@@ -17,6 +17,7 @@ class IndexController extends Controller
     /**
      * 发送验证码
      * @POST phone 发送验证码的电话
+     * @return 验证码/error(数组)
      */
     public function sendSMS()
     {
@@ -88,12 +89,24 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 注销
+     * 直接用，什么都不用post
+     */
     public function logout()
     {
         session('userid',null);
         $this -> ajaxReturn(array('success' => '04'));
     }
 
+    /**
+     * 注册（记得先验证好验证码）
+     * @POST 电话
+     * @POST 注册昵称
+     * @POST 密码
+     * @POST 头像
+     * @return success/error
+     */
     public function register()
     {
         $db = M('user');
@@ -139,6 +152,13 @@ class IndexController extends Controller
 
     //--------对书块的操作---------
 
+    /**
+     * 新建出租图书
+     * @POST 书本描述
+     * @POST 价格
+     * @POST 标签
+     * @return success/error
+     */
     public function creatBlock()
     {
         $books = M('books');
@@ -182,6 +202,13 @@ class IndexController extends Controller
     }
 
 
+    /**
+     * 查询前五个书块
+     * @POST flag
+     * @POST 个人中心（非必要）
+     * @POST 查询关键字（非必要）
+     * @return 长度为五的一个数组，其中包括字段[id]书块id,[owner]发布者,[price]价格,[time]创建时间,[pic]此字段内容有可能为数组 是图片url,[description]描述,[commentNum]评论数量
+     */
     public function showBlocks()
     {
         $books = M('books');
@@ -211,6 +238,11 @@ class IndexController extends Controller
         $this -> ajaxReturn($data);
     }
 
+    /**
+     * 删除书块
+     * @POST 书块id
+     * @return success/error
+     */
     public function deleteBlock()
     {
         $books = M('books');
@@ -244,6 +276,11 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 出租操作
+     * @POST 书块id
+     * @return success/error
+     */
     public function rentOut()
     {
         $books= M('books');
@@ -261,6 +298,12 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 新增评论
+     * @POST 书块id
+     * @POST 评论内容
+     * @return success/error
+     */
     public function addComment()
     {
         $comment = M('comments');
@@ -287,6 +330,11 @@ class IndexController extends Controller
 
     //----------user----------
 
+    /**
+     * 修改用户头像
+     * @POST 头像
+     * @return success/error
+     */
     public function changePic()
     {
         $db = M('user');
@@ -320,6 +368,12 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 修改密码
+     * @POST 旧密码
+     * @POST 新密码
+     * @return success/error
+     */
     public function changePass()
     {
         $db = M('user');
@@ -343,6 +397,12 @@ class IndexController extends Controller
         }
     }
 
+    /**
+     * 忘记密码（先通过手机短信验证）
+     * @POST 新密码
+     * @POST 电话号码
+     * @return success/error
+     */
     public function forgetPass()
     {
         $db = M('user');
@@ -366,7 +426,7 @@ class IndexController extends Controller
 
 
 
-    //---------private function----------
+    //---------private function----------(以下函数无须理会)
 
     private function getComments($flag)
     {
