@@ -1,5 +1,6 @@
 #ignore config of database
 /LibraryBE/Common/Conf
+/LibraryBE/Home/Conf
 
 #ignore some Mac os file
 /.idea
