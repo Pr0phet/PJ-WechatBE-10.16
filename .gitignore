@@ -1,11 +1,11 @@
 #ignore config of database
-/LibBE/Common/Conf
+/LibraryBE/Common/Conf
 
 #ignore some Mac os file
 /.idea
 
 #ignore log files
-/LibBe/Runtime
+/LibraryBe/Runtime
 
 #ignore upload files
 /Public/upload
