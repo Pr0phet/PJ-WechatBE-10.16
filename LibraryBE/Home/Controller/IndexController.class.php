@@ -11,8 +11,13 @@ class IndexController extends Controller
 {
     private static $sms_user = "13929470083";
     private static $sms_pass = "gtagta123";
-    private static $sms_url = "http://222.73.117.169/msg/HttpBatchSendSM";
+    private static $sms_url = "http://sms.tehir.cn/code/sms/api/v1/send?";
 
+
+    public function index()
+    {
+        echo "hello!";
+    }
 
     /**
      * 发送验证码
@@ -21,38 +26,27 @@ class IndexController extends Controller
      */
     public function sendSMS()
     {
-        $Phone = I('post.phone');
-        $checkNum = (string)random_int(1000,9999);
-        session(array('checkNum' => $checkNum , 'expire' => '900'));
-        $tpl = "【EX-book】您此次的验证码为".$checkNum."\n【15分钟后失效】";
-        $data = array(
-            'account' => $this::$sms_user,
-            'pswd' => $this::$sms_pass,
-            'mobile' => $Phone,
-            'msg' => $tpl,
-            'needstatus' => 'true'
-        );
-        $options = array(
-            'CURLOPT_URL' => $this::$sms_url,
-            'CURLOPT_POST' => true,
-            'CURLOPT_RETURNTRANSFER' => true,
-            'CURLOPT_POSTFILEDS' => $data
-        );
-        $curl = curl_init();
-        curl_setopt_array($curl,$options);
-        $res = curl_exec($curl);
-        $res = explode(',',$res);
-        $res = explode("\n",$res);
-        if($res[0] == '0')
+        $Phone = '13929470083';
+        $checkNum = (string)rand(1000,9999);
+        session(array('checkNum' => $checkNum , 'expire' => '900'),$checkNum);
+
+        $ch = curl_init();
+        $url = $this::$sms_url."srcSeqId=0"."&account=".$this::$sms_user."&password=".$this::$sms_pass."&mobile=".$Phone."&code=".$checkNum."&time=15";
+        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
+        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt ( $ch, CURLOPT_URL, $url );
+        $res = curl_exec($ch);
+        $res = json_decode($res,true);
+
+        if($res['responseCode'] == '0')
         {
-            $this -> ajaxReturn($checkNum);
+            $this -> ajaxReturn(array('success' => '10'));
         }
         else
         {
-            $this -> ajaxReturn(array('sendError' => $res[0]));
+            $this -> ajaxReturn(array('error' => '06'));
         }
-        curl_close($curl);
-
+        curl_close($ch);
     }
 
     public function checkSession()
@@ -60,6 +54,12 @@ class IndexController extends Controller
         return session('?userid');
     }
 
+    public function checkCode()
+    {
+        $this -> ajaxReturn((
+            (I('post.checkNum') == session('checkNum')) ? array('success' => '10') : array('error' => '06')
+        ));
+    }
 
     /**
      *  登录
@@ -84,7 +84,8 @@ class IndexController extends Controller
         }
         else
         {
-            session(array('userid' => $res['id']));
+            session(array('name' => 'userid'));
+            session('userid',$res['id']);
             $this -> ajaxReturn(array('success' => '00'));
         }
     }
@@ -163,12 +164,15 @@ class IndexController extends Controller
     {
         $books = M('books');
         $picRepo = M('picRepo');
+        $user = M('user');
+        $owner_pic = $user -> WHERE('id = '.session('userid')) -> find();
 
         $raw = I('post.');
         $data['description'] = $raw['description'];
         $data['price'] = $raw['price'];
         $data['tag'] = $raw['tag'];
         $data['owner'] = session('userid');
+        $data['ownerpic'] = $owner_pic['pic'];
         $data['ct'] = time();
 
         $saveBook = $books -> add($data);
@@ -229,12 +233,42 @@ class IndexController extends Controller
         {
             $data[$i]['id'] = $blocks[$i]['id'];
             $data[$i]['owner'] = $blocks[$i]['owner'];
+            $data[$i]['owner_pic'] = $blocks[$i]['owner_pic'];
             $data[$i]['price'] = $blocks[$i]['price'];
             $data[$i]['time'] = $this->showTime($blocks[$i]['ct']);
-            $data[$i]['pic'] = $this -> getPic($blocks[$i]['flag'],'book');
+            $data[$i]['pic'] = $this -> getPic($blocks[$i]['picflag'],'book');
             $data[$i]['desciption'] = $blocks[$i]['description'];
             $data[$i]['commentNum'] = count($this -> getComments($blocks[$i]['commentsflag']));
+            $data[$i]['publishNum'] = count($books -> WHERE($condition) -> select());
         }
+        $this -> ajaxReturn($data);
+    }
+
+    public function detailBlock()
+    {
+        $condition['flag'] = I('post.id');
+        //getComments
+        $com = M('comments');
+        $user = M('user');
+        $flag = $com -> WHERE($condition) -> select();
+        for($i = 0; i < count($flag); $i++)
+        {
+            $owner = $user -> WHERE('id = '.$flag['ownerid']) -> find();
+            $data['comments'][$i]['user'] = $owner['name'];
+            $data['comments'][$i]['content'] = $flag['content'];
+            $data['comments'][$i]['time'] = $this -> showTime($flag['time']);
+        }
+        //getDetail
+        $condition['status'] = 1;
+        $books = M('books');
+        $res = $books -> WHERE($condition) -> find();
+        $data['id'] = $res['id'];
+        $data['owner'] = $res['owner'];
+        $data['owner_pic'] = $res['owner_pic'];
+        $data['price'] = $res['price'];
+        $data['time'] = $this -> showTime($res['ct']);
+        $data['pic'] = $this -> getPic($res['picflag'],'book');
+        $data['description'] = $res['description'];
         $this -> ajaxReturn($data);
     }
 
@@ -331,6 +365,49 @@ class IndexController extends Controller
     //----------user----------
 
     /**
+     * 获取用户头像
+     * @POST 用户id
+     * @return success/error
+     */
+    public function showPic()
+    {
+        $db = M('user');
+        $id = session('userid');
+        $condition['id'] = $id;
+        $pic = $db -> WHERE($condition) -> find();
+        if($pic)
+        {
+            $this -> ajaxReturn(array('success' => $pic));
+        }
+        else
+        {
+            $this -> ajaxReturn(array('error' => '06'));
+        }
+    }
+
+    /**
+     * 修改用户名称
+     * @POST 新用户名
+     * @return success/error
+     */
+    public function changeName()
+    {
+        $db = M('user');
+        $newName = I('post.name');
+        $conndition['id'] = session('userid');
+        $data['name'] = $newName;
+        $res = $db -> WHERE($conndition) -> save($data);
+        if($res)
+        {
+            $this -> ajaxReturn(array('success' => '09'));
+        }
+        else
+        {
+            $this -> ajaxReturn(array('error' => '06'));
+        }
+    }
+
+    /**
      * 修改用户头像
      * @POST 头像
      * @return success/error
@@ -377,8 +454,8 @@ class IndexController extends Controller
     public function changePass()
     {
         $db = M('user');
-        $old_pass = I('post.old');
-        $new_pass = I('post.new');
+        $old_pass = I('post.OldPass');
+        $new_pass = I('post.NewPass');
         $condition['id'] = session('userid');
         $user = $db -> WHERE($condition) -> find();
         if(!$user)
