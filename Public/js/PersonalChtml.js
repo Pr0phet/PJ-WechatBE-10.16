@@ -1,83 +1,32 @@
-
-//判断是否登录
+//
 $(function(){
 window.UserId;      
 
 //获取个人信息//判断是否登录
     $.ajax({
-     type:"POST",
+     type:"GET",
      dataType:"json",
      url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
      success:function(data){
-        if(data!=0){
-            UserId=data;
+        if(data.success!=0){
+            UserId=data.id;
         }else{
             if(confirm("请先登录")){
                 window.location.href="login.html";
             }
-        }
+        };
      },
      error:function(jqXHR){
        //$("body").html("未知错误"+jqXHR.status);
      },
 
    });
-});
 //定义全局变量
 $(function(){
-window.personal="personal";
 window.fail=$("#DeleteFai-box");
- $("#IsPicture").click(function(){
-    window.location.href="issue.html";
- });
 });
-
-//注销操作
-$(function(){
-$("a[name='PcCannal']").click(function(){
-  if(confirm('您确定要注销吗?')){
-    $.ajax({
-      type:"POST",
-      dataType:"json",
-      url:"http://localhost/EXbook/index.php/Home/Index/logout",
-      success:function(data){
-              if(data.success==04){
-                alert("注销成功");
-                window.location.href="login.html";
-              }
-      },
-      error:function(jqXHR){
-        fail.css('display','block');
-      }
-    });
-  };
-});
-});
-
-//提示操作
-$(function(){
-
-//退出未知错误提示
-    $("#DeleteFai-box").click(function(){
-           $("#DeleteFai-box").css('display','none');
-            });
-//取消删除
-    $("#DeBlockCannel").click(function(){
-          $("#de-box").css('display','none');
-       });
-//退出成功出租提示
-    $("#su-box").click(function(){
-      $("#su-box").css('display','none');
-    })
-//退出成功删除提示
-    $("#con-box").click(function(){
-      $("#con-box").css('display','none');
-    })
-});
-
-//生成页面
-$(function(){
-  $.ajax({
+//获取个人信息
+$.ajax({
     type:"GET",
     dataType:"json",
     url:"http://localhost/EXbook/index.php/Home/Index/showUser",
@@ -92,6 +41,7 @@ $(function(){
 //首次加载页面
   getdata(0);
 });
+
 //下拉加载
 $(function(){
   var flagI=1;
@@ -106,13 +56,15 @@ $(function(){
            }
    });
 });
-//加载个人信息
+//
+
+//加载页面
 function getdata(flag){
  $.ajax({
   type:"POST",
   dataType:"json",
   url:"http://localhost/EXbook/index.php/Home/Index/showBlocks",
-  data:{mode:personal,
+  data:{mode:"personal",
         flag:flag},
   success:function(data){
     console.log(data);
@@ -149,63 +101,7 @@ function getdata(flag){
 
 
     });
-};
-//出租点击
-$(function(){
-   $(".is-bu-rent").click(function(){
-     var BookChunkId=$(this).attr('name');
-    $.ajax({
-      type:"POST",
-      url:"http://localhost/EXbook/index.php/Home/Index/rentOut",
-      dataType:"json",
-      data:{BookChunkId:BookChunkId},
-      success:function(data){
-        if(data.success==06){
-          $(this).html("已出租");
-          $("#su-box").css('display','block');
-        }else if(data.error==06){
-          $("#DeleteFai-box").css('display','block');
-              
-        }
-      },
-        error:function(jqXHR){
-             alert(BookChunkId);
-              $("#de-box").css('display','none');
-              $("#DeleteFai-box").css('display','block');
-        },
-     });
-   });
-});
-
-//点击删除
-$(function(){
-    $(".is-bu-delete").click(function(){
-       var BookChunkId=$(this).attr('name');
-       $("#de-box").css('display','block');
-       $("#DeBlockConfirm").click(function(){
-           $.ajax({
-            type:"POST",
-            url:"http://localhost/EXbook/index.php/Home/Index/deleteBlock",
-            dataType:"json",
-            data:{BookChunkId:BookChunkId},
-            success:function(data){
-              if(data.success==05){
-                  $("#con-box").click(function(){
-                        $("#"+BookChunkId).remove();
-                  });
-                  $("#con-box").css('display','block');
-              }else if(data.error==06){
-                $("#DeleteFai-box").css('display','block');
-
-              }
-            },
-            error:function(jqXHR){
-              $("#DeleteFai-box").css('display','block');
-            }
-        });
-       });
-    });
-});
+}
 //点击图片转到发布页面
 $(function(){
     $("#IsPicture").click(function(){
@@ -291,7 +187,6 @@ $(function(){
       });
    });
 });
-
 //点击black后退;
 $(function(){
    $("a[name=black]").click(function(){
@@ -300,7 +195,6 @@ $(function(){
       $("#BookdeBox").html("");
    });
 });
-
 //我要留言
 $(function(){
   $("#choose-box > button").click(function(){
@@ -370,4 +264,98 @@ $(function(){
      
         });
   });
+});
+//注销操作
+$(function(){
+$("a[name='PcCannal']").click(function(){
+  if(confirm('您确定要注销吗?')){
+    $.ajax({
+      type:"POST",
+      dataType:"json",
+      url:"http://localhost/EXbook/index.php/Home/Index/logout",
+      success:function(data){
+              if(data.success==04){
+                alert("注销成功");
+                window.location.href="login.html";
+              }
+      },
+      error:function(jqXHR){
+        fail.css('display','block');
+      }
+    });
+  };
+});
+});
+//提示操作
+$(function(){
+
+//退出未知错误提示
+    $("#DeleteFai-box").click(function(){
+           $("#DeleteFai-box").css('display','none');
+            });
+//取消删除
+    $("#DeBlockCannel").click(function(){
+          $("#de-box").css('display','none');
+       });
+//退出成功出租提示
+    $("#su-box").click(function(){
+      $("#su-box").css('display','none');
+    })
+//退出成功删除提示
+    $("#con-box").click(function(){
+      $("#con-box").css('display','none');
+    })
+});
+//出租点击
+$(function(){
+  $("#PeCeBox").delegate('.is-bu-rent', 'click', function() {
+     var BookChunkId=$(this).attr('name');
+     $.ajax({
+      type:"POST",
+      url:"http://localhost/EXbook/index.php/Home/Index/rentOut",
+      dataType:"json",
+      data:{BookChunkId:BookChunkId},
+      success:function(data){
+        if(data.success==06){
+          $(this).html("已出租");
+          $("#su-box").css('display','block');
+        }else if(data.error==06){
+          $("#DeleteFai-box").css('display','block');
+              
+        }
+      },
+        error:function(jqXHR){
+             alert(BookChunkId);
+              $("#de-box").css('display','none');
+              $("#DeleteFai-box").css('display','block');
+        },
+     });  
+   });
+//点击删除
+$("#PeCeBox").delegate('.is-bu-delete', 'click', function() {
+        var BookChunkId=$(this).attr('name');
+       $("#de-box").css('display','block');
+       $("#DeBlockConfirm").click(function(){
+           $.ajax({
+            type:"POST",
+            url:"http://localhost/EXbook/index.php/Home/Index/deleteBlock",
+            dataType:"json",
+            data:{BookChunkId:BookChunkId},
+            success:function(data){
+              if(data.success==05){
+                  $("#con-box").click(function(){
+                        $("#"+BookChunkId).remove();
+                  });
+                  $("#con-box").css('display','block');
+              }else if(data.error==06){
+                $("#DeleteFai-box").css('display','block');
+
+              }
+            },
+            error:function(jqXHR){
+              $("#DeleteFai-box").css('display','block');
+            }
+        });
+       });
+});
 });

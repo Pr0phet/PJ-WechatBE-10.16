@@ -222,9 +222,11 @@ class IndexController extends Controller
         $flag = (int)I('post.flag')*5;
         $mode = I('post.mode',0) ? I('post.mode') : 'public';
         $search = I('post.keyword',0) ? I('post.keyword') : null;
+        $condition['status'] = 1;
         if($mode == 'personal')
         {
-            $condition['owner'] = session('username  ');
+            $condition['owner'] = session('username');
+            unset($condition['status']);
         }
         if($search != null)
         {
@@ -233,7 +235,6 @@ class IndexController extends Controller
             $where['_logic'] = 'OR';
             $condition['_complex'] = $where;
         }
-        $condition['status'] = 1;
         $blocks = $books -> WHERE($condition) -> limit("$flag,5") ->select();
         if($blocks)
         {
@@ -248,6 +249,7 @@ class IndexController extends Controller
                 $data[$i]['desciption'] = $blocks[$i]['description'];
                 $data[$i]['commentNum'] = $this->getComments($blocks[$i]['commentsflag'])['num'];
                 $data[$i]['publishNum'] = count($books->WHERE($condition)->select());
+                $data[$i]['status'] = $blocks[$i]['status'];
             }
         }
         else
@@ -306,7 +308,7 @@ class IndexController extends Controller
     {
         $books = M('books');
 
-        $id = I('post.id');
+        $id = I('post.BookChunkId');
         $block = $books -> WHERE('id = '.$id) -> find();
 
         $picflag = $block['picflag'];
@@ -343,9 +345,9 @@ class IndexController extends Controller
     public function rentOut()
     {
         $books= M('books');
-        $id = I('post.id');
+        $id = I('post.BookChunkId');
         $condition['id'] = $id;
-        $data['status'] = '1';
+        $data['status'] = '0';
         $res = $books -> WHERE($condition) -> save($data);
         if($res)
         {

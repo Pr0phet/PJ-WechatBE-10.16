@@ -5,12 +5,14 @@ body{background-color: #eeeeee;}
              border-bottom: 1px solid #c5c5c5;
              float: left;
              margin-left: 5%;}
-.me-head{width: 40px;
+.me-head{display: block;
+         width: 40px;
          height: 40px;
          float: left;
          background-color: black;
          margin-top: 10px;
-         margin-bottom: 10px;}
+         margin-bottom: 10px;
+         cursor: pointer;}
 .me-name{color: #004986;
 	     font-size: 16px;
 	     font-family: "华文细黑";
