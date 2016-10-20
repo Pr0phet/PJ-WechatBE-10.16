@@ -1,0 +1,160 @@
+body{background-color: #eeeeee;}
+/*修改的title宽度*/
+.d-2{width: 66px;}
+
+/*register+login+contact us*/
+#table-box{width: 100%;
+           background-image:url(/EXbook/Public/photo/JPG/pw-bg1.jpg);
+           background-repeat:repeat;
+           float: left;}
+
+/*register*/
+.ta-img1{width: 16px;
+         height: 22px;}
+.ta-img2{width: 17px;
+         height: 20px;}
+.ta-img3{width: 17px;
+         height: 24px;}
+.ta-img{margin: 0 auto;
+        display: block;
+        padding-top: 2px;}
+.ta-text{background: none;
+         outline: none;
+         border: 0;
+         color: #ffffff;
+         font-family: STXihei,"华文细黑";
+         font-size: 15spx;
+         padding-top: 10px;
+         float: left;
+         margin-left: 5px;}
+.ta-hr{margin-bottom: 20px;
+       margin-top: 5px;}
+.ta-hr1{width: 133px;
+       float: left;}
+#re-ta{margin: 0 auto;
+       width: 223px;
+       border: 0;
+       border-collapse: collapse;
+       margin-top: 40px;}
+#re-ta td{border:0;}
+#re-bu{float: left;
+       background-color: #f2b149;
+       border: 0;
+       color: #ffffff;
+       font-family: STXihei,"华文细黑";
+       font-size: 13px;
+       width: 90px;
+       height: 35px;
+       border-radius: 5px;
+       -moz-border-radius: 5px;
+       -o-border-radius: 5px;
+       -ms-border-radius: 5px;
+       -webkit-border-radius:5px;
+       outline: none;
+       cursor: pointer;
+       margin-bottom: 15px;
+       margin-right: 10px;
+     }
+.re-su{border: 0;
+       background-color: #98cb86;
+       font-size: 18px;
+       font-family: STXihei,"华文细黑";
+       width: 237px;
+       height: 50px;
+       cursor: pointer;
+       outline: none;
+       border-radius: 5px;
+       display: block;
+       color: #ffffff;
+       margin: 0 auto;}
+
+/*login*/
+#lo-ta1{margin: 0 auto;
+       border: 0;
+       border-collapse: collapse;
+       margin-top: 45px;}
+#lo-ta1 td{border: 0;}
+.lo-ti{font-size: 35px;
+       font-family: STXihei,"华文细黑";
+       color: #ffffff;
+       width: 154px;
+       margin: 0 auto;
+       font-weight: bold;
+       margin-bottom: 25px;}
+.lo-img{float: left;}
+.lo-td{width: 20px;}
+.lo-su{border: 0;
+       background-color: #98cb86;
+       font-size: 18px;
+       font-family: STXihei,"华文细黑";
+       width: 257px;
+       height: 50px;
+       cursor: pointer;
+       outline: none;
+       border-radius: 5px;
+       -moz-border-radius: 5px;
+       -o-border-radius: 5px;
+       -ms-border-radius: 5px;
+       -webkit-border-radius:5px;
+       display: block;
+       color: #ffffff;
+       margin-top: 10px;}
+#lo-ta2{margin: 0 auto;
+        border-collapse: collapse;
+        margin-top: 15px;
+        width: 256px;}
+.lo-a{color: #ffffff;
+      cursor: pointer;
+      display: block;
+      font-size: 14px;
+      font-family: STXihei,"华文细黑";}
+.lo-a1{float: left;}
+.lo-a2{float: right;}
+.lo-a:hover{color: #d0d0d0;}
+
+/*change password*/
+#bg-box{background-color: #eeeeee;
+         width: 100%;
+         float: left;}
+#cpw-ta{border-collapse: collapse;
+        width: 243px;
+        margin: 0 auto;
+        margin-top: 50px;}
+.cpw-img{width: 21px;
+         height: 24px;}
+.cpw-td1{width: 24px;}
+.cpw-hr{margin-top: 5px;
+        margin-bottom: 20px;}
+.hr1{margin-bottom: 20px;}
+.hr2{margin-bottom: 10px;}
+.cpw-te{font-size: 13px;
+        font-family:Microsoft YaHei,"微软雅黑";
+        color:#777777;
+        outline: none;
+        border: none;
+        background-color: #eeeeee;
+        margin-top: 7px;}
+
+/*contact us*/
+#tdc{width: 200px;
+     height: 200px;
+     background-color: #eeeeee;
+     margin: 0 auto;
+     margin-top: 40px;}
+.p-1{font-size: 16px;
+     font-family: STxihei,"华文细黑";
+     color: #ffffff;
+     width: 84px;
+     margin: 0 auto;
+     font-weight: normal;
+     margin-top: 35px;}
+.p-2{font-size: 14px;
+     font-family: STxihei,"华文细黑";
+     color: #ffffff;
+     font-weight: normal;
+     margin: 0 auto;
+     width: 140px;
+     margin-top: 25px;}
+
+.name-img{width: 22px;height: 26px;}
+.cn-te{color: #787878;}

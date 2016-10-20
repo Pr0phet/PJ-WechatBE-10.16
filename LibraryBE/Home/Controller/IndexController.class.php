@@ -1,7 +1,7 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-
+import('Org.Im.rongcloud');
 /**
  * Class IndexController
  * @package Home\Controller
@@ -14,9 +14,10 @@ class IndexController extends Controller
     private static $sms_url = "http://sms.tehir.cn/code/sms/api/v1/send?";
 
 
+
     public function index()
     {
-        echo "hello!";
+        $this -> display();
     }
 
     /**
@@ -51,7 +52,7 @@ class IndexController extends Controller
 
     public function checkSession()
     {
-        return session('?userid');
+        $this ->  ajaxReturn(session('?userid'));
     }
 
     public function checkCode()
@@ -85,7 +86,9 @@ class IndexController extends Controller
         else
         {
             session(array('name' => 'userid'));
+            session(array('name' => 'username'));
             session('userid',$res['id']);
+            session('username',$res['name']);
             $this -> ajaxReturn(array('success' => '00'));
         }
     }
@@ -163,7 +166,7 @@ class IndexController extends Controller
     public function creatBlock()
     {
         $books = M('books');
-        $picRepo = M('picRepo');
+        $picRepo = M('picrepo');
         $user = M('user');
         $owner_pic = $user -> WHERE('id = '.session('userid')) -> find();
 
@@ -221,25 +224,35 @@ class IndexController extends Controller
         $search = I('post.keyword',0) ? I('post.keyword') : null;
         if($mode == 'personal')
         {
-            $condition['id'] = session('userid');
+            $condition['owner'] = session('username  ');
         }
         if($search != null)
         {
-            $condition['title'] = $search;
+            $where['description'] = array('like',"%$search%");
+            $where['owner'] = array('like',"%$search%");
+            $where['_logic'] = 'OR';
+            $condition['_complex'] = $where;
         }
         $condition['status'] = 1;
         $blocks = $books -> WHERE($condition) -> limit("$flag,5") ->select();
-        for($i = 0 ; $i < 5 ; $i++)
+        if($blocks)
         {
-            $data[$i]['id'] = $blocks[$i]['id'];
-            $data[$i]['owner'] = $blocks[$i]['owner'];
-            $data[$i]['owner_pic'] = $blocks[$i]['owner_pic'];
-            $data[$i]['price'] = $blocks[$i]['price'];
-            $data[$i]['time'] = $this->showTime($blocks[$i]['ct']);
-            $data[$i]['pic'] = $this -> getPic($blocks[$i]['picflag'],'book');
-            $data[$i]['desciption'] = $blocks[$i]['description'];
-            $data[$i]['commentNum'] = count($this -> getComments($blocks[$i]['commentsflag']));
-            $data[$i]['publishNum'] = count($books -> WHERE($condition) -> select());
+            for ($i = 0; $i < count($blocks); $i++)
+            {
+                $data[$i]['id'] = $blocks[$i]['id'];
+                $data[$i]['owner'] = $blocks[$i]['owner'];
+                $data[$i]['owner_pic'] = $blocks[$i]['owner_pic'];
+                $data[$i]['price'] = $blocks[$i]['price'];
+                $data[$i]['time'] = $this->showTime($blocks[$i]['ct']);
+                $data[$i]['pic'] = $this->getPic($blocks[$i]['picflag'], 'book');
+                $data[$i]['desciption'] = $blocks[$i]['description'];
+                $data[$i]['commentNum'] = $this->getComments($blocks[$i]['commentsflag'])['num'];
+                $data[$i]['publishNum'] = count($books->WHERE($condition)->select());
+            }
+        }
+        else
+        {
+            $data['error'] = "empty";
         }
         $this -> ajaxReturn($data);
     }
@@ -251,19 +264,31 @@ class IndexController extends Controller
         $com = M('comments');
         $user = M('user');
         $flag = $com -> WHERE($condition) -> select();
-        for($i = 0; i < count($flag); $i++)
+        if($flag)
         {
-            $owner = $user -> WHERE('id = '.$flag['ownerid']) -> find();
-            $data['comments'][$i]['user'] = $owner['name'];
-            $data['comments'][$i]['content'] = $flag['content'];
-            $data['comments'][$i]['time'] = $this -> showTime($flag['time']);
+            $data['comments']['flag'] = 1;
+            for ($i = 0; $i < count($flag); $i++)
+            {
+                $owner = $user->WHERE('id = ' . $flag[$i]['ownerid'])->find();
+                $data['comments'][$i]['owner'] = $owner['name'];
+                $data['comments'][$i]['pic'] = $owner['pic'];
+                $data['comments'][$i]['description'] = $flag[$i]['content'];
+                $data['comments'][$i]['time'] = $this->showTime($flag[$i]['time']);
+            }
+            $data['comments']['times'] = count($flag);
+        }
+        else
+        {
+            $data['comments']['flag'] = 0;
         }
         //getDetail
         $condition['status'] = 1;
         $books = M('books');
         $res = $books -> WHERE($condition) -> find();
+        $selectOwner['name'] = $res['owner'];
         $data['id'] = $res['id'];
         $data['owner'] = $res['owner'];
+        $data['ownerid'] = $user -> WHERE($selectOwner) -> find();
         $data['owner_pic'] = $res['owner_pic'];
         $data['price'] = $res['price'];
         $data['time'] = $this -> showTime($res['ct']);
@@ -287,7 +312,7 @@ class IndexController extends Controller
         $picflag = $block['picflag'];
         $commentsflag = $block['commentsflag'];
 
-        $picRepo = M('picRepo');
+        $picRepo = M('picrepo');
         $picCondition['flag'] = $picflag;
         $pics = $picRepo -> WHERE($picCondition) -> select();
         for($i = 0; $i < count($pics); $i++)
@@ -341,17 +366,22 @@ class IndexController extends Controller
     public function addComment()
     {
         $comment = M('comments');
+        $user = M('user');
 
-        $id = I('post.id');
-        $data['content'] = I('post.commment');
+        $userinfo = $user -> WHERE('id = '.session('userid')) -> find();
+        $data['head'] = $userinfo['pic'];
+        $data['name'] = $userinfo['name'];
+        $id = I('post.postid');
+        $data['content'] = I('post.comment');
         $data['flag'] = $id;
         $data['ownerid'] = session('userid');
         $data['time'] = time();
 
         $res = $comment -> add($data);
+        $data['time'] = $this -> showTime($data['time']);
         if($res)
         {
-            $this -> ajaxReturn(array('success' => '08'));
+            $this -> ajaxReturn($data);
         }
         else
         {
@@ -363,6 +393,20 @@ class IndexController extends Controller
 
 
     //----------user----------
+
+    public function showUser()
+    {
+        $db = M('user');
+        $books = M('books');
+        $condition['id'] = session('userid');
+        $res = $db -> WHERE($condition) -> find();
+        $data['owner'] = $res['name'];
+        $data['pic'] = $res['pic'];
+        $selectB['owner'] = $res['name'];
+        $num =  count($books -> WHERE($selectB) -> select());
+        $data['number'] = $num;
+        $this -> ajaxReturn($data);
+    }
 
     /**
      * 获取用户头像
@@ -393,12 +437,18 @@ class IndexController extends Controller
     public function changeName()
     {
         $db = M('user');
-        $newName = I('post.name');
+        $newName = I('post.NewName');
         $conndition['id'] = session('userid');
         $data['name'] = $newName;
+        $res = $db -> WHERE($data) -> find();
+        if($res)
+            $this -> ajaxReturn(array('error' => 'repeat'));
         $res = $db -> WHERE($conndition) -> save($data);
         if($res)
         {
+            $rongCloud = new \rongcloud('x18ywvqf8wznc','CIJoQrifglW3FE');
+            $rongCloud -> user() -> refresh(session('userid'),$newName);
+
             $this -> ajaxReturn(array('success' => '09'));
         }
         else
@@ -440,6 +490,9 @@ class IndexController extends Controller
             }
             else
             {
+                $rongCloud = new \rongcloud('x18ywvqf8wznc','CIJoQrifglW3FE');
+                $rongCloud -> user() -> refresh(session('userid'),$data['pic']);
+
                 $this -> ajaxReturn(array('success' => '02'));
             }
         }
@@ -510,13 +563,18 @@ class IndexController extends Controller
         $db = M('comments');
         $condition['flag'] = $flag;
         $data = $db -> WHERE($condition) -> select();
-        $data['time'] = $this->showTime($data['time']);
+        $num = count($data);
+        $data['num'] = $num;
+        if($data)
+        {
+            $data['time'] = $this->showTime($data['time']);
+        }
         return $data;
     }
 
     private function getPic($flag,$tag)
     {
-        $db = M('picRepo');
+        $db = M('picrepo');
         $condition['flag'] = $flag;
         $condition['tag'] = $tag;
         $data = $db -> WHERE($condition) -> field('url') -> select();
@@ -528,22 +586,19 @@ class IndexController extends Controller
         $res = time() - $time;
         if($res < 60)
         {
-            return $res.'秒';
+            return $res.'秒前';
         }
         elseif($res <= 3600)
         {
-            return $res / 60 .'分钟前';
+            return (int)($res / 60) .'分钟前';
         }
         elseif($res <= 86400)
         {
-            return $res / 3600 .'小时前';
+            return (int)($res / 3600) .'小时前';
         }
         else
         {
             return date('Y-M-D');
         }
     }
-
-
-
 }

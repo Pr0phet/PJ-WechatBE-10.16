@@ -1,0 +1,115 @@
+body{background-color: #eeeeee;}
+*{vertical-align:top;}
+#search-box{width: 100%;
+	          height: 40px;}
+#search-form{width: 100%;
+	           height: 40px;
+             background-color: #f0f0f0;}
+#search-text-box{height: 25px;
+                 width: 68%;
+                 float: left;
+                 margin-top: 5px;
+                 margin-left: 10px;
+                 border: 1px solid #b5b5b5;
+                 border-radius: 6px;
+                 -moz-border-radius: 6px;
+                 -o-border-radius: 6px;
+                 -ms-border-radius: 6px;
+                 -webkit-border-radius:6px;
+                 background-color: #fff;}
+#search-img{width: 24px;
+            height: 24px;
+            float: left;}
+#search-text{border: 0;
+	         outline: none;
+	         float: left;
+	         width: 85%;
+             height: 23px;
+             font-family:Verdana,"华文细黑";
+             color:#b5b5b5;}
+#search-button{background-color: #b5e5bf;
+	           float: left;
+               color: #fff;
+               outline: none;
+               border: 0;
+               border-radius: 6px;
+              -moz-border-radius: 6px;
+              -o-border-radius: 6px;
+              -ms-border-radius: 6px;
+              -webkit-border-radius:6px;
+               font-size: 15px;
+               font-family:Verdana,"华文细黑";
+               margin-top: 5px;
+               margin-left: 8px;
+               cursor: pointer;
+               width: 60px;
+               height: 26px;}
+
+.index-content-box{border-top: 0.5px solid #aaaaaa;
+                  width: 100%;
+                  float: left;}
+.index-content-box table{width: 100%;
+                         position: relative;}
+.index-head-1{width: 40px;
+              height: 40px;
+              background-color: black;
+              margin:10px 10px;
+              float: left;}
+.index-head-1 img{width: 100%;height: 100%;}
+.index-name-1{float: left;
+              font-family: "华文细黑";
+              font-size: 16px;
+              margin-top: 6px;}
+.index-money-1{font-size: 17px;
+               font-family: "华文细黑";
+               color: #fc6c6b;
+               float: right;
+               position: absolute;
+               right: 15px;
+               top: 5px;}
+.index-money-1 img{width: 18px;
+                   height: 24px;}
+.index-time-1{font-size: 14px ;
+              font-family: "华文细黑" ;
+              color: #8a8a8a;
+              float: left;
+              margin-top: 5px;}
+.index-img-box{width: 100%;}
+.index-img-box img{width: 70px;
+                  height: 70px;
+                  float: left;
+                  margin-right: 5px;
+                  margin-top: 5px;
+                  margin-bottom: 5px;}
+.index-content-1{float: left;
+                 color: #8a8a8a;
+                 font: 13px "华文细黑";
+                 text-indent: 0.5em;}
+.index-more-1 a{color: #686868;
+                font: 14px "华文细黑";
+                float: right;
+                margin-right: 20px;
+                margin-top: 6px;}
+.index-comment-1{width: 52px;}
+.index-comment-1 img{width:17px;
+                     height: 15px;
+                     float: right;
+                     margin-right: 5px;
+                     margin-top: 10px;}
+.index-comment-1 div{color: #349ae4;
+          font-size: 14px;
+          font-family: "华文细黑";
+          float: right;
+          height: 14px;
+          line-height: 14px;
+          margin-right: 10px;
+          margin-top: 10px;}
+
+
+#BookDetail{display: none;}
+#index-body-center{float: left; 
+                   padding-bottom: 100px;
+                   width: 100%;}
+#SearchResultBox{float: left; 
+                 padding-bottom: 100px;
+                 width: 100%;display: none;}

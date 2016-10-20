@@ -1,0 +1,60 @@
+body{background-color: #eeeeee;}
+#chat-top-box{width: 100%;
+         height: 40px;
+         background-color: #d9e7e7;
+         float: left;
+         position: relative;}
+.chat-ti  {  color: #005981;
+	         width: 100%;
+	         height: 40px;
+	         line-height: 40px;
+             font-size: 16px;
+             font-weight: 600;
+             text-align: center;}
+.chat-a-1{position: absolute;
+          top: 10px;
+          left: 5px;}
+.chat-a-1 a{color: #015981;
+            font-size: 15px;}
+.chat-a-11{font-weight: 600;}
+.chat-a-12{font-family:STXihei,"华文细黑";}
+
+
+#sent-comment{width: 100%;
+              background-color: #d9e7e7;
+              position: fixed;
+              bottom: 0;}
+#sent-comment textarea{width: 70%;
+	                   height: 30px;
+                       margin-left: 2%;
+                       border-radius: 5px;
+                       -ms-border-radius: 5px;
+                       -o-border-radius: 5px;
+                       -webkit-border-radius: 5px;
+                       -moz-border-radius: 5px;
+                       margin-top: 5px;
+                       margin-bottom: 5px;
+                       font-size: 15px;
+                       color: #8a8a8a;
+                       line-height: 30px;
+                       resize:none;
+                       outline: none;
+                       text-indent: 0.5em;
+                       float: left;}
+#sent-comment input{width: 55px;
+                    height: 30px;
+                    float: left;
+                    border: none;
+                    background-color: #98cb86;
+                    color: #ffffff;
+                    outline: none;
+                    cursor: pointer;
+                    font-size: 15px;
+                    border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    -o-border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -moz-border-radius: 5px;
+                    margin-left: 10px;
+                    margin-top: 5px;
+                    margin-bottom: 5px;}

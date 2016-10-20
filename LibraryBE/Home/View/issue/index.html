@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__\style\common.css">
+		<link rel="stylesheet" type="text/css" href="__PUBLIC__\style\issue.css">
+        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+		<script type="text/javascript" src="__PUBLIC__\js\jquery-1.12.3.js"></script>
+        <script type="text/javascript" src="__PUBLIC__\js\issue.js"></script>
+		<title>发布</title>
+	</head>
+	<body>
+      <form action="#" method="post" enctype="multipart/form- data">
+		<div id="top-box">
+			<div class="a-1"><a href="index.html" class="a-11">〈</a>
+				             <a href="index.html" class="a-12">Back</a></div>
+			<div class="d-1">发布</div>
+		</div>
+        <textarea class="is-textarea" onfocus="if(value=='|文字描述'){value=''}" onblur="if(value==''){value='|文字描述'}" id="CreatNewDes" name="description">|文字描述</textarea>
+        
+        <div id="sp-box">
+            <form id="imageform" method="post" enctype="multipart/form-data" action="#">
+        	<label for="chooseImage" class="file-la"><div class="file-style"></div></label>
+        	<input name="file"  type="button" id="chooseImage"  style="display:none">
+            </form>
+        </div>
+
+        <table id="is-ta">
+        	<tr>
+        		<td class="is-ta-text">价格</td>
+        		<td><input type="text" value="|输入价格" onfocus="if(value=='|输入价格'){value=''}" onblur="if(value==''){value='|输入价格'}" class="is-ta-input" id="CreatNewPri" name="price"></td>
+        	</tr>
+        	<tr>
+        		<td colspan="2"><hr/></td>
+        	</tr>
+        	<tr>
+        		<td class="is-ta-text">分类</td>
+        		<td>
+        				<select name="classify" class="is-ta-select">
+        			    <option>计算机类</option>
+        			    <option>法学类</option>
+        			    <option>医学类</option>
+        			    <option>艺术类</option>
+        			    <option>体育类</option>
+        			    <option>动漫类</option>
+        			    <option>工具书</option>
+        			    <option>外语类</option>
+        		       </select>
+        	    </td>
+        	</tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" value="确定" class="is-su" id="CreatNewSu">
+                </td>
+            </tr>
+        </table>
+       </form>
+        <div id="DeleteFai-box">
+            <div class="su-content">
+                未知错误：请重试
+            </div>
+        </div>
+	</body>
+</html>

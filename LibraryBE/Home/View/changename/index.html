@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="utf-8">
+    	<link rel="stylesheet" type="text/css" href="__PUBLIC__\style\registerlogin.css">
+    	<link rel="stylesheet" type="text/css" href="__PUBLIC__\style\common.css">
+    	<script type="text/javascript" src="__PUBLIC__\js\jquery-1.12.3.js"></script>
+    	<script type="text/javascript" src="__PUBLIC__\js\change.js"></script>
+    	<title>修改名称</title>
+    </head>
+	<body>
+		<div id="top-box">
+			<div class="a-1"><a href="myprofile.html" class="a-11">〈</a>
+				             <a href="myprofile.html" class="a-12">Back</a></div>
+			<div class="d-1 d-2">修改名称</div>
+		</div>
+		<div id="bg-box">
+			<form>
+				<table id="re-ta">
+					<tr>
+						<td>
+							<img src="__PUBLIC__/photo/PNG/username.png" class="name-img">
+						</td>
+						<td>
+							<input type="text" value="新名称" onfocus="if(value=='新名称'){value=''}" onblur="if(value==''){value='新名称'}" class="cpw-te cn-te" id="NewName">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<hr class="ta-hr">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							 <input type="button" value="确定修改" class="re-su" id="NewNameSu">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="DeleteFai-box">
+            <div class="su-content">
+                未知错误：请重试
+            </div>
+        </div>
+	</body>
+</html>

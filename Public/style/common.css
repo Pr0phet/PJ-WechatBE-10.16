@@ -1,0 +1,113 @@
+/*前设*/
+*{
+    padding: 0;
+    margin: 0;
+    font-size: normal;
+    font-weight: normal;}
+a:link{text-decoration: none;}
+li{list-style: none;}
+body,html{width: 100%;
+          height: 100%;}
+/*顶部*/
+#top-box{width: 100%;
+         height: 40px;
+         background-color: #d9e7e7;
+         position: relative;}
+.a-1 a{color: #015981;
+       font-size: 15px;}
+.a-11{font-weight: 600;}
+.a-12{font-family:STXihei,"华文细黑";}
+.a-1{width: 60px;
+     float: left;
+     margin-left: 3px;
+     margin-top: 10px;}
+.d-1{        color: #005981;
+             font-size: 16px;
+             font-family:STXihei,"华文细黑";
+             margin: 0 auto;
+             padding-top: 8px;
+             width: 34px;
+             font-weight: 600;}
+/*修改的title宽度*/
+.d-2{width: 66px;}
+.d-3{width: 73px;}
+/*导航*/
+#navigation-box{width: 100%;
+                height: 100px;
+                position: fixed;
+                bottom: 0;}
+#navigation-box-top{width: 100%;
+                    height: 48px;
+                    position: relative;}
+#navigation-box-top img{width: 80px;
+                          height: 80px;
+                          display: block;
+                          margin: 0 auto;
+                          padding-top: 13px;
+                          cursor: pointer;}
+#navigation-box-bottom{width: 100%;
+                       height: 52px;
+                       background-color: #1f0f0f;}
+.nav{float: left;
+       width: 20%;
+       height: 60px;}
+.nav img{width: 22px;
+           height: 22px;
+           display: block;
+           margin:0 auto;
+           margin-top: 8px;}
+.nav a{  margin: 0 auto;
+         display: block;
+         margin-top: 2px;
+         color: #fff;
+         transform:scale(0.6);
+         font-family:Verdana,"华文细黑";}
+.nav-1 a{width: 34px;}
+.nav-3 a{width: 64px;}
+.nav-1:hover {background-color: #b5e5bf;}
+.nav-3:hover {background-color: #b5e5bf;}
+.nav-2 a{width: 34px;
+         margin-top: 32px;}
+/*提示框*/
+#su-box{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        position: absolute;
+        z-index: 1000;
+        background-image:url(/EXbook/Public/photo/PNG/bg.png);
+        display: none;
+        cursor: pointer;}
+#DeleteFai-box{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        position: absolute;
+        z-index: 1000;
+        background-image:url(/EXbook/Public/photo/PNG/bg.png);
+        display: none;
+        cursor: pointer;}
+
+.su-content{
+   border: 0;
+   width: 200px;
+   height: 130px;
+   background-color: #eeeeee;
+   display: block;
+   margin: 0 auto;
+   margin-top: 150px;
+   font-size: 22px;
+   font-family: "华文细黑";
+   color: red;
+   line-height: 130px;
+   text-align: center;
+   cursor: default;
+   outline: none;}
+
+#con-box{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        position: absolute;
+        z-index: 1100;
+        display: none;}

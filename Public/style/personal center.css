@@ -1,0 +1,172 @@
+body{background-color: #eeeeee;}
+#pc-top-box{width: 100%;
+         height: 40px;
+         background-color: #d9e7e7;
+         position: relative;}
+.text{width: 100px;height: 100px;background-color: black;}
+.idbox{display: none;}
+.pc-a-1{
+           width: 30px;
+           float: left;
+           position: absolute;}
+.pc-a-1 a{
+           color: #8a8a8a;
+           font-size: 15px;
+           font-family:Verdana,"华文细黑";}
+.pc-a-11{left: 10px;
+      top: 10px;}
+.pc-a-12{right: 10px;
+      bottom: 9px;}
+.pc-d-1{color: #005981;
+             font-size: 16px;
+             font-family:Verdana,"华文细黑";
+             margin: 0 auto;
+             padding-top: 8px;
+             width: 66px;
+             font-weight: bold;}
+.pc-box{float: left; 
+        padding-bottom: 80px;}.my-message{width: 100%;
+            margin: 0 auto;}
+.my-com{float: left;
+        font-family: "华文细黑";}
+.my-head{width: 40px;
+         height: 40px;
+         background-color: black;
+         margin-top: 10px;
+         margin-bottom: 10px;
+         margin-right: 10px;
+         margin-left: 10px;}
+.my-head img{width: 100%;height: 100%;}
+.my-name{
+         height: 16px;
+         font-size: 16px;
+         color: #2b2b2b;
+         margin-top: 5px;
+         margin-bottom: 5px;}
+.my-isnu,.my-number{font-size: 14px;
+         color: #005983;}
+
+.is-bg{background-color: #ffffff;
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+        border-top: 0.5px solid #bfbfbf;
+        }
+.is-pic{
+        width: 72%;
+        float: left;
+        margin-left: 5%;}
+.is-pic img{width: 70px;height: 70px;margin-right: 10px;margin-top: 10px;float: left;}
+.is-ri-box{width: 40px;
+           float: right;
+           margin-right: 5%;}
+.is-pri{width: 40px;
+        float: right;}
+.is-pri img{width: 21px;
+            height: 27px;}
+.is-pri div{font-size: 19px;
+            font-family: "华文细黑";
+            color: #fc6c6b;
+            float: right;
+            margin-right: 5px;}
+.is-bu-rent{width: 40px;
+            height: 34px;
+            outline: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-family:"华文细黑";
+            color: #f1971d;
+            background-color: #ffffff;
+            border: 1px solid #f1971d;
+            border-radius: 3px;
+            -moz-border-radius: 3px;
+            -o-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -webkit-border-radius: 3px;
+            float: right;
+            margin-top: 5px;}
+
+.is-content{width: 90%;
+            float: left;
+            margin-left: 5%;
+            margin-top: 10px;
+            font: 13px "华文细黑";
+            text-indent: 1em;}
+.is-bo-box{width: 90%;
+           float: left;
+           margin-top: 10px;
+           margin-left: 5%;
+           margin-bottom: 5px;}
+.is-time{font-size: 14px ;
+        font-family: "华文细黑" ;
+        color: #8a8a8a;
+        float: left;}
+.is-bu-delete{background-color: #ffffff;
+              border: none;
+              color: #005983;
+              outline: none;
+              cursor: pointer;
+              float: left;
+              font-size: 14px;
+              font-family: "华文细黑";
+              margin-left: 10px;
+              margin-bottom: 3px;}
+.is-bo-box a{color: #8a8a8a;
+             font-size: 14px;
+             font-family: "华文细黑";
+             display: block;
+             float: right;}
+.is-me{float: right;
+       margin-left: 15px;
+       margin-top: 4px;}
+.is-me img{width:17px;
+           height: 15px;
+           float: left;}
+.is-me-nu{color: #005983;
+          font-size: 14px;
+          font-family: "华文细黑";
+          float: left;
+          margin-left: 7px;
+          height: 14px;
+          line-height: 14px;}
+#de-box{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        position: absolute;
+        z-index: 999;
+        background-image:url(/EXbook/Public/photo/PNG/bg.png);
+        display: none;}
+#de-select-box{
+   width: 200px;
+   height: 130px;
+   background-color: #eeeeee;
+   margin: 0 auto;
+   position: relative;
+   margin-top: 150px;
+}
+.de-content{font-size: 17px;
+            font-family: "华文细黑";
+            width: 85px;
+            height: 26px;
+            margin: 0 auto;
+            padding-top: 45px;
+            padding-left: 10px;}
+.de-bu{border: none;
+      font-size: 17px;
+      font-family: "华文细黑";
+      width: 100px;
+      height: 40px;
+      line-height: 40px;
+      text-align:center;
+      overflow: hidden;
+      position: absolute;
+      bottom: 0px;
+      outline: none;
+      cursor: pointer;}
+.de-bu:hover{color: #f1971d;}
+.de-bu-confirm{left: 100px;
+               color: red;}
+
+#Person{display: block;}
+#BookDetail{display: none;}
