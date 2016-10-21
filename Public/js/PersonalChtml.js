@@ -6,19 +6,21 @@ window.UserId;
     $.ajax({
      type:"GET",
      dataType:"json",
-     url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
+     url:"/EXbook/index.php/Home/Index/checkSession",
      success:function(data){
-        if(data.success!=0){
-            UserId=data.id;
+        if(data!=0){
+               UserId=data.id;
         }else{
-            if(confirm("请先登录")){
-                window.location.href="login.html";
-            }
-        };
-     },
+            $("#DeleteFai-box > div").html("请先登录");
+            $("#DeleteFai-box").css('display','block');
+            window.setTimeout("window.location.href='issue.html'",1000);
+            $("#DeleteFai-box").click(function(){
+            window.location="login.html";
+        });
+     }},
      error:function(jqXHR){
        //$("body").html("未知错误"+jqXHR.status);
-     },
+     }
 
    });
 //定义全局变量
@@ -29,7 +31,7 @@ window.fail=$("#DeleteFai-box");
 $.ajax({
     type:"GET",
     dataType:"json",
-    url:"http://localhost/EXbook/index.php/Home/Index/showUser",
+    url:"/EXbook/index.php/Home/Index/showUser",
     success:function(data){
         var PeCeIsNun=$("#PeCeIsNu").html(data.number);//发布的数字
         var PeCeMyName=$("#PeCeMyName").html(data.owner);//获取名字
@@ -63,22 +65,21 @@ function getdata(flag){
  $.ajax({
   type:"POST",
   dataType:"json",
-  url:"http://localhost/EXbook/index.php/Home/Index/showBlocks",
+  url:"/EXbook/index.php/Home/Index/showBlocks",
   data:{mode:"personal",
         flag:flag},
   success:function(data){
-    console.log(data);
     if (data.error != "empty") {
             data.forEach((value, index) =>{
               $("#PeCeBox").append(
                                "<div class='is-bg' id='"+value.id+"'>"+
                                      "<div class='is-pic' id='a"+index+"'></div>"+
-                                     "<div class='is-ri-box'>"+
+                                     "<div class='is-ri-box' id='c"+index+"'>"+
                                           "<div class='is-pri'>"+
                                               "<img src='/EXbook/Public/photo/PNG/mo.png'>"+
                                               "<div>"+value.price+"</div>"+
                                           "</div>"+
-                                          "<button class='is-bu-rent' name='"+value.id+"'>已出租请点击</button>"+
+                                          //"<button class='is-bu-rent' name='"+value.id+"'>已出租请点击</button>"+
                                      "</div>"+
                                      "<div class='is-content'>    "+value.desciption+"</div>"+
                                            "<div class='is-bo-box'>"+
@@ -92,6 +93,12 @@ function getdata(flag){
                                                   "</div>"+
                                   "</div>"+
                                  "</div>");
+              if(value.status==1){
+                  $("#c"+index).append("<button class='is-bu-rent is-bu-rent-no' id='d"+index+"' name='"+value.id+"'>未出租请点击"+
+                                       "</button>")
+              }else if(value.status==0){
+                  $("#c"+index).append("<button class='is-bu-rent'>已出租</button>")
+              }
              for(var j=0;j<value.pic.length;j++){
               $("#a"+index).append("<img class='img-1 img-1-1' src='"+value.pic[j].url+"'>");
                 };
@@ -111,22 +118,19 @@ $(function(){
 
 //转到详情
 $(function(){
-   $(".more").click(function(){
+$("#PeCeBox").delegate(".more", "click", function(){
       var DetailId=$(this).attr('name');
       $.ajax({
         type:"POST",
         dataType:"json",
-        url:"http://localhost/EXbook/index.php/Home/Index/detailBlock",
-        data:{DetailId:DetailId},
+        url:"/EXbook/index.php/Home/Index/detailBlock",
+        data:{id:DetailId},
         success:function(data){
-                $("#Index").css('display','none');
-                $("#search-box").css('display','none');
-                $("#navigation-box").css('display','none');
+                $("#Person").css('display','none');
                 $("#BookDetail").css('display','block');
                 $("#BookdeBox").append(
-        
                          "<div class='book-introduce'>"+
-                             "<div class='book-head'></div>"+
+                             "<div class='book-head'><img src='"+data.owner_pic+"'></div>"+
                              "<table class='book-box'>"+
                                 "<tr>"+
                                   "<td><div class='book-name'>"+data.owner+"</div></td>"+
@@ -136,7 +140,7 @@ $(function(){
                                 "</tr>"+
                              "</table>"+
                                  "<div class='book-money'>"+
-                                     "<img src='photo/PNG/mo2.png'>"+
+                                     "<img src='/Exbook/Public/photo/PNG/mo2.png'>"+
                                      "<p>"+data.price+"</p>"+
                                  "</div>"+
                              "</div>"+
@@ -150,14 +154,15 @@ $(function(){
                              "</div>"+
                              "<div class='comment-title'>留言</div>"+"<p hidden='hidden'>"+DetailId+"</p>"+
                              "<div class='comment-box' id='CommentBox'></div>");
-        //加载targetid
-        window.targetid="chat.html?target="+data.ownerid;
-        $("#chathtml").attr('href',targetid);
-        //加载描述图片
-        data.forEach((value,index) => {
-        for(var j=0;j<value.pic.length;j++){
-            $("#ImgBox").appen("<img src='"+value.pic[j].url+"'>")
-          };
+          //加载targetid
+          window.targetid="chat.html?target="+data.ownerid;
+          $("#chathtml").attr('href',targetid);
+          //加载图片
+          $.makeArray(data).forEach((value, index) =>{
+           for(var j=0;j<value.pic.length;j++){
+               $("#ImgBox").append("<img src='"+value.pic[j].url+"'>")
+           };
+
            //加载留言
           $("#CommentBox").append(
             "<div class='comment'>"+
@@ -167,7 +172,7 @@ $(function(){
                         "<td><div class='comment-name'>"+value.owner+"</div></td>"+
                     "</tr>"+
                     "<tr>"+
-                        "<td><div class='comment-content'>"+value.desciption+"</div></td>"+
+                        "<td><div class='comment-content'>"+value.description+"</div></td>"+
                     "</tr>"+
                 "</table>"+
                 "<div class='comment-time'>"+value.time+"</div>"+
@@ -203,7 +208,7 @@ $(function(){
          $.ajax({
           type:"GET",
           dataType:"json",
-          url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
+          url:"/EXbook/index.php/Home/Index/checkSession",
           success:function(data){
              if(data.success!=0){
                  UserId=data.id;
@@ -272,7 +277,7 @@ $("a[name='PcCannal']").click(function(){
     $.ajax({
       type:"POST",
       dataType:"json",
-      url:"http://localhost/EXbook/index.php/Home/Index/logout",
+      url:"/EXbook/index.php/Home/Index/logout",
       success:function(data){
               if(data.success==04){
                 alert("注销成功");
@@ -308,16 +313,18 @@ $(function(){
 });
 //出租点击
 $(function(){
-  $("#PeCeBox").delegate('.is-bu-rent', 'click', function() {
+  $("#PeCeBox").delegate('.is-bu-rent-no', 'click', function() {
      var BookChunkId=$(this).attr('name');
+     var buttonid=$(this).attr('id');
      $.ajax({
       type:"POST",
-      url:"http://localhost/EXbook/index.php/Home/Index/rentOut",
+      url:"/EXbook/index.php/Home/Index/rentOut",
       dataType:"json",
       data:{BookChunkId:BookChunkId},
       success:function(data){
         if(data.success==06){
-          $(this).html("已出租");
+          $("#"+buttonid).removeClass("is-bu-rent-no")
+          $("#"+buttonid).html("已出租");
           $("#su-box").css('display','block');
         }else if(data.error==06){
           $("#DeleteFai-box").css('display','block');
@@ -338,7 +345,7 @@ $("#PeCeBox").delegate('.is-bu-delete', 'click', function() {
        $("#DeBlockConfirm").click(function(){
            $.ajax({
             type:"POST",
-            url:"http://localhost/EXbook/index.php/Home/Index/deleteBlock",
+            url:"/EXbook/index.php/Home/Index/deleteBlock",
             dataType:"json",
             data:{BookChunkId:BookChunkId},
             success:function(data){
@@ -347,12 +354,18 @@ $("#PeCeBox").delegate('.is-bu-delete', 'click', function() {
                         $("#"+BookChunkId).remove();
                   });
                   $("#con-box").css('display','block');
+                  $("#de-box").css('display','none');
+                  var n=$("#PeCeIsNu").html();
+                  $("#PeCeIsNu").html(n-1);
               }else if(data.error==06){
+                $("#de-box").css('display','none');
                 $("#DeleteFai-box").css('display','block');
 
               }
             },
             error:function(jqXHR){
+              $("#de-box").css('display','none');
+              $("#DeleteFai-box").html("错误"+jqXHR.status);
               $("#DeleteFai-box").css('display','block');
             }
         });

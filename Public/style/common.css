@@ -75,7 +75,7 @@ body,html{width: 100%;
         top: 0;
         position: absolute;
         z-index: 1000;
-        background-image:url(/EXbook/Public/photo/PNG/bg.png);
+        background-image:url(../photo/PNG/bg.png);
         display: none;
         cursor: pointer;}
 #DeleteFai-box{
@@ -84,7 +84,16 @@ body,html{width: 100%;
         top: 0;
         position: absolute;
         z-index: 1000;
-        background-image:url(/EXbook/Public/photo/PNG/bg.png);
+        background-image:url(../photo/PNG/bg.png);
+        display: none;
+        cursor: pointer;}
+#DeleteFai-box1{
+        width: 100%;
+        height: 100%;
+        top: 0;
+        position: absolute;
+        z-index: 1000;
+        background-image:url(../photo/PNG/bg.png);
         display: none;
         cursor: pointer;}
 
@@ -96,7 +105,7 @@ body,html{width: 100%;
    display: block;
    margin: 0 auto;
    margin-top: 150px;
-   font-size: 22px;
+   font-size: 14px;
    font-family: "华文细黑";
    color: red;
    line-height: 130px;

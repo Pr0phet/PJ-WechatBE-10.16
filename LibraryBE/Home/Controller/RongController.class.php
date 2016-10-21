@@ -18,13 +18,13 @@ class RongController extends Controller
 
     private function imToken($status)
     {
-        if($status)
+        if($status['code'] == '200')
         {
             //获取用户
             $db = M('user');
             $id = session('userid');
             $user = $db->WHERE('id = ' . $id)->find();
-            $name = $user['owner'];
+            $name = $user['name'];
             $pic = $user['pic'];
 
             $rongCloud = new \RongCloud($this::$APPkey, $this::$APPSecret);
@@ -32,7 +32,7 @@ class RongController extends Controller
             $data['id'] = $id;
             $data['name'] = $name;
             $data['pic'] = $pic;
-            $data['token'] = $token;
+            $data['token'] = json_decode($token,true)['token'];
             $this->ajaxReturn($data);
         }
         else
@@ -41,12 +41,16 @@ class RongController extends Controller
         }
     }
 
-    public function checkOnline()
+    public function check()
     {
-        $id = I('post.id');
+        $id = session('userid');
+        if (!session('?userid'))
+        {
+            $this -> ajaxReturn(array('error' => '06'));
+        }
         $rongcloud = new \RongCloud($this::$APPkey,$this::$APPSecret);
         $result = $rongcloud -> user() -> checkOnline($id);
         $result = json_decode($result,true);
-        $this ->imToken($result['status']);
+        $this ->imToken($result);
     }
 }

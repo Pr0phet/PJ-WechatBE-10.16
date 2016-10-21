@@ -2,15 +2,16 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__\style\common.css">
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__\style\issue.css">
-        <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
-		<script type="text/javascript" src="__PUBLIC__\js\jquery-1.12.3.js"></script>
-        <script type="text/javascript" src="__PUBLIC__\js\issue.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"> 
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__\style\common.css">
+        <link rel="stylesheet" type="text/css" href="__PUBLIC__\style\issue.css">
+        <script type="text/javascript" src="__PUBLIC__\js/jquery-3.1.1.js"></script>
+        <script type="text/javascript" src="__PUBLIC__\js/jquery.form.min.js"></script>
+        <script type="text/javascript" src="__PUBLIC__\js/issue.js"></script>
 		<title>发布</title>
 	</head>
 	<body>
-      <form action="#" method="post" enctype="multipart/form- data">
+      <form id="IsForm" method="post" enctype="multipart/form-data" action="__MODULE__/Index/creatBlock">
 		<div id="top-box">
 			<div class="a-1"><a href="index.html" class="a-11">〈</a>
 				             <a href="index.html" class="a-12">Back</a></div>
@@ -19,12 +20,11 @@
         <textarea class="is-textarea" onfocus="if(value=='|文字描述'){value=''}" onblur="if(value==''){value='|文字描述'}" id="CreatNewDes" name="description">|文字描述</textarea>
         
         <div id="sp-box">
-            <form id="imageform" method="post" enctype="multipart/form-data" action="#">
-        	<label for="chooseImage" class="file-la"><div class="file-style"></div></label>
-        	<input name="file"  type="button" id="chooseImage"  style="display:none">
-            </form>
+                 <label for="chooseImage" class="file-la"><div class="file-style"></div></label>
+        	     <input name="file" type="file" type="button" id="chooseImage" multiple="multiple" style="display:none">
+                 <div id="imageformbox">
+                 </div>
         </div>
-
         <table id="is-ta">
         	<tr>
         		<td class="is-ta-text">价格</td>
@@ -36,7 +36,7 @@
         	<tr>
         		<td class="is-ta-text">分类</td>
         		<td>
-        				<select name="classify" class="is-ta-select">
+        				<select name="tag" class="is-ta-select">
         			    <option>计算机类</option>
         			    <option>法学类</option>
         			    <option>医学类</option>
@@ -56,6 +56,11 @@
         </table>
        </form>
         <div id="DeleteFai-box">
+            <div class="su-content">
+                未知错误：请重试
+            </div>
+        </div>
+        <div id="DeleteFai-box1">
             <div class="su-content">
                 未知错误：请重试
             </div>

@@ -5,24 +5,21 @@ $(function(){
   window.userid;
   window.userhead;
 $.ajax({
-          type:"GET",
+          type:"POST",
           dataType:"json",
-          url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
+          url:"/EXbook/index.php/Home/Rong/check",
           success:function(data){
-             if(data.success!=0){
-                  ltoken=data.token;//得到用户token
-             }else{
-                  if(confirm("请先登录")){
-                     window.location.href="login.html";
-                  }
-              };
-          },
-          error:function(jqXHR){
-             //$("body").html("未知错误"+jqXHR.status);
-           },
-        });
+            if (data.error == 06) 
+            {
+                failhtml.html("请登录");
+                fail.css('display','block');
+                fail.click(function(){
+                  window.location="login.html";
+                });
+            }
+             if(data!=0){
 
-});
+                  ltoken=data.token;//得到用户token
 // 初始化
 // RongIMClient.init(appkey, [dataAccessProvider],[options]);
 // appkey:官网注册的appkey。
@@ -64,6 +61,7 @@ var token = ltoken;
               console.log(errorCode);
             }
       });
+
 // 设置连接监听状态 （ status 标识当前连接状态）
  // 连接状态监听器
  RongIMClient.setConnectionStatusListener({
@@ -91,14 +89,6 @@ var token = ltoken;
               break;
             }
     }});
-//定义全局
- $(function(){
-  window.fail=$("#DeleteFai-box");
-  window.failhtml=$("#DeleteFai-box > div");
-  fail.click(function() {
-    fail.css('display','none');
-  });
-
 // 消息监听器
  RongIMClient.setOnReceiveMessageListener({
     // 接收到的消息
@@ -125,7 +115,36 @@ var token = ltoken;
         }
     }
 });
+
+
+
+
+             }else{
+                     window.location.href="login.html";
+
+              }
+          },
+          error:function(jqXHR){
+             $("body").html("未知错误"+jqXHR.status);
+           }
+        });
+
 });
 
+
+//定义全局
+ $(function(){
+  window.fail=$("#DeleteFai-box");
+  window.failhtml=$("#DeleteFai-box > div");
+  fail.click(function() {
+    fail.css('display','none');
+  });
+});
+//点击图片转到发布页面
+$(function(){
+    $("#IsPicture").click(function(){
+        window.location.href="issue.html";
+});
+});
 
 

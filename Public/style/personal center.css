@@ -45,7 +45,7 @@ body{background-color: #eeeeee;}
          margin-bottom: 5px;}
 .my-isnu,.my-number{font-size: 14px;
          color: #005983;}
-
+#PeCeBox{width: 100%;}
 .is-bg{background-color: #ffffff;
         width: 100%;
         float: left;
@@ -60,15 +60,16 @@ body{background-color: #eeeeee;}
 .is-ri-box{width: 40px;
            float: right;
            margin-right: 5%;}
-.is-pri{width: 40px;
-        float: right;}
+.is-pri{width: 53px; float: right;}
 .is-pri img{width: 21px;
-            height: 27px;}
-.is-pri div{font-size: 19px;
+            height: 27px;
+            float: left;}
+.is-pri div{font-size: 16px;
             font-family: "华文细黑";
             color: #fc6c6b;
             float: right;
-            margin-right: 5px;}
+            margin-right: 5px;
+            margin-top: 5px;}
 .is-bu-rent{width: 40px;
             height: 34px;
             outline: none;

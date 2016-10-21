@@ -22,14 +22,14 @@ class User{
     	try{
 			if (empty($userId))
 				throw new Exception('Paramer "userId" is required');
-				
+
 			if (empty($name))
 				throw new Exception('Paramer "name" is required');
-				
+
 			if (empty($portraitUri))
 				throw new Exception('Paramer "portraitUri" is required');
-				
-	
+
+
     		$params = array (
     		'userId' => $userId,
     		'name' => $name,

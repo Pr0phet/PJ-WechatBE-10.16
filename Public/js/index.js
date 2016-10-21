@@ -8,16 +8,12 @@ window.UserId;
      dataType:"json",
      url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
      success:function(data){
-        if(data.success!=0){
+        if(data!=0){
             UserId=data.id;
-        }else{
-            if(confirm("请先登录")){
-                window.location.href="login.html";
-            }
-        };
+            //$("#status").val()= UserId;
+        }
      },
      error:function(jqXHR){
-       //$("body").html("未知错误"+jqXHR.status);
      },
 
    });
@@ -47,7 +43,7 @@ $("#search-button").click(function(){
 
       }else{
 		  console.log(data);
-      data.forEach((value, index) => {
+      data.each(function(value, index){
           $("#SearchResultBox").append(
             "<div class='index-content-box'> "+
               "<table cellpadding='0' cellspacing='0'>"+
@@ -105,7 +101,7 @@ $("#search-button").click(function(){
 
 });
 //首次加载页面
-  getdata(1);
+  getdata(0);
 });
 //下拉加载
 $(function(){
@@ -130,9 +126,16 @@ function getdata(flag){
 	type:"get",
 	dataType:"json",
 	data:{flag:flag},
-	url:"http://localhost/EXbook/index.php/Home/Index/showBlocks",
+	url:"/EXbook/index.php/Home/Index/showBlocks",
 	success:function(data){
-    data.forEach((value, index) => {
+    console.log(data);
+    if(data.error=="empty"){
+        $("#DeleteFai-box > div").html("没有啦！");
+        $("#DeleteFai-box").css('display','block');
+        $("#DeleteFai-box").click(function(){
+        $("#DeleteFai-box").css('display','none');});
+    }else{
+      data.forEach(function(value, index){
        $("#index-body-center").append(
            "<div class='index-content-box'> "+
               "<table cellpadding='0' cellspacing='0'>"+
@@ -176,6 +179,7 @@ function getdata(flag){
              $("#a"+index).append("<img class='img-1 img-1-1' src='"+value.pic[j].url+"'>");
           };
     })
+    }
 
 	},
     error:function(jqXHR){
@@ -187,7 +191,7 @@ function getdata(flag){
 //点击图片转到发布页面
 $(function(){
     $("#IsPicture").click(function(){
-    window.location.href="issue.html";
+        window.location.href="issue.html";
 });
 });
 //转到详情
@@ -197,7 +201,7 @@ $(function(){
       $.ajax({
         type:"POST",
         dataType:"json",
-        url:"http://localhost/EXbook/index.php/Home/Index/detailBlock",
+        url:"/EXbook/index.php/Home/Index/detailBlock",
         data:{id:DetailId},
         success:function(data){
                 $("#Index").css('display','none');
@@ -237,6 +241,7 @@ $(function(){
          //加载targetid
             window.targetid="chat.html?target="+data.ownerid;
             $("#chathtml").attr('href',targetid);
+            console.log($("#chathtml").attr('href'));
 
         // 加载留言
         if (data.comments.flag == 1)
@@ -292,7 +297,7 @@ $(function(){
          $.ajax({
           type:"GET",
           dataType:"json",
-          url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
+          url:"/EXbook/index.php/Home/Index/checkSession",
           success:function(data){
              if(data.success!=0){
                  UserId=data.id;
@@ -309,7 +314,7 @@ $(function(){
                      }else{
                          $.ajax({
                              type:"POST",
-                             url:"http://localhost/EXbook/index.php/Home/Index/addComment",
+                             url:"/EXbook/index.php/Home/Index/addComment",
                              dataType:"json",
                              data:{
                                  comment:$("#Comment").val(),

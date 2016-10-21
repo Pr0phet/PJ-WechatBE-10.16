@@ -13,9 +13,9 @@ $(function(){
   $.ajax({
      type:"GET",
      dataType:"json",
-     url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
+     url:"/EXbook/index.php/Home/Index/checkSession",
      success:function(data){
-        if(data.success!=0){
+        if(data!=0){
             UserId=data.id;
         }else{
             failhtml.html("请先登录");
@@ -57,7 +57,7 @@ $(function(){
         }else{
           $.ajax({
                type:"POST",
-               url:"http://localhost/EXbook/index.php/Home/Index/changePass",
+               url:"/EXbook/index.php/Home/Index/changePass",
                dataType:"json",
                data:{
                   OldPass:$("#ChangePassOld").val(),
@@ -97,7 +97,7 @@ $(function(){
     }else{
       $.ajax({
                    type:"POST",
-                   url:"http://localhost/EXbook/index.php/Home/Index/changeName",
+                   url:"/EXbook/index.php/Home/Index/changeName",
                    dataType:"json",
                    data:{
                     NewName:$("#NewName").val()

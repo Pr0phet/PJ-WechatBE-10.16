@@ -14,10 +14,9 @@ class IndexController extends Controller
     private static $sms_url = "http://sms.tehir.cn/code/sms/api/v1/send?";
 
 
-
     public function index()
     {
-        $this -> display();
+        $this->display();
     }
 
     /**
@@ -27,38 +26,35 @@ class IndexController extends Controller
      */
     public function sendSMS()
     {
-        $Phone = '13929470083';
-        $checkNum = (string)rand(1000,9999);
-        session(array('checkNum' => $checkNum , 'expire' => '900'),$checkNum);
+        $Phone = I('post.phone');
+        $checkNum = (string)rand(1000, 9999);
+        session(array('checkNum' => $checkNum, 'expire' => '900'), $checkNum);
 
         $ch = curl_init();
-        $url = $this::$sms_url."srcSeqId=0"."&account=".$this::$sms_user."&password=".$this::$sms_pass."&mobile=".$Phone."&code=".$checkNum."&time=15";
-        curl_setopt ( $ch, CURLOPT_HEADER, 0 );
-        curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, 1 );
-        curl_setopt ( $ch, CURLOPT_URL, $url );
+        $url = $this::$sms_url . "srcSeqId=0" . "&account=" . $this::$sms_user . "&password=" . $this::$sms_pass . "&mobile=" . $Phone . "&code=" . $checkNum . "&time=15";
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
         $res = curl_exec($ch);
-        $res = json_decode($res,true);
+        $res = json_decode($res, true);
 
-        if($res['responseCode'] == '0')
-        {
-            $this -> ajaxReturn(array('success' => '10'));
-        }
-        else
-        {
-            $this -> ajaxReturn(array('error' => '06'));
+        if ($res['responseCode'] == '0') {
+            $this->ajaxReturn(array('success' => '10'));
+        } else {
+            $this->ajaxReturn(array('error' => '06'));
         }
         curl_close($ch);
     }
 
     public function checkSession()
     {
-        $this ->  ajaxReturn(session('?userid'));
+        $this->ajaxReturn(session('?userid'));
     }
 
     public function checkCode()
     {
-        $this -> ajaxReturn((
-            (I('post.checkNum') == session('checkNum')) ? array('success' => '10') : array('error' => '06')
+        $this->ajaxReturn((
+        (I('post.checkNum') == session('checkNum')) ? array('success' => '10') : array('error' => '06')
         ));
     }
 
@@ -74,22 +70,17 @@ class IndexController extends Controller
         $pass = I('post.pass');
         $user = M('user');
         $condition['phone'] = $phone;
-        $res = $user -> WHERE($condition) -> find();
-        if(!$res)
-        {
-            $this -> ajaxReturn(array('error' => '00'));
-        }
-        elseif($res['pass'] != $pass)
-        {
-            $this -> ajaxReturn(array('error' => '01'));
-        }
-        else
-        {
+        $res = $user->WHERE($condition)->find();
+        if (!$res) {
+            $this->ajaxReturn(array('error' => '00'));
+        } elseif ($res['pass'] != $pass) {
+            $this->ajaxReturn(array('error' => '01'));
+        } else {
             session(array('name' => 'userid'));
             session(array('name' => 'username'));
-            session('userid',$res['id']);
-            session('username',$res['name']);
-            $this -> ajaxReturn(array('success' => '00'));
+            session('userid', $res['id']);
+            session('username', $res['name']);
+            $this->ajaxReturn(array('success' => '00'));
         }
     }
 
@@ -99,8 +90,8 @@ class IndexController extends Controller
      */
     public function logout()
     {
-        session('userid',null);
-        $this -> ajaxReturn(array('success' => '04'));
+        session('userid', null);
+        $this->ajaxReturn(array('success' => '04'));
     }
 
     /**
@@ -116,40 +107,17 @@ class IndexController extends Controller
         $db = M('user');
         $raw = I('post.');
         $data = array();
-        if($raw['checkNum'] == session('checkNum'))
-        {
+        if ($raw['checkNum'] == session('checkNum')) {
             $data['phone'] = $raw['phone'];
             $data['name'] = $raw['name'];
             $data['pass'] = $raw['pass'];
-            $config = array(
-                'maxSize' => '1572864', //最大1.5M
-                'rootPath' => './Public/upload/', //根目录
-                'savePath' => session('userid').'/', //分类存储图片（相对于根目录）
-                'saveName' => 'userpic', //文件命名规则
-                'exts' => array('jpg','jpeg','png'),
-                'replace' => true
-            );
-            $upload = new \Think\upload($config);
-            $info = $upload -> uploadOne($_FILES['pic']);
-            if(!$info)
-            {
-                $this -> ajaxReturn(array('error' => '03'));
-                exit();
-            }
-            else
-            {
-                $data['pic'] = $info['savepath'];
-            }
         }
-        $res = $db -> create($data);
-        if($res != true)
-        {
-            $this -> ajaxReturn(array('error' => '02'));
-        }
-        else
-        {
-            session('checkNum',null);
-            $this -> ajaxReturn(array('success' => '01'));
+        $res = $db->add($data);
+        if ($res != true) {
+            $this->ajaxReturn(array('error' => '02'));
+        } else {
+            session('checkNum', null);
+            $this->ajaxReturn(array('success' => '01'));
         }
     }
 
@@ -168,43 +136,41 @@ class IndexController extends Controller
         $books = M('books');
         $picRepo = M('picrepo');
         $user = M('user');
-        $owner_pic = $user -> WHERE('id = '.session('userid')) -> find();
+        $owner = $user->WHERE('id = ' . session('userid'))->find();
 
         $raw = I('post.');
         $data['description'] = $raw['description'];
         $data['price'] = $raw['price'];
         $data['tag'] = $raw['tag'];
-        $data['owner'] = session('userid');
-        $data['ownerpic'] = $owner_pic['pic'];
+        $data['owner'] = session('username');
+        $data['owner_pic'] = $owner['pic'];
         $data['ct'] = time();
 
-        $saveBook = $books -> add($data);
+        $saveBook = $books->add($data);
         $config = array(
             'maxSize' => '1572864', //最大1.5M
             'rootPath' => './Public/upload/', //根目录
-            'savePath' => session('userid').'/', //分类存储图片（相对于根目录）
-            'exts' => array('jpg','jpeg','png'),
+            'savePath' => session('userid') . '/', //分类存储图片（相对于根目录）
+            'exts' => array('jpg', 'jpeg', 'png'),
             'replace' => true
         );
         $upload = new \Think\Upload($config);
-        $res = $upload -> upload();
-        if($res)
-        {
+        $res = $upload->upload();
+        if ($res) {
             $save['picflag'] = $saveBook;
-            $save['commentsflag'] =$saveBook;
-            for($i = 0; $i < count($res); $i++)
-            {
-                $pic[$i]['url'] = $res[$i]['savepath'];
-                $pic[$i]['flag'] = $data['picflag'];
+            $save['commentsflag'] = $saveBook;
+            $i = 0;
+            foreach ($res as $file) {
+                $pic[$i]['url'] = 'http://localhost/EXbook/Public/upload/' . '/' . $file['savepath'] . $file['savename'];
+                $pic[$i]['flag'] = $saveBook;
                 $pic[$i]['tag'] = $data['tag'];
+                $i++;
             }
-            $picRepo -> saveAll($pic);
-            $books -> WHERE('id = '.$saveBook) -> save($save);
-            $this -> ajaxReturn(array('success' => '07'));
-        }
-        else
-        {
-            $this -> ajaxReturn(array('error' => '06'));
+            $picRepo->addAll($pic);
+            $books->WHERE('id = ' . $saveBook)->save($save);
+            $this->ajaxReturn(array('success' => '07'));
+        } else {
+            echo $upload->getError();
         }
     }
 
@@ -219,24 +185,22 @@ class IndexController extends Controller
     public function showBlocks()
     {
         $books = M('books');
-        $flag = (int)I('post.flag')*5;
-        $mode = I('post.mode',0) ? I('post.mode') : 'public';
-        $search = I('post.keyword',0) ? I('post.keyword') : null;
+        $flag = (int)I('post.flag') * 5;
+        $mode = I('post.mode', 0) ? I('post.mode') : 'public';
+        $search = I('post.keyword', 0) ? I('post.keyword') : null;
         $condition['status'] = 1;
-        if($mode == 'personal')
-        {
+        if ($mode == 'personal') {
             $condition['owner'] = session('username');
             unset($condition['status']);
         }
-        if($search != null)
-        {
-            $where['description'] = array('like',"%$search%");
-            $where['owner'] = array('like',"%$search%");
+        if ($search != null) {
+            $where['description'] = array('like', "%$search%");
+            $where['owner'] = array('like', "%$search%");
             $where['_logic'] = 'OR';
             $condition['_complex'] = $where;
         }
-        $blocks = $books -> WHERE($condition) -> limit("$flag,5") ->select();
-        if($blocks)
+        $blocks = $books->WHERE($condition)->limit("$flag,5")->select();
+        if ($blocks)
         {
             for ($i = 0; $i < count($blocks); $i++)
             {
@@ -245,7 +209,7 @@ class IndexController extends Controller
                 $data[$i]['owner_pic'] = $blocks[$i]['owner_pic'];
                 $data[$i]['price'] = $blocks[$i]['price'];
                 $data[$i]['time'] = $this->showTime($blocks[$i]['ct']);
-                $data[$i]['pic'] = $this->getPic($blocks[$i]['picflag'], 'book');
+                $data[$i]['pic'] = $this->getPic($blocks[$i]['picflag']);
                 $data[$i]['desciption'] = $blocks[$i]['description'];
                 $data[$i]['commentNum'] = $this->getComments($blocks[$i]['commentsflag'])['num'];
                 $data[$i]['publishNum'] = count($books->WHERE($condition)->select());
@@ -256,7 +220,7 @@ class IndexController extends Controller
         {
             $data['error'] = "empty";
         }
-        $this -> ajaxReturn($data);
+        $this->ajaxReturn($data);
     }
 
     public function detailBlock()
@@ -265,12 +229,10 @@ class IndexController extends Controller
         //getComments
         $com = M('comments');
         $user = M('user');
-        $flag = $com -> WHERE($condition) -> select();
-        if($flag)
-        {
+        $flag = $com->WHERE($condition)->select();
+        if ($flag) {
             $data['comments']['flag'] = 1;
-            for ($i = 0; $i < count($flag); $i++)
-            {
+            for ($i = 0; $i < count($flag); $i++) {
                 $owner = $user->WHERE('id = ' . $flag[$i]['ownerid'])->find();
                 $data['comments'][$i]['owner'] = $owner['name'];
                 $data['comments'][$i]['pic'] = $owner['pic'];
@@ -278,25 +240,23 @@ class IndexController extends Controller
                 $data['comments'][$i]['time'] = $this->showTime($flag[$i]['time']);
             }
             $data['comments']['times'] = count($flag);
-        }
-        else
-        {
+        } else {
             $data['comments']['flag'] = 0;
         }
         //getDetail
-        $condition['status'] = 1;
+        $condition['id'] = I('post.id');
         $books = M('books');
-        $res = $books -> WHERE($condition) -> find();
+        $res = $books->WHERE($condition)->find();
         $selectOwner['name'] = $res['owner'];
         $data['id'] = $res['id'];
         $data['owner'] = $res['owner'];
-        $data['ownerid'] = $user -> WHERE($selectOwner) -> find();
+        $data['ownerid'] = $user->WHERE($selectOwner)->find()['id'];
         $data['owner_pic'] = $res['owner_pic'];
         $data['price'] = $res['price'];
-        $data['time'] = $this -> showTime($res['ct']);
-        $data['pic'] = $this -> getPic($res['picflag'],'book');
+        $data['time'] = $this->showTime($res['ct']);
+        $data['pic'] = $this->getPic($res['picflag']);
         $data['description'] = $res['description'];
-        $this -> ajaxReturn($data);
+        $this->ajaxReturn($data);
     }
 
     /**
@@ -309,32 +269,24 @@ class IndexController extends Controller
         $books = M('books');
 
         $id = I('post.BookChunkId');
-        $block = $books -> WHERE('id = '.$id) -> find();
+        $block = $books->WHERE('id = ' . $id)->find();
 
         $picflag = $block['picflag'];
         $commentsflag = $block['commentsflag'];
 
         $picRepo = M('picrepo');
         $picCondition['flag'] = $picflag;
-        $pics = $picRepo -> WHERE($picCondition) -> select();
-        for($i = 0; $i < count($pics); $i++)
-        {
+        $pics = $picRepo->WHERE($picCondition)->select();
+        for ($i = 0; $i < count($pics); $i++) {
             unlink($pics[$i]['url']);
         }
-        $picRes = $picRepo -> WHERE($picCondition) -> delete();
+        $picRepo->WHERE($picCondition)->delete();
 
         $commentsRepo = M('comments');
         $commentsCondition['flag'] = $commentsflag;
-        $commentsRes = $commentsRepo -> WHERE($commentsCondition) -> delete();
-        if($picRes && $commentsRes)
-        {
-            $books -> WHERE('id = '.$id) -> delete();
-            $this -> ajaxReturn(array('success' => '05'));
-        }
-        else
-        {
-            $this -> ajaxReturn(array('error' => '06'));
-        }
+        $commentsRepo->WHERE($commentsCondition)->delete();
+        $books->WHERE('id = ' . $id)->delete();
+        $this->ajaxReturn(array('success' => '05'));
     }
 
     /**
@@ -344,18 +296,15 @@ class IndexController extends Controller
      */
     public function rentOut()
     {
-        $books= M('books');
+        $books = M('books');
         $id = I('post.BookChunkId');
         $condition['id'] = $id;
         $data['status'] = '0';
-        $res = $books -> WHERE($condition) -> save($data);
-        if($res)
-        {
-            $this -> ajaxReturn(array('success' => '06'));
-        }
-        else
-        {
-            $this -> ajaxReturn(array('error' => '06'));
+        $res = $books->WHERE($condition)->save($data);
+        if ($res) {
+            $this->ajaxReturn(array('success' => '06'));
+        } else {
+            $this->ajaxReturn(array('error' => '06'));
         }
     }
 
@@ -370,7 +319,7 @@ class IndexController extends Controller
         $comment = M('comments');
         $user = M('user');
 
-        $userinfo = $user -> WHERE('id = '.session('userid')) -> find();
+        $userinfo = $user->WHERE('id = ' . session('userid'))->find();
         $data['head'] = $userinfo['pic'];
         $data['name'] = $userinfo['name'];
         $id = I('post.postid');
@@ -379,15 +328,12 @@ class IndexController extends Controller
         $data['ownerid'] = session('userid');
         $data['time'] = time();
 
-        $res = $comment -> add($data);
-        $data['time'] = $this -> showTime($data['time']);
-        if($res)
-        {
-            $this -> ajaxReturn($data);
-        }
-        else
-        {
-            $this -> ajaxReturn(array('error' => '06'));
+        $res = $comment->add($data);
+        $data['time'] = $this->showTime($data['time']);
+        if ($res) {
+            $this->ajaxReturn($data);
+        } else {
+            $this->ajaxReturn(array('error' => '06'));
         }
     }
 
@@ -395,6 +341,30 @@ class IndexController extends Controller
 
 
     //----------user----------
+
+    public function getName()
+    {
+        $id = I('post.id');
+        $user = M('user');
+
+        $name = $user->WHERE('id = ' . $id)->find()['name'];
+        $this->ajaxReturn($name);
+    }
+
+    public function checkExsist()
+    {
+        $phone = I('post.phone');
+        $user = M('user');
+        $res = $user -> WHERE('phone ='. $phone) -> find();
+        if($res)
+        {
+            $this -> ajaxReturn(1);
+        }
+        else
+        {
+            $this -> ajaxReturn(0);
+        }
+    }
 
     public function showUser()
     {
@@ -476,7 +446,7 @@ class IndexController extends Controller
             'exts' => array('jpg','jpeg','png'),
             'replace' => true
         );
-        $upload = new \Think\upload($config);
+        $upload = new \Think\Upload($config);
         $info = $upload -> uploadOne($_FILES['pic']);
         if(!$info)
         {
@@ -484,7 +454,7 @@ class IndexController extends Controller
         }
         else
         {
-            $data['pic'] = $info['savepath'];
+            $data['pic'] = 'http://localhost/EXbook/Public/upload/'.$info['savepath'].$info['savename'];
             $res = $db -> WHERE($conditon) -> save($data);
             if(!$res)
             {
@@ -567,18 +537,17 @@ class IndexController extends Controller
         $data = $db -> WHERE($condition) -> select();
         $num = count($data);
         $data['num'] = $num;
-        if($data)
-        {
-            $data['time'] = $this->showTime($data['time']);
-        }
+//        if($data)
+//        {
+//            $data['time'] = $this->showTime($data['time']);
+//        }
         return $data;
     }
 
-    private function getPic($flag,$tag)
+    private function getPic($flag)
     {
         $db = M('picrepo');
         $condition['flag'] = $flag;
-        $condition['tag'] = $tag;
         $data = $db -> WHERE($condition) -> field('url') -> select();
         return $data;
     }

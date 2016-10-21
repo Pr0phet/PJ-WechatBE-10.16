@@ -5,7 +5,9 @@
 	  <title>Ex-BOOK</title>
 	  <link rel="stylesheet" type="text/css" href="__PUBLIC__\style\common.css">
 	  <link rel="stylesheet" type="text/css" href="__PUBLIC__\style\choosepic.css">
-	  <script type="text/javascript" src="js\jsbg.js"></script>
+	  <script type="text/javascript" src="__PUBLIC__\js/jquery-3.1.1.js"></script>
+	  <script type="text/javascript" src="__PUBLIC__\js/jquery.form.min.js"></script>
+	  <script type="text/javascript" src="__PUBLIC__\js/choosepic.js"></script>
 	</head>
     <body>
 		<div id="top-box">
@@ -13,22 +15,28 @@
 				<a href="#" class="a-11">〈</a>
 				<a href="#" class="a-12">Back</a>
 		    </div>
-		    <div class="cp-c-1">选择相册</div>
-			<div class="d-1">照片</div>
+			<div class="d-1 d-2">更改头像</div>
 		</div>
 		<div id="bg-box">
-			<div class="cp-no"></div>
-		    <button id="cp-button"></button>
-		    <div class="img-1"></div>
-		    <div class="img-1"></div>
-		    <div class="img-1"></div>
-		    <div class="img-1"></div>
-		    <div class="img-1"></div>
-		    <div class="img-1"></div>
-		    <div class="img-1"></div>
+		    <form id="IsForm" method="post" enctype="multipart/form-data" action="__MODULE__/Index/changePic">
+			   <label for="chooseImage" class="file-la"></label>
+        	   <input name="pic" type="file" type="button" id="chooseImage" style="display:none">
+        	   <div id="imageformbox">
+        	   </div>
+        	</form>
         </div>
 		<div id="cp-buttom">
-			<input type="submit" value="确定">
+			<input type="button" id="cp-button" value="确定">
 		</div>
+        <div id="DeleteFai-box">
+            <div class="su-content">
+                未知错误：请重试
+            </div>
+        </div>
+        <div id="DeleteFai-box1">
+            <div class="su-content">
+                未知错误：请重试
+            </div>
+        </div>
     </body>
 </html>

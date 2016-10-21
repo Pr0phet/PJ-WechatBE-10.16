@@ -52,7 +52,7 @@ $(function(){
 
     $("#userPassword2").focus(function(){
     	var input_value=$(this).val();
-    	if(input_value=="请再次确定密码"){
+    	if(input_value==""){
     		$(this).val("");
     		$(this).attr("type","password");
     	}
@@ -99,15 +99,16 @@ $(function(){
         }
     }) 
 
-    $("#LoginPass").focus(function(){
+    $("#userPassword1").focus(function(){
     	var input_value=$(this).val();
-    	if(input_value=="请输入密码"){
-    		$(this).val("");
-    		$(this).attr("type","password");
+    	if(input_value==""){
+            console.log(1);
+    		$(this).attr('type','password');
+
     	}
     })
 
-    $("#LoginPass").blur(function(){
+    $("#userPassword1").blur(function(){
     	var input_value=$(this).val();
     	if(input_value==""){
     		$(this).val("请输入密码");
@@ -115,7 +116,7 @@ $(function(){
     	}
     }) 
 
-    $("#userPassword1").focus(function(){
+    $("#LoginPass").focus(function(){
         var input_value=$(this).val();
         if(input_value=="请输入密码"){
             $(this).val("");
@@ -123,7 +124,7 @@ $(function(){
         }
     })
 
-    $("#userPassword1").blur(function(){
+    $("#LoginPass").blur(function(){
         var input_value=$(this).val();
         if(input_value==""){
             $(this).val("请输入密码");

@@ -8,15 +8,16 @@ body{background-color: #eeeeee;}
         margin-right: 10px;}
 #bg-box{width: 100%;
        padding-bottom: 120px;}
-#cp-button{width: 70px;
+.file-la{  width: 70px;
            height: 70px;
            border: 0;
            outline: none;
            cursor: pointer;
+           display: block;
            float: left;
-           margin-top: 4px;
-           margin-left: 4px;
-           background-image: url(/EXbook/Public/photo/PNG/bu.jpg);}
+           margin-top: 5px;
+           margin-left: 5px;
+           background-image: url(../photo/PNG/bu.jpg);}
 .img-1{width: 70px;
        height: 70px;
        background-color: #aaaaaa;
@@ -37,4 +38,6 @@ body{background-color: #eeeeee;}
                  cursor: pointer;
                  float: right;
                  margin-top: 6px;
-                 margin-right: 10px;}
+                 margin-right: 10px;
+                 outline: none;}
+#imageformbox{float: left;margin-left: 5px;margin-top: 5px;}

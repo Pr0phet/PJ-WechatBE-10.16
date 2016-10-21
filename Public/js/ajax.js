@@ -39,14 +39,18 @@ $(function(){
   URL未填写
 */
 $(function(){
+      window.successcode=0;
       var sleep = 60;
       var interval = null;
       var btn=$("#re-bu");
+      var reg =  /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
       $("#re-bu").click(function(){
-          if($("#userphone").val()=="请输入手机号码"){
-             failhtml.html("请先输入手机号码");
-             fail.css('display','block');
-          }else if(!interval){
+          if(!reg.test($("#userphone").val())){
+              failhtml.html("号码有误");
+              fail.css('display','block');
+              return false;
+          }
+          else if(!interval){
                 btn.css('backgroundColor','rgb(243, 182, 182)');
                 btn.attr('disabled','disabled');
                 btn.css('cursor','wait');
@@ -69,24 +73,24 @@ $(function(){
                     }
                     btn.val("重新发送" + sleep--);
                 }, 1000);
-
                 $.ajax({
                    type:"POST",
                    dataType:"json",
-                   url:"http://localhost/EXbook/index.php/Home/Index/sendSMS",
+                   url:"/EXbook/index.php/Home/Index/sendSMS",
                    data:{phone:$("#userphone").val()},
                    success:function(data){
                         $("#Code").blur(function(){
                            $.ajax({
                                 type:"POST",
                                 dataType:"json",
-                                url:"http://localhost/EXbook/index.php/Home/Index/checkCode",
+                                url:"/EXbook/index.php/Home/Index/checkCode",
                                 data:{code:$("#Code").val()},
                                 success:function(data){
-                                     if(data.error==08){//验证码错误号码未确定
-                                        $("#Code").val("验证码错误");
+                                     if(data.success==10){//?
+                                        $("#Code").val("验证码成功");
                                         $("#Code").css('color','red');
-                                     };
+                                        successcode++;
+                                     }else{console.log(data);};
                                 },
                                 error:function(jqXHR){
                                         $("#Code").val("验证码失败："+jqXHR.status);
@@ -109,7 +113,8 @@ $(function(){
 /*注册表单提交 
   URL未填写*/
 $(function(){
-  var RS=$("#RegisterSu").click(function(){
+    var reg =  /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+    var RS=$("#RegisterSu").click(function(){
     var userName=$("#username").val();
     var userPhone=$("#userphone").val();
     var Code=$("#Code").val();
@@ -124,10 +129,17 @@ $(function(){
       $("#userphone").val("手机号码不能为空");
       $("#userphone").css('color','red');
       return false;
+    }else if(!reg.test($("#userphone").val())||userPhone=="手机号码错误"){
+      $("#userphone").val("手机号码错误");
+      $("#userphone").css('color','red');
+      return false;
     }else if(Code=="请输入短信验证码"||Code=="请输入验证码"){
       $("#Code").val("请输入验证码");
       $("#Code").css('color','red');
       return false;
+    }else if(successcode==0||Code=="验证码错误"){
+      $("#Code").val("验证码错误");
+      $("#Code").css('color','red');
     }else if(userPassword1=="请输入密码"||userPassword1=="密码不能为空"){
       $("#userPassword1").val("密码不能为空");
       $("#userPassword1").css('color','red');
@@ -139,19 +151,19 @@ $(function(){
     }else{
       $.ajax({
         type:"POST",
-        url:"http://localhost/EXbook/index.php/Home/Index/register",
+        url:"/EXbook/index.php/Home/Index/register",
         dataType:"json",
         data:{
-          userName:$("#username").val(),
-          userPhone:$("#userphone").val(),
-          userPassword:$("#userPassword1").val()
+          name:$("#username").val(),
+          phone:$("#userphone").val(),
+          pass:$("#userPassword1").val()
         },
         success:function(data){
           if(data.success==01){
             failhtml.html("注册成功");
             fail.css('display','block');
             window.location.href="login.html";
-            return false;
+            return true;
           }else if(data.error==02){
             failhtml.html("失败请重新注册");
             fail.css('display','block');
@@ -189,7 +201,7 @@ $(function(){
         }else{
         $.ajax({
     		type:'POST',
-    		url:"http://localhost/EXbook/index.php/Home/Index/login",
+    		url:"/EXbook/index.php/Home/Index/login",
     		dataType:'json',
     		data:{
     			   phone:$("#LoginPhone").val(),
@@ -227,13 +239,14 @@ $(function(){
   URL未填写*/
 $(function(){
 	$("#ForgetPassSu").click(function(){
+    var reg =  /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
 		var userphone=$("#userphone").val();
 		var Code=$("#Code").val();
 		var SetNewPass1=$("#SetNewPass1").val();
 		var SetNewPass2=$("#SetNewPass2").val();
 		
-		if (userphone=="请输入手机号码") {
-          failhtml.html("请输入手机号码");
+		if (!reg.test($("#userphone").val())) {
+          failhtml.html("手机号码有误");
           fail.css('display','block');
 			    return false;
 		}else if(Code=="请输入短信验证码"||Code=="请输入验证码"){
@@ -249,31 +262,48 @@ $(function(){
       fail.css('display','block');
 			return false;
 		}else{
-			$.ajax({
-				type:"POST",
-				url:"http://localhost/EXbook/index.php/Home/Index/forgetPass",
-				dataType:"json",
-				data:{
-					ForgetPhone:$("#userphone").val(),
-					newPass:$("#SetNewPass1").val()
-				},
-				success:function(data){
-                    if(data.error==06){
-                    	failhtml.html("未知错误：请重试");
-                      fail.css('display','block');
-                    	window.location.href="forgetpw.html";
-                    	return false;
-                    }else if(data.success==03){
-                    	failhtml.html("修改密码成功");
-                      fail.css('display','block');
-                    	window.location.href="login.html";
-                    }
-				},
-				error:function(jqXHR){
-					failhtml.html("提交失败："+jqXHR.status);
-          fail.css('display','block');
-				}
-			});
+
+      $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"/EXbook/index.php/Home/Index/checkExsist",
+        data:$("#userphone").val(),
+        success:function(){
+           if(data==1){
+                 $.ajax({
+                  type:"POST",
+                  url:"/EXbook/index.php/Home/Index/forgetPass",
+                  dataType:"json",
+                  data:{
+                    ForgetPhone:$("#userphone").val(),
+                    newPass:$("#SetNewPass1").val()
+                  },
+                  success:function(data){
+                              if(data.error==06){
+                                failhtml.html("未知错误：请重试");
+                                fail.css('display','block');
+                                window.location.href="forgetpw.html";
+                                return false;
+                              }else if(data.success==03){
+                                failhtml.html("修改密码成功");
+                                fail.css('display','block');
+                                window.location.href="login.html";
+                              }
+                },
+                 error:function(jqXHR){
+                 failhtml.html("提交失败："+jqXHR.status);
+                 fail.css('display','block');
+                                  }
+                 });
+           }else{
+                failhtml.html("没有用户");
+                fail.css('display','block');
+           }
+        },
+        error:function(jqXHR){
+          $("body").html("出现错误".jqXHR.status);
+        }
+      });
 		}
 	});
 });

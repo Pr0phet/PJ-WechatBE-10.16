@@ -1,4 +1,4 @@
-body{background-color: #eeeeee;}
+body{background-color: #eeeeee;float: right;}
 #chat-top-box{width: 100%;
          height: 40px;
          background-color: #d9e7e7;
@@ -24,8 +24,8 @@ body{background-color: #eeeeee;}
               background-color: #d9e7e7;
               position: fixed;
               bottom: 0;}
-#sent-comment textarea{width: 70%;
-	                   height: 30px;
+#sent-comment textarea{width: 63%;
+	                     height: 30px;
                        margin-left: 2%;
                        border-radius: 5px;
                        -ms-border-radius: 5px;
@@ -58,3 +58,20 @@ body{background-color: #eeeeee;}
                     margin-left: 10px;
                     margin-top: 5px;
                     margin-bottom: 5px;}
+.mychat{width: 95%;float: right;margin-top: 10px;margin-right: 10px;}
+.ChatmyHead{width: 40px;height: 40px;background-color: black;float: right;}
+.ChatmyHead img{width: 100%;height: 100%;}
+.tria1{width: 0;height: 0;border-top: 5px solid transparent;border-left: 10px solid #d9e7e7;border-bottom: 5px solid transparent;float: right;margin-top: 15px;
+      margin-right: 10px;}
+.rect1{max-width: 60%; background-color: #d9e7e7;font-family: "微软雅黑";font-size: 14px;line-height: 30px;float: right;border-radius: 5px;
+      padding-left: 10px;padding-right: 10px;margin-top: 5px;}
+
+.otherchat{width: 95%;float: left;margin-top: 10px;margin-left: 10px;}
+.otherchat img{width: 100%;height: 100%;}
+.othermyHead{width: 40px;height: 40px;background-color: black;float: left;}
+.tria2{width: 0;height: 0;
+    border-top: 5px solid transparent;
+    border-right: 10px solid #d9e7e7;
+    border-bottom: 5px solid transparent;float: left;margin-top: 15px;margin-left: 10px;}
+.rect2{max-width: 60%;height: 30px;background-color: #d9e7e7;font-family: "微软雅黑";font-size: 14px;line-height: 30px;float: left;border-radius: 5px;
+      padding-left: 10px;padding-right: 10px;margin-top: 5px;}

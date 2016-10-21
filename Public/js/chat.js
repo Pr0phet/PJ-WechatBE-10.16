@@ -1,31 +1,3 @@
-//判断是否登录
-$(function(){
-  window.ltoken;
-  window.username;
-  window.userid;
-  window.userhead;
-$.ajax({
-          type:"GET",
-          dataType:"json",
-          url:"http://localhost/EXbook/index.php/Home/Index/checkSession",
-          success:function(data){
-             if(data.success!=0){
-                  ltoken=data.token;//得到用户token
-                  userid=data.onwerid;//用户id
-                  userhead=data.owner_pic;//得到用户照片
-                  username=data.onwer;//用户名称
-             }else{
-                  if(confirm("请先登录")){
-                     window.location.href="login.html";
-                  }
-              };
-          },
-          error:function(jqXHR){
-             //$("body").html("未知错误"+jqXHR.status);
-           },
-        });
-
-});
 //获取目标id
 
 function GetQueryString(name)
@@ -34,31 +6,44 @@ function GetQueryString(name)
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
 }
+
+
 $(function(){
      window.targetid=GetQueryString("target");
     $.ajax({
-    	type:"POST",
-    	dataType:"json",
-    	//url:,
-    	data:{targetid:targetid},//目标id
-    	success:function(data){
-    		   $("#targetName").html(data.name);//目标姓名
-    	},
+      type:"POST",
+      dataType:"json",
+      url:"/EXbook/index.php/Home/Index/getName",
+      data:{id:targetid},//目标id
+      success:function(data){
+           $("#targetName").html(data);//目标姓名
+      },
+      error:function(jqXHR) {
+      }
     });
 });
-// 初始化
-// RongIMClient.init(appkey, [dataAccessProvider],[options]);
-// appkey:官网注册的appkey。
-// dataAccessProvider:自定义本地存储方案的实例，不传默认为内存存储，自定义需要实现WebSQLDataProvider所有的方法，此参数必须是传入实例后的对象。
 
-RongIMClient.init("x18ywvqf8wznc");
-var token = "73Q0DFIR60PMU9Sg+xcSu7XGo5hHg+2GTxRIdXhPCHD8/lnYhK82MTIUgW+x7upKqQTEjdfUH391Mwx2wkZJRw==";
-//var token = ltoken;
-/*
- *@param config {Object} 初始化配置参数
- */
-// 连接融云服务器。
- RongIMClient.connect(token, {
+
+
+//判断是否登录
+$(function(){
+  window.token;
+  window.username;
+  window.userid;
+  window.userhead;
+$.ajax({
+          type:"POST",
+          dataType:"json",
+          url:"/EXbook/index.php/Home/Rong/check",
+          success:function(data){
+             if(data!=0){
+                  token=data.token;//得到用户token
+                  userid=data.id;//用户id
+                  userhead=data.pic;//得到用户照片
+                  username=data.name;//用户名称
+                  RongIMClient.init("x18ywvqf8wznc");
+    // 初始化
+    RongIMClient.connect(token, {
         onSuccess: function(userId) {
           console.log("Login successfully." + userId);
         },
@@ -114,18 +99,14 @@ var token = "73Q0DFIR60PMU9Sg+xcSu7XGo5hHg+2GTxRIdXhPCHD8/lnYhK82MTIUgW+x7upKqQT
               break;
             }
     }});
-//定义全局
- $(function(){
-  window.fail=$("#DeleteFai-box");
-  window.failhtml=$("#DeleteFai-box > div");
-  fail.click(function() {
-    fail.css('display','none');
-  });
- });
-
+             }else{
+                  if(confirm("请先登录")){
+                     window.location.href="login.html";
+                  }
+              };
 //发送信息
-$(function(){
-  $("#SentMsg").click(function(){
+
+ $("#SentMsg").click(function(){
      if($("#MyMsg").val()=="我想说"){
        failhtml.html("消息不能为空");
              fail.css('display','block');
@@ -196,7 +177,26 @@ $(function(){
         }
     }
 });
+
+
+
+          },
+          error:function(jqXHR){
+            console.log(1);
+            window.token="73Q0DFIR60PMU9Sg+xcSu7XGo5hHg+2GTxRIdXhPCHD8/lnYhK82MTIUgW+x7upKqQTEjdfUH391Mwx2wkZJRw==";
+             //$("body").html("未知错误"+jqXHR.status);
+           },
+        });
 });
+
+//定义全局
+ $(function(){
+  window.fail=$("#DeleteFai-box");
+  window.failhtml=$("#DeleteFai-box > div");
+  fail.click(function() {
+    fail.css('display','none');
+  });
+ });
 
 
 
