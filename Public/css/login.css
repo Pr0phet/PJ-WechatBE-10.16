@@ -1,0 +1,102 @@
+.content{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: -150px;
+	width: 300px;
+	color: white;
+	font-size: 10px;
+}
+
+.content h1{
+	font-size: 40px;
+	margin-bottom: 12px;
+	text-align: center;
+}
+
+.content #phone, .content #password{
+	width: 270px;
+	line-height: 40px;
+	background-color: transparent;
+	outline: none;
+	border: none;
+	font-size: 15px;
+	border-bottom: 2px solid #e6e6e6;
+	padding-left: 30px;
+	color: white;
+}
+
+.content input::-webkit-input-placeholder{
+	color: white;
+}
+
+.content input:-moz-placeholder{
+	color: white;
+}
+
+.content input:-ms-input-placeholder{
+	color: white;
+}
+
+.content .phone, .content .password{
+	display: inline-block;
+	width: 20px;
+	height: 26px;
+	margin-right: -20px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	position: relative;
+	top: 8px;
+	left: 3px;
+	margin-top: 20px;
+}
+
+.content .phone{
+	background-image: url(../img/phone.png);
+}
+
+.content .password{
+	background-image: url(../img/password.png);	
+}
+
+.content .submit{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	margin-top: 30px;
+	background-color: #98cb86;
+	color: white;
+	border-radius: 8px;
+	outline: none;
+	border: none;
+}
+
+.content .else{
+	padding-top: 30px;
+	overflow: hidden;
+}
+
+.content .else a{
+	color: white;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.content .else .register{
+	float: left;
+}
+
+.content .else .forget{
+	float: right;
+}
+
+.content span{
+	display: inline-block;
+	margin-top: 8px;
+	margin-bottom: -8px;
+	margin-left: 20px;
+	color: #f3ed44;
+	font-size: 14px;
+}
