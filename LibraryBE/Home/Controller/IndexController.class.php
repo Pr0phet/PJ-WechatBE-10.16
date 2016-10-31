@@ -607,4 +607,19 @@ class IndexController extends Controller
         }
     }
 
+    public function loginP()
+    {
+        $this -> display();
+    }
+
+    public function registerP()
+    {
+        $this -> display();
+    }
+
+    public function forget()
+    {
+        $this -> display();
+    }
+
 }
