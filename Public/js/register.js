@@ -1,19 +1,19 @@
-;((window, undefined) => {
-	$(() => {
+;(function(window, undefined){
+	$(function(){
 		// 返回前一页
-		$("#back").click(() => {
+		$("#back").click(function(){
 			window.history.back(-1);
 		});
 
 		// 验证码获取和检查
 		var codeCheck = false,
 			sending = false;
-		$("#getCode").click(() => {
+		$("#getCode").click(function(){
 			if(sending == false){
 				if($("#phone").val().length == 11){
 					sending = true;
 					var times = 60,
-						interval = setInterval(() => {
+						interval = setInterval(function(){
 							if(times == 0){
 								clearInterval(interval);
 								sending = false;
@@ -29,7 +29,7 @@
 							phone: $("#phone").val(),
 						},
 						dataType: "json",
-						success: (data) => {
+						success: function(data){
 							codeCheck = false;
 							if(data.status){
 								tools.alertMassage("发送成功");
@@ -37,7 +37,7 @@
 								tools.alertMassage("发送失败");
 							}
 						},
-						error: (error) => {
+						error: function(error){
 							tools.alertMassage("连接服务器错误");
 						},
 					});
@@ -48,7 +48,7 @@
 		});
 
 		var codingCheck = false
-		$("#code").blur(() => {
+		$("#code").blur(function(){
 			if(codingCheck == false){
 				if(/^\d{4}$/.test($("#code").val())){
 					$("#codeWarning").html("");
@@ -60,7 +60,7 @@
 							code: $("#code").val(),
 						},
 						dataType: "json",
-						success: (data) => {
+						success: function(data){
 							codingCheck = false;
 							if(data.status){
 								$("#codeWarning").html("");
@@ -68,7 +68,7 @@
 								$("#codeWarning").html("验证码错误");
 							}
 						},
-						error: (error) => {
+						error: function(error){
 							codingCheck = false;
 							tools.alertMassage("连接服务器错误");
 						}
@@ -83,7 +83,7 @@
 			url: "/Exbook/index.php/Home/Index/register",
 			type: "post",
 			dataType: "json",
-			beforeSubmit: (data) => {
+			beforeSubmit: function(data){
 				for(var i = 0; i < data.length; i++){
 					var value = data[i];
 					if(value.value == ""){
@@ -107,21 +107,21 @@
 					}
 				}
 			},
-			success: (data) => {
+			success: function(data){
 				if(data.status){
 					location.href = "index.html";
 				}else{
 					tools.alertMassage("登录错误， 请检查帐号和密码是否正确");
 				}
 			},
-			error: (error) => {
+			error: function(error){
 				tools.alertMassage("连接服务器错误");
 			},
 		});
 
 		// 预检验
 		var phoneCheck = false;
-		$("#phone").blur(() => {
+		$("#phone").blur(function(){
 			if(phoneCheck == false){
 				if($("#phone").val().length == 11){
 					$("#phoneWarning").html("");
@@ -134,7 +134,7 @@
 							obj: $("#phone").val(),
 						},
 						dataType: "json",
-						success: (data) => {
+						success: function(data){
 							phoneCheck = false
 							if(data == 1){
 								$("#phoneWarning").html("该手机号已存在");
@@ -142,7 +142,7 @@
 								$("#phoneWarning").html("");
 							}
 						},
-						error: (error) => {
+						error: function(error){
 							tools.alertMassage("连接服务器错误")
 						}
 					});
@@ -152,7 +152,7 @@
 			}
 		});
 
-		$("#username").blur(() => {
+		$("#username").blur(function(){
 			if($("#username").val() == ""){
 				$("#usernameWarning").html("用户名不能为空");
 			}else{
@@ -160,7 +160,7 @@
 			}
 		});
 
-		$("#password").blur(() => {
+		$("#password").blur(function(){
 			if($("#password").val().length < 8){
 				$("#passwordWarning").html("密码至少8位");
 			}else{
@@ -168,7 +168,7 @@
 			}
 		});
 
-		$("#repassword").blur(() => {
+		$("#repassword").blur(function(){
 			if($("#repassword").val() != $("#password").val()){
 				$("#repeatWarning").html("两次密码不相同");
 			}else{
