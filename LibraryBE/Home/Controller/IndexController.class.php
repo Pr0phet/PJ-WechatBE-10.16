@@ -116,7 +116,7 @@ class IndexController extends Controller
         $res = $db -> WHERE($condition) -> find();
         if($res)
         {
-            $this - ajaxReturn(array('status' => '0'));
+            $this -> ajaxReturn(array('status' => '0'));
         }
         else
         {
@@ -607,12 +607,12 @@ class IndexController extends Controller
         }
     }
 
-    public function loginP()
+    public function subLogin()
     {
         $this -> display();
     }
 
-    public function registerP()
+    public function subRegister()
     {
         $this -> display();
     }
