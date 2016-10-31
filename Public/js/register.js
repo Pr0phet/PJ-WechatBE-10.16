@@ -57,10 +57,11 @@
 						url: "/EXbook/index.php/Home/Index/checkCode",
 						type: "post",
 						data: {
-							code: $("#code")
+							code: $("#code").val(),
 						},
 						dataType: "json",
 						success: (data) => {
+							codingCheck = false;
 							if(data.status){
 								$("#codeWarning").html("");
 							}else{
@@ -68,6 +69,7 @@
 							}
 						},
 						error: (error) => {
+							codingCheck = false;
 							tools.alertMassage("连接服务器错误");
 						}
 					});
@@ -77,7 +79,7 @@
 			}
 		});
 
-		$("#login").ajaxForm({
+		$("#register").ajaxForm({
 			url: "/Exbook/index.php/Home/Index/register",
 			type: "post",
 			dataType: "json",
@@ -167,10 +169,10 @@
 		});
 
 		$("#repassword").blur(() => {
-			if($("#repassword").val() != $("password").val()){
-				$("repeatWarning").html("两次密码不相同");
+			if($("#repassword").val() != $("#password").val()){
+				$("#repeatWarning").html("两次密码不相同");
 			}else{
-				$("repeatWarning").html("");
+				$("#repeatWarning").html("");
 			}
 		});
 	});

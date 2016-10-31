@@ -7,3 +7,200 @@ html, body{
 	height: 100%;
 	background-color: #f0f0f0;
 }
+
+.leaders{
+	width: 100%;
+	height: 60px;
+	background-color: #241e1e;
+	position: fixed;
+	bottom: 0px;
+	z-index: 5;
+}
+
+.leaders .leader{
+	float: left;
+	width: 19%;
+	height: 100%;
+	text-align: center;
+	font-size: 13px;
+	color: white;
+}
+
+.leaders .upleader{
+	width: 24%;
+}
+
+.leaders .leader img{
+	width: 27px;
+	height: 27px;
+	margin: 6px 30% 5px;
+}
+
+.leaders .upleader img{
+	width: 100%;
+	height: auto;
+	margin: 0px;
+	margin-top: -44px;
+	margin-bottom: -6px;
+}
+
+.index{
+	height: 100%;
+}
+
+.index .search{
+	height: 50px;
+	border-bottom: 1px solid #d6d7dc;
+	padding-left: 150px;
+}
+
+.index .search #search{
+	float: right;
+	margin-top: 8px;
+	margin-right: 15px;
+	width: 74px;
+	height: 34px;
+	line-height: 34px;
+	outline: none;
+	border: none;
+	background-color: #b5e5bf;
+	color: #eeeff3;
+	font-size: 16px;
+	border-radius: 5px;
+}
+
+.index .search .#searchSpan{
+	position: relative;
+}
+
+.index .search #searchText{
+	display: inline-block;
+	margin-top: 8px;
+	width: 100%;
+	height: 32px;
+	margin-left: -135px;
+	border: none;
+	outline: none;
+	border: 1px solid #b5b5b5;
+	border-radius: 8px;
+	padding-left: 30px;
+}
+
+.index .search i::before{
+	display: block;
+	content: "";
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	background-image: url(../img/9.png);
+	background-size: 100%;
+}
+
+.index .books{
+	padding: 15px 20px;
+	margin-bottom: 50px;
+}
+
+.index .books .book{
+	overflow: hidden;
+	border-bottom: 1px solid #d6d7dc;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+.index .books .touxiang{
+	float: left;
+	width: 50px;
+	height: 50px;
+	background-color: yellow;
+}
+
+.index .books .information>*{
+	margin-left: 60px;
+	margin-right: 20px;
+}
+
+.index .books h4, .index .books .time{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.index .books h4{
+	font-size: 16px;
+	margin: 3px 0px 8px;
+	font-weight: 500;
+	padding-right: 10px;
+}
+
+.index .books .time{
+	color: #7d7d7d;
+	font-size: 15px;
+}
+
+.index .books .pic{
+	margin-top: 5px;
+}
+
+.index .books .pic img{
+	width: 60px;
+	height: 60px;
+	background-color: yellow;
+	margin-top: 5px;
+}
+
+.index .books .describe{
+	margin-top: 5px;
+	font-size: 15px;
+	color: #7d7d7d;
+}
+
+.index .books .price{
+	float: right;
+	font-size: 22px;
+	position: relative;
+	top: -5px;
+	color: #fe6c6c;
+}
+
+.index .books .price::before{
+	display: inline-block;
+	content: "";
+	width: 24px;
+	height: 24px;
+	background-image: url(../img/mo2.png);
+	background-size: 100%;
+	position: relative;
+	top: 5px;
+}
+
+.index .books .more{
+	text-align: right;
+	margin-top: 5px;
+	font-size: 15px;
+}
+
+.index .books .more a{
+	color: #7d7d7d;
+	text-decoration: none;
+}
+
+.index .books .comment{
+	margin-left: 12px;
+	color: #2291e0 !important;
+}
+
+.index .books .comment::before{
+	display: inline-block;
+	content: "";
+	width: 20px;
+	height: 17px;
+	background-image: url(../img/pl.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	position: relative;
+	top: 4px;
+	right: 4px;
+}
