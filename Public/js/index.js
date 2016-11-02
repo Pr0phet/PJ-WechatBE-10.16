@@ -17,8 +17,8 @@
 		},
 		dataType: "json",
 		success: function(datas){
-			console.log(datas);
-			// books.push.apply(books, datas);
+			books.push.apply(books, datas);
+			console.log(books[books.length - 1].id)
 		},
 		error: function(e){
 			tools.alertMessage("连接服务器失败");

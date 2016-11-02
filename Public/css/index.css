@@ -78,6 +78,8 @@
 	height: 50px;
 	background-color: #d2d2d2;
 	color: white;
+	line-height: 50px;
+	text-align: center;
 }
 
 .index .books .information>*{
