@@ -83,6 +83,7 @@
 	margin: 14px 0px;
 	background-color: white;
 	padding: 10px 20px;
+	overflow: hidden;
 }
 
 .content .books .bookStatus{
@@ -101,7 +102,6 @@
 	color: #fe6c6c;
 	font-size: 24px;
 	position: relative;
-	margin-right: 4px;
 }
 
 .content .bookStatus span::before{
@@ -131,6 +131,11 @@
 	line-height: 20px;
 	text-indent: 2em;
 	margin-right: 20px;
+}
+
+.content .books .else{
+	overflow: hidden;
+	width: 100%;
 }
 
 .content .books .more{

@@ -16,6 +16,7 @@
 		}
 	});
 
+	// 任务开始
 	var start = function(){
 		var data = {
 			pictures: []
@@ -26,6 +27,7 @@
 			data: data,
 		});
 
+		// 图片预览
 		$("#picture").change(function(){
 			if(this.files.length == 0)
 				return;
@@ -55,10 +57,16 @@
 			$("#file").append('<input type="file" accept="image/*" multiple="true" id="picture"/>');
 		});
 
+		// 发布
+		$("#publish").submit(function(){
+			
+		})
+
 		$("#publish").ajaxForm({
 			url: "/EXbook/index.php/Home/Index/createBlock",
 			type: "post",
 			dataType: "json",
+			mimeType: "multipart/form-data",
 			beforeSubmit: function(datas){
 				for(var value of datas){
 					if(value.name == "description" && value.value == ""){

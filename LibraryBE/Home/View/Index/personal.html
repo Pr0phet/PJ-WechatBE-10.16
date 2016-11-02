@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
 	<link rel="stylesheet" href="__PUBLIC__/css/personal.css" />
 	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/tools.js"></script>
 </head>
 <body>
 	<div class="leaders">
@@ -43,13 +45,13 @@
 		</div>
 	</div>
 	
-	<div class="content">
+	<div class="content" id="content">
 		<div class="header">
 			<div class="setting" id="setting">
 				<span><a href="">设置</a></span>
 			</div>
 			<div class="logout" id="logout">
-				<span><a href="">注销</a></span>
+				<span><a>注销</a></span>
 			</div>
 			<div class="title">
 				<p>个人中心</p>
@@ -58,108 +60,48 @@
 
 		<div class="person">
 			<div class="touxiang">
-				<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
+				<img v-bind:src="information.owner_pic" alt="" />
 			</div>
 			<div class="information">
-				<h4>天使的大熊</h4>
+				<h4>{{ information.owner }}</h4>
 				<p class="published">
-					已发布的<span>2</span>
+					已发布的<span>{{ information.number }}</span>
 				</p>
 			</div>
 		</div>
 
 		<div class="books">
-			<div class="book">
+			<div class="book" v-for="book in books">
 				<div class="bookStatus">
-					<span>5</span>
+					<span>{{ book.price }}</span>
 					<img src="__PUBLIC__/img/click.png" alt="" />
 				</div>
 				<div class="information">
 					<div class="pics">
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
+						<img v-for="pic in book.pic" v-bind:src="pic" alt="" />
 					</div>
 					<div class="description">
+						<p>{{ book.desciption }}</p>
+					</div>
+				</div>
+				<div class="else">
+					<div class="time">
 						<p>
-							《自然语言处理综述》全新的，没用过，有需要的小伙伴可以看看，我还有其他的书可以，可以私聊。
+							<span>{{ book.time }}</span>
+							<a href="">删除</a>
 						</p>
 					</div>
-				</div>
-				<div class="time">
-					<p>
-						<span>5天前发布</span>
-						<a href="">删除</a>
-					</p>
-				</div>
-				<div class="more">
-					<p>
-						<a href="">详情</a>
-						<a href="" class="comment">20</a>
-					</p>
-				</div>
-			</div>
-			<div class="book">
-				<div class="bookStatus">
-					<span>5</span>
-					<img src="__PUBLIC__/img/click.png" alt="" />
-				</div>
-				<div class="information">
-					<div class="pics">
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-					</div>
-					<div class="description">
+					<div class="more">
 						<p>
-							《自然语言处理综述》全新的，没用过，有需要的小伙伴可以看看，我还有其他的书可以，可以私聊。
+							<a href="">详情</a>
+							<a href="" class="comment">{{ book.commentNum }}</a>
 						</p>
 					</div>
-				</div>
-				<div class="time">
-					<p>
-						<span>5天前发布</span>
-						<a href="">删除</a>
-					</p>
-				</div>
-				<div class="more">
-					<p>
-						<a href="">详情</a>
-						<a href="" class="comment">20</a>
-					</p>
-				</div>
-			</div>
-			<div class="book">
-				<div class="bookStatus">
-					<span>5</span>
-					<img src="__PUBLIC__/img/click.png" alt="" />
-				</div>
-				<div class="information">
-					<div class="pics">
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-						<img src="__PUBLIC__/img/touxiang.jpg" alt="" />
-					</div>
-					<div class="description">
-						<p>
-							《自然语言处理综述》全新的，没用过，有需要的小伙伴可以看看，我还有其他的书可以，可以私聊。
-						</p>
-					</div>
-				</div>
-				<div class="time">
-					<p>
-						<span>5天前发布</span>
-						<a href="">删除</a>
-					</p>
-				</div>
-				<div class="more">
-					<p>
-						<a href="">详情</a>
-						<a href="" class="comment">20</a>
-					</p>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script src="__PUBLIC__/js/personal.js"></script>
 </body>
 </html>

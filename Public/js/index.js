@@ -1,35 +1,34 @@
 ;(function(window, undefined){
 	// 渲染首页
 	var books = [{
-		owner_pic: "/EXbook/Public/img/touxiang.jpg",
-		owner: "天使的大熊sdfsdfsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
 		price: "5",
-		time: "1分钟前",
-		pic: ["/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg"],
-		description: "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
-		commentNum: "20"
-	}, {
-		owner_pic: "/EXbook/Public/img/touxiang.jpg",
-		owner: "天使的大熊sdfsdfsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-		price: "5",
-		time: "1分钟前",
-		pic: ["/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg"],
-		description: "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
-		commentNum: "20"
-	}, {
-		owner_pic: "/EXbook/Public/img/touxiang.jpg",
-		owner: "天使的大熊sdfsdfsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
-		price: "5",
-		time: "1分钟前",
-		pic: ["/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg", "/EXbook/Public/img/touxiang.jpg"],
-		description: "描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述描述",
-		commentNum: "20"
+		owner: "coderben",
+		time: "1 minute ago",
+		desciption: "123",
+		commentNum: "5",
+		owner_pic: "/EXbook/Public/img/touxiang.jpg"
 	}];
 
 	new Vue({
 		el: "#books",
 		data: {
 			books: books,
+		},
+	});
+
+	$.ajax({
+		url: "/EXbook/index.php/Home/Index/showBlocks",
+		type: "post",
+		data: {
+			mode: 0,
+		},
+		dataType: "json",
+		success: function(datas){
+			console.log(datas);
+			books.push.apply(books, datas);
+		},
+		error: function(e){
+			tools.alertMessage("连接服务器失败");
 		},
 	});
 })(window);

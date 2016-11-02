@@ -8,6 +8,8 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
 	<link rel="stylesheet" href="__PUBLIC__/css/index.css" />
 	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/tools.js"></script>
 </head>
 <body>
 	<div class="leaders">
@@ -59,7 +61,7 @@
 						<p class="pic">
 							<img v-bind:src="url" alt=""  v-for="url in book.pic"/>
 						</p>
-						<p class="describe">{{book.description}}</p>
+						<p class="describe">{{book.desciption}}</p>
 					</div>
 					<p class="more">
 						<a href="">详情</a>
