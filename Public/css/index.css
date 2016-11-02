@@ -98,6 +98,9 @@
 	margin: 3px 0px 8px;
 	font-weight: 500;
 	padding-right: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .index .books .time{
@@ -110,8 +113,8 @@
 }
 
 .index .books .pic img{
-	width: 60px;
-	height: 60px;
+	width: 70px;
+	height: 70px;
 	background-color: #d2d2d2;
 	margin-top: 8px;
 	margin-left: 8px;
@@ -171,3 +174,7 @@
 	right: 4px;
 }
 
+.index .books .nomore{
+	text-align: center;
+	padding-bottom: 20px;
+}
