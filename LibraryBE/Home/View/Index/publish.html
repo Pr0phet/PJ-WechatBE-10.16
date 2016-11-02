@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<title>Ex-BOOK</title>
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
+	<link rel="stylesheet" href="__PUBLIC__/css/publish.css" />
+	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/ajaxform.js"></script>
+	<script src="__PUBLIC__/js/tools.js"></script>
+</head>
+<body>
+	<div class="leaders">
+		<div class="leader">
+			<a href="index">
+				<img src="__PUBLIC__/img/index.png" alt="" />
+				<span>首页</span>
+			</a>
+		</div>
+		<div class="leader">
+			<a href="message">
+				<img src="__PUBLIC__/img/message.png" alt="" />
+				<span>消息</span>
+			</a>
+		</div>
+		<div class="leader upleader">
+			<a href="publish">
+				<img src="__PUBLIC__/img/pulish.png" alt="" />
+				<span>发布</span>
+			</a>
+		</div>
+		<div class="leader">
+			<a href="personal">
+				<img src="__PUBLIC__/img/pc.png" alt="" />
+				<span>个人中心</span>
+			</a>
+		</div>
+		<div class="leader">
+			<a href="connect">
+				<img src="__PUBLIC__/img/feedback.png" alt="" />
+				<span>联系我们</span>
+			</a>
+		</div>
+	</div>
+	
+	<div class="content">
+		<div class="header">
+			<div class="back" id="back" onclick="history.back()">
+				<img src="__PUBLIC__/img/back.png" alt="back">
+				<span>Back</span>
+			</div>
+			<div class="title">
+				<p>发布</p>
+			</div>
+		</div>
+
+		<form id="publish">
+			<textarea name="description" id="" class="description" placeholder="文字描述"></textarea>
+			<div class="pics">
+				<div class="pic" v-for="picture in pictures">
+					<img v-bind:src="picture" alt="" />
+				</div>
+				<div class="pic" id="file">
+					<input type="file" accept="image/*" multiple="true" id="picture"/>
+					<label for="picture" id="forPicture">+</label>
+				</div>
+			</div>
+			<p class="price">
+				价格
+				<input type="text" name="price" placeholder="输入价格" id="price"/>
+			</p>
+			<p class="classification">
+				分类
+				<select name="tag" id="classification">
+					<option value="请选择">请选择</option>
+					<option value="计算机类">计算机类</option>
+					<option value="法学类">法学类</option>
+					<option value="医学类">医学类</option>
+					<option value="艺术类">艺术类</option>
+					<option value="体育类">体育类</option>
+					<option value="动漫类">动漫类</option>
+					<option value="工具书">工具书</option>
+					<option value="外语类">外语类</option>
+				</select>
+			</p>
+			<input type="submit" value="确定" class="submit"/>
+		</form>
+	</div>
+
+	<script src="__PUBLIC__/js/publish.js"></script>
+</body>
+</html>

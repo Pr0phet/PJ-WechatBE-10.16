@@ -26,7 +26,7 @@
 			},
 			success: function(data){
 				if(data.status){
-					location.href = "index.html";
+					location.href = "index";
 				}else{
 					tools.alertMassage("登录错误， 请检查帐号和密码是否正确");
 				}
@@ -41,27 +41,7 @@
 		$("#phone").blur(function(){
 			if(phoneCheck == false){
 				if($("#phone").val().length == 11){
-					phoneCheck = true;
-					$.ajax({
-						url: "/EXbook/index.php/Home/Index/checkRepeat",
-						type: "post",
-						data: {
-							field: "phone",
-							obj: $("#phone").val(),
-						},
-						dataType: "json",
-						success: function(data){
-							phoneCheck = false
-							if(data == 1){
-								$("#phoneWarning").html("该手机号已存在");
-							}else{
-								$("#phoneWarning").html("");
-							}
-						},
-						error: function(error){
-							tools.alertMassage("连接服务器错误")
-						}
-					});
+					$("#phoneWarning").html("");
 				}else{
 					$("#phoneWarning").html("手机号只能为11位");
 				}

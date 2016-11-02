@@ -1,0 +1,190 @@
+.content{
+	margin-top: 50px;
+	margin-bottom: 90px;
+}
+
+.content .header{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #d9e7e7;
+	font-size: 20px;
+	color: #005981;
+	text-align: center;
+	z-index: 5;
+}
+
+.content .header .setting{
+	float: left;
+	margin-left: 20px;
+	margin-right: -155px;
+	font-size: 16px;
+	color: #7d7d7d;
+}
+
+.content .header .logout{
+	float: right;
+	margin-right: 20px;
+	margin-left: -155px;
+	font-size: 16px;
+	color: #7d7d7d;
+}
+
+.content .header a{
+	text-decoration: none;
+	color: #7d7d7d;
+}
+
+.content .person{
+	margin: 65px 20px 20px;
+}
+
+.content .touxiang{
+	width: 50px;
+	height: 50px;
+	float: left;
+}
+
+.content .touxiang img{
+	width: 100%;
+	height: 100%;
+}
+
+.content .person .information{
+	margin-left: 60px;
+}
+
+.content .information h4{
+	font-size: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	font-weight: 600;
+	margin-bottom: 5px;
+	padding-top: 3px;
+}
+
+.content .information .published{
+	color: #004787;
+	font-weight: 500;
+	font-size: 15px;
+}
+
+.content .information .published span{
+	margin-left: 15px;
+}
+
+.content .books .book{
+	border-width: 1px 0px;
+	border-style: solid;
+	border-color: #d6d7dc;
+	margin: 14px 0px;
+	background-color: white;
+	padding: 10px 20px;
+}
+
+.content .books .bookStatus{
+	float: right;
+	font-size: 20px;
+	width: 40px;
+	text-align: right;
+}
+
+.content .bookStatus img{
+	width: 100%;
+	margin-top: 5px;
+}
+
+.content .bookStatus span{
+	color: #fe6c6c;
+	font-size: 24px;
+	position: relative;
+	margin-right: 4px;
+}
+
+.content .bookStatus span::before{
+	content: "";
+	display: block;
+	width: 20px;
+	height: 20px;
+	background-image: url(../img/mo2.png);
+	background-size: 100% 100%;
+	position: absolute;
+	top: 3px;
+	left: -22px;
+}
+
+.content .book .pics{
+	margin-right: 50px;
+}
+
+.content .book .pics img{
+	width: 80px;
+	margin-bottom: 5px;
+}
+
+.content .description{
+	margin-top: 3px;
+	font-size: 15px;
+	line-height: 20px;
+	text-indent: 2em;
+	margin-right: 20px;
+}
+
+.content .books .more{
+	text-align: right;
+	margin-top: 5px;
+	font-size: 15px;
+}
+
+.content .books .more a{
+	color: #7d7d7d;
+	text-decoration: none;
+}
+
+.content .books .comment{
+	margin-left: 12px;
+	color: #2291e0 !important;
+}
+
+.content .books .comment::before{
+	display: inline-block;
+	content: "";
+	width: 20px;
+	height: 17px;
+	background-image: url(../img/pl.png);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	position: relative;
+	top: 4px;
+	right: 4px;
+}
+
+.content .book .time{
+	float: left;
+	margin-top: 9px;
+	font-size: 15px;
+}
+
+.content .book .time span{
+	color: #7d7d7d;
+}
+
+.content .book .time a{
+	color: #2291e0;
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+

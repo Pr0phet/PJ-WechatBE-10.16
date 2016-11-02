@@ -6,7 +6,7 @@
 	<title>Ex-BOOK</title>
 	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
 	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
-	<link rel="stylesheet" href="__PUBLIC__/css/index.css" />
+	<link rel="stylesheet" href="__PUBLIC__/css/message.css" />
 	<script src="__PUBLIC__/js/vue.min.js"></script>
 </head>
 <body>
@@ -43,32 +43,33 @@
 		</div>
 	</div>
 	
-	<div class="viewbox">
-		<div class="view index">
-			<div class="search">
-				<input type="button" id="search" value="搜索"/>
-				<i></i><input type="text" id="searchText" placeholder="搜索" />
+	<div class="content">
+		<div class="header">
+			<div class="back" id="back">
+				<img src="__PUBLIC__/img/back.png" alt="back">
+				<span>Back</span>
 			</div>
-			<div class="books" id="books">
-				<div class="book" v-for="book in books">
-					<img v-bind:src="book.owner_pic" alt="无法加载头像" class="touxiang"/>
-					<span class="price">{{book.price}}</span>
-					<div class="information">
-						<h4>{{book.owner}}</h4>
-						<p class="time">{{book.time}}</p>
-						<p class="pic">
-							<img v-bind:src="url" alt=""  v-for="url in book.pic"/>
-						</p>
-						<p class="describe">{{book.description}}</p>
-					</div>
-					<p class="more">
-						<a href="">详情</a>
-						<a href="" class="comment">{{book.commentNum}}</a>
-					</p>
+			<div class="title">
+				<p>消息</p>
+			</div>
+		</div>
+
+		<div class="messages" id="messages">
+			<div class="message" v-for="message in messages">
+				<div class="touxiang">
+					<img v-bind:src="message.pic" alt="" />
+				</div>
+				<div class="time">
+					<p>{{message.time}}</p>
+				</div>
+				<div class="text">
+					<h4>{{message.name}}</h4>
+					<p>{{message.message}}</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script src="__PUBLIC__/js/index.js"></script>
+
+	<script src="__PUBLIC__/js/message.js"></script>
 </body>
 </html>

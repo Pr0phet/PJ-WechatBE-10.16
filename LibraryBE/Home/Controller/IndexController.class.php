@@ -190,8 +190,8 @@ class IndexController extends Controller
             $picRepo->addAll($pic);
             $this->ajaxReturn(array('status' => '1'));
         } else {
-//            echo $upload->getError();
-            $this -> ajaxReturn(array('status' => '0'));
+            echo $upload->getError();
+            return;
         }
     }
 
@@ -622,4 +622,23 @@ class IndexController extends Controller
         $this -> display();
     }
 
+    public function connect()
+    {
+        $this -> display();
+    }
+
+    public function message()
+    {
+        $this -> display();
+    }
+
+    public function personal()
+    {
+        $this -> display();
+    }
+
+    public function publish()
+    {
+        $this -> display();
+    }
 }

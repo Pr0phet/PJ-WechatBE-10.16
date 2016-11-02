@@ -9,6 +9,7 @@
 		var codeCheck = false,
 			sending = false;
 		$("#getCode").click(function(){
+			console.log(sending, phoneCheck)
 			if(sending == false && phoneCheck == true){
 				if($("#phone").val().length == 11){
 					codeCheck = false;
@@ -79,9 +80,9 @@
 			}
 		});
 
-		// 提交注册
+		// 提交
 		$("#register").ajaxForm({
-			url: "/Exbook/index.php/Home/Index/register",
+			url: "/Exbook/index.php/Home/Index/forgetPass",
 			type: "post",
 			dataType: "json",
 			beforeSubmit: function(data){
@@ -96,9 +97,6 @@
 					}else if(value.name == "pass" && value.value.length < 8){
 						tools.alertMassage("密码至少8位");
 						return false;
-					}else if(value.name == "name" && value.value == ""){
-						tools.alertMassage("用户名不能为空");
-						return false;
 					}else if(value.name == "repass" && value.value != $("#password").val()){
 						tools.alertMassage("两次密码不相同");
 						return false;
@@ -111,9 +109,9 @@
 			},
 			success: function(data){
 				if(data.status){
-					location.href = "index";
+					location.href = "subLogin";
 				}else{
-					tools.alertMassage("注册错误， 请检查帐号和密码是否正确");
+					tools.alertMassage("更改错误， 请检查帐号和密码是否正确");
 				}
 			},
 			error: function(error){
@@ -136,8 +134,8 @@
 					},
 					dataType: "json",
 					success: function(data){
-						if(data.status == 0){
-							$("#phoneWarning").html("该手机号已存在");
+						if(data.status == 1){
+							$("#phoneWarning").html("该手机号不存在");
 						}else{
 							phoneCheck = true;
 							$("#phoneWarning").html("");
@@ -149,14 +147,6 @@
 				});
 			}else{
 				$("#phoneWarning").html("手机号只能为11位");
-			}
-		});
-
-		$("#username").blur(function(){
-			if($("#username").val() == ""){
-				$("#usernameWarning").html("用户名不能为空");
-			}else{
-				$("#usernameWarning").html("");
 			}
 		});
 

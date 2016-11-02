@@ -1,0 +1,112 @@
+.content{
+	margin-top: 50px;
+}
+
+.content .header{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #d9e7e7;
+	font-size: 20px;
+	color: #005981;
+	text-align: center;
+	z-index: 5;
+}
+
+.content .header .back{
+	float: left;
+	margin-left: 10px;
+	margin-right: -155px;
+}
+
+.content .header .back img{
+	position: relative;
+	width: 10px;
+	top: 3px;
+}
+
+#publish{
+	margin: 60px 30px;
+	padding-bottom: 60px;
+}
+
+#publish .description{
+	width: 100%;
+	height: 120px;
+	font-size: 15px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	resize: none;
+	border-bottom: 1px solid #d6d7dc;
+	margin-bottom: 15px;
+}
+
+#publish .pics{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+
+#publish .pic{
+	float: left;
+	width: 80px;
+	height: 80px;
+	background-color: #d2d2d2;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+#publish .pic img{
+	width: 100%;
+	height: 100%;
+}
+
+#publish .pic [type="file"]{
+	display: none;
+}
+
+#publish .pic #forPicture{
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 80px;
+	text-align: center;
+	font-size: 50px;
+	background-color: #d2d2d2;
+	color: white;
+}
+
+#publish .price{
+	padding-bottom: 8px;
+	border-bottom: 1px solid #d6d7dc;
+	margin-bottom: 15px;
+}
+
+#publish #price{
+	background-color: transparent;
+	border: none;
+	outline: none;
+	font-size: 15px;
+	position: relative;
+	top: 1px;
+}
+
+#publish #classification{
+	width: 200px;
+	height: 24px;
+}
+
+#publish .submit{
+	margin-top: 30px;
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	outline: none;
+	color: white;
+	background-color: #ff5001;
+	border-radius: 5px;
+	font-size: 15px;
+}

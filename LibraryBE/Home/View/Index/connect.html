@@ -6,8 +6,7 @@
 	<title>Ex-BOOK</title>
 	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
 	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
-	<link rel="stylesheet" href="__PUBLIC__/css/index.css" />
-	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/connect.css" />
 </head>
 <body>
 	<div class="leaders">
@@ -43,32 +42,26 @@
 		</div>
 	</div>
 	
-	<div class="viewbox">
-		<div class="view index">
-			<div class="search">
-				<input type="button" id="search" value="搜索"/>
-				<i></i><input type="text" id="searchText" placeholder="搜索" />
+	<div class="content">
+		<div class="header">
+			<div class="back" id="back" onclick="history.back()">
+				<img src="__PUBLIC__/img/back.png" alt="back">
+				<span>Back</span>
 			</div>
-			<div class="books" id="books">
-				<div class="book" v-for="book in books">
-					<img v-bind:src="book.owner_pic" alt="无法加载头像" class="touxiang"/>
-					<span class="price">{{book.price}}</span>
-					<div class="information">
-						<h4>{{book.owner}}</h4>
-						<p class="time">{{book.time}}</p>
-						<p class="pic">
-							<img v-bind:src="url" alt=""  v-for="url in book.pic"/>
-						</p>
-						<p class="describe">{{book.description}}</p>
-					</div>
-					<p class="more">
-						<a href="">详情</a>
-						<a href="" class="comment">{{book.commentNum}}</a>
-					</p>
-				</div>
+			<div class="title">
+				<p>联系我们</p>
+			</div>
+		</div>
+
+		<div class="connect">
+			<div class="erweima">
+				<img src="__PUBLIC__/img/erweima.jpg" alt="" />
+			</div>
+			<div class="text">
+				@Ex-BOOK<br />
+				长按二维码给我们留言<br />
 			</div>
 		</div>
 	</div>
-	<script src="__PUBLIC__/js/index.js"></script>
 </body>
 </html>
