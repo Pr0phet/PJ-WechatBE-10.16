@@ -167,7 +167,7 @@ class IndexController extends Controller
         $data['description'] = I('post.description');
         $data['price'] = I('post.price');
         $data['tag'] = I('post.tag');
-        $data['owner'] = session('username');
+        $data['owner'] = session('userid');
         $data['ct'] = time();
 
         $saveBook = $books->add($data);
