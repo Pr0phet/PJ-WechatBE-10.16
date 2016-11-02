@@ -70,7 +70,7 @@
 			</div>
 		</div>
 
-		<div class="books">
+		<div class="books" id="books">
 			<div class="book" v-for="book in books">
 				<div class="bookStatus">
 					<span>{{ book.price }}</span>
@@ -78,7 +78,7 @@
 				</div>
 				<div class="information">
 					<div class="pics">
-						<img v-for="pic in book.pic" v-bind:src="pic" alt="" />
+						<img v-for="pic in book.pic" v-bind:src="pic.url" alt="" />
 					</div>
 					<div class="description">
 						<p>{{ book.desciption }}</p>
@@ -99,6 +99,7 @@
 					</div>
 				</div>
 			</div>
+			<p class="nomore">加载中</p>
 		</div>
 	</div>
 

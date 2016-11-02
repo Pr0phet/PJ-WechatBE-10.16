@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<title>Ex-BOOK</title>
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
+	<link rel="stylesheet" href="__PUBLIC__/css/information.css" />
+	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<div class="leaders">
+		<div class="leader">
+			<a href="index">
+				<img src="__PUBLIC__/img/index.png" alt="" />
+				<span>首页</span>
+			</a>
+		</div>
+		<div class="leader">
+			<a href="message">
+				<img src="__PUBLIC__/img/message.png" alt="" />
+				<span>消息</span>
+			</a>
+		</div>
+		<div class="leader upleader">
+			<a href="publish">
+				<img src="__PUBLIC__/img/pulish.png" alt="" />
+				<span>发布</span>
+			</a>
+		</div>
+		<div class="leader">
+			<a href="personal">
+				<img src="__PUBLIC__/img/pc.png" alt="" />
+				<span>个人中心</span>
+			</a>
+		</div>
+		<div class="leader">
+			<a href="connect">
+				<img src="__PUBLIC__/img/feedback.png" alt="" />
+				<span>联系我们</span>
+			</a>
+		</div>
+	</div>
+	
+	<div class="content">
+		<div class="header">
+			<div class="back" id="back">
+				<img src="__PUBLIC__/img/back.png" alt="back">
+				<span>Back</span>
+			</div>
+			<div class="title">
+				<p>BOOK详情</p>
+			</div>
+		</div>
+
+		<div class="information" id="information">
+			<div class="baseInfor">
+				<div class="touxiang">
+					<img v-bind:src="owner_pic" alt="头像" />
+				</div>
+				<div class="price">
+					<span>{{ price }}</span>
+				</div>
+				<div class="person">
+					<h4>{{ owner }}</h4>
+					<p>{{ time }}</p>
+				</div>
+			</div>
+
+			<div class="descript">
+				<h4>图片描述</h4>
+				<p class="pic">
+					<img v-bind:src="picture.url" v-for="picture in pic" alt="图片" />
+				</p>
+				<p class="description">
+					{{ description }}
+				</p>
+			</div>
+
+			<div class="comments">
+				<h4>留言</h4>
+				<div class="comment" v-for="comment in comments">
+					<div class="touxiang">
+						<img v-bind:src="comment.pic" alt="头像" />
+					</div>
+					<div class="time">{{ comment.time }}</div>
+					<div class="commentInfor">
+						<h5>{{ comment.owner }}</h5>
+						<p>{{ comment.description }}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="__PUBLIC__/js/information.js"></script>
+</body>
+</html>
