@@ -182,7 +182,10 @@
 	text-decoration: none;
 }
 
-
+.content .books .nomore{
+	text-align: center;
+	padding-bottom: 20px;
+}
 
 
 

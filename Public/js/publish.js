@@ -86,7 +86,6 @@
 				}
 			},
 			success: function(data){
-				console.log(data);
 				if(data.status == 1){
 					tools.alertMassage("发布成功");
 					location.href = "index";

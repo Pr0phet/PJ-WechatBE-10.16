@@ -55,12 +55,48 @@
 			},
 			dataType: "json",
 			success: function(datas){
-				data.books = datas;
+				if(datas.error == "empty"){
+					$(".nomore").html("没有更多");
+				}else{
+					data.books = datas;
+				}
 			},
 			error: function(data){
 				tools.alertMassage("连接服务器失败");
 			},
 		});
+
+		// 滑动添加
+		var scollStatus = false,
+			scollTime = window.setInterval(function(){
+				if(scollStatus == false){
+					if($("#content").height() + $("#content").offset().top
+						< 1.5 * document.body.clientHeight){
+						scollStatus = true;
+						$.ajax({
+							url: "/EXbook/index.php/Home/Index/showBlocks",
+							type: "post",
+							data: {
+								update: data.books[data.books.length - 1] ? data.books[data.books.length - 1].id : null,
+								mode: 1,
+							},
+							dataType: "json",
+							success: function(datas){
+								scollStatus = false;
+								if(datas.error == "empty"){
+									$(".nomore").html("没有更多");
+									clearInterval(scollTime);
+								}else{
+									data.books.push.apply(data.books, datas);
+								}
+							},
+							error: function(e){
+								tools.alertMessage("连接服务器失败");
+							}
+						});
+					}
+				}
+			}, 200);
 
 		// 注销
 		$("#logout").click(function(){
