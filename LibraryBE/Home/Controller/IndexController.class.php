@@ -259,7 +259,6 @@ class IndexController extends Controller
         $user = M('user');
         $flag = $com->WHERE($condition)->select();
         if ($flag) {
-            $data['comments']['flag'] = 1;
             for ($i = 0; $i < count($flag); $i++) {
                 $owner = $user->WHERE('id = ' . $flag[$i]['ownerid'])->find();
                 $data['comments'][$i]['owner'] = $owner['name'];
@@ -267,9 +266,8 @@ class IndexController extends Controller
                 $data['comments'][$i]['description'] = $flag[$i]['content'];
                 $data['comments'][$i]['time'] = $this->showTime($flag[$i]['time']);
             }
-            $data['comments']['times'] = count($flag);
         } else {
-            $data['comments']['flag'] = 0;
+            $data['comments'] = array();
         }
         //getDetail
         $condition['id'] = I('post.id');
