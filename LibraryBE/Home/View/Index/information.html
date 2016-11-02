@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
 	<link rel="stylesheet" href="__PUBLIC__/css/information.css" />
 	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 	<div class="leaders">
@@ -54,38 +55,46 @@
 			</div>
 		</div>
 
-		<div class="information">
+		<div class="information" id="information">
 			<div class="baseInfor">
 				<div class="touxiang">
-					<img src="__PUBLIC__/img/touxiang.jpg" alt="头像" />
+					<img v-bind:src="owner_pic" alt="头像" />
 				</div>
 				<div class="price">
-					<span>5</span>
+					<span>{{ price }}</span>
 				</div>
 				<div class="person">
-					<h4>天使的大熊</h4>
-					<p>1分钟前</p>
+					<h4>{{ owner }}</h4>
+					<p>{{ time }}</p>
 				</div>
 			</div>
 
 			<div class="descript">
 				<h4>图片描述</h4>
 				<p class="pic">
-					<img src="__PUBLIC__/img/touxiang.jpg" alt="图片" />
-					<img src="__PUBLIC__/img/touxiang.jpg" alt="图片" />
+					<img v-bind:src="picture.url" v-for="picture in pic" alt="图片" />
 				</p>
 				<p class="description">
-					《自然语言处理综述》全新的，没用的，有需要的小伙伴可以看看，我还有其他的书可以，可以私聊。
+					{{ description }}
 				</p>
 			</div>
 
 			<div class="comments">
 				<h4>留言</h4>
-				<div class="comment">
-					<div class="touxiang"></div>
+				<div class="comment" v-for="comment in comments">
+					<div class="touxiang">
+						<img v-bind:src="comment.pic" alt="头像" />
+					</div>
+					<div class="time">{{ comment.time }}</div>
+					<div class="commentInfor">
+						<h5>{{ comment.owner }}</h5>
+						<p>{{ comment.description }}</p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<script src="__PUBLIC__/js/information.js"></script>
 </body>
 </html>
