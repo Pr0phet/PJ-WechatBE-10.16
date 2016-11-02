@@ -52,8 +52,8 @@
 				<i></i><input type="text" id="searchText" placeholder="搜索" />
 			</div>
 			<div class="books" id="books">
-				<div class="book" v-for="book in books">
-					<img v-bind:src="book.owner_pic" alt="无法加载头像" class="touxiang"/>
+				<div class="book" v-bind:id="'book' + book.id" v-for="book in books">
+					<img v-bind:src="book.owner_pic" alt="头像" class="touxiang"/>
 					<span class="price">{{book.price}}</span>
 					<div class="information">
 						<h4>{{book.owner}}</h4>
