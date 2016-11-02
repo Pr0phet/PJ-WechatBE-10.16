@@ -59,7 +59,7 @@
 						<h4>{{book.owner}}</h4>
 						<p class="time">{{book.time}}</p>
 						<p class="pic">
-							<img v-bind:src="url" alt=""  v-for="url in book.pic"/>
+							<img v-bind:src="url.url" alt=""  v-for="url in book.pic"/>
 						</p>
 						<p class="describe">{{book.desciption}}</p>
 					</div>

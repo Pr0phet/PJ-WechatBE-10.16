@@ -53,15 +53,15 @@
 				}
 				reader.readAsDataURL(files[i]);
 			}
-			$("#picture").id += data.pictures.length;
-			$("#file").append('<input type="file" accept="image/*" multiple="true" id="picture"/>');
+			$("#picture").attr({
+				id: "picture" + data.pictures.length,
+				name: "picture" + data.pictures.length,
+			});
+			$("#file").append('<input type="file" accept="image/*" multiple="true" id="picture"/>')
+			.find("#picture").change(arguments.callee);
 		});
 
 		// 发布
-		$("#publish").submit(function(){
-			
-		})
-
 		$("#publish").ajaxForm({
 			url: "/EXbook/index.php/Home/Index/createBlock",
 			type: "post",
@@ -89,9 +89,13 @@
 				console.log(data);
 				if(data.status == 1){
 					tools.alertMassage("发布成功");
+					location.href = "index";
 				}else{
 					tools.alertMassage("发布失败");
 				}
+			},
+			error: function(e){
+				tools.alertMassage("连接服务器错误");
 			},
 		});
 	};	

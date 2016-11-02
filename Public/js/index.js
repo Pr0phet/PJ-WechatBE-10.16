@@ -1,13 +1,6 @@
 ;(function(window, undefined){
 	// 渲染首页
-	var books = [{
-		price: "5",
-		owner: "coderben",
-		time: "1 minute ago",
-		desciption: "123",
-		commentNum: "5",
-		owner_pic: "/EXbook/Public/img/touxiang.jpg"
-	}];
+	var books = [];
 
 	new Vue({
 		el: "#books",
@@ -25,7 +18,7 @@
 		dataType: "json",
 		success: function(datas){
 			console.log(datas);
-			books.push.apply(books, datas);
+			// books.push.apply(books, datas);
 		},
 		error: function(e){
 			tools.alertMessage("连接服务器失败");
