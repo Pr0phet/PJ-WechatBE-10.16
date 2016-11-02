@@ -12,8 +12,8 @@ import('Org.Im.rongcloud');
 
 class RongController extends Controller
 {
-    private static $APPkey = "x18ywvqf8wznc";
-    private static $APPSecret = "CIJoQrifglW3FE";
+    private static $APPkey = "kj7swf8o7whu2";
+    private static $APPSecret = "KlcwUbhosHi34";
     //Im类库引用
 
     private function imToken($status)
