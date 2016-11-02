@@ -182,12 +182,10 @@ class IndexController extends Controller
         $res = $upload->upload();
         if ($res) {
             $i = 0;
-            foreach ($res as $file) {
-                foreach ($file as $index) {
-                    $pic[$i]['url'] = '/EXbook/Public/upload/' . $index['savepath'] . $index['savename'];
-                    $pic[$i]['flag'] = $saveBook;
-                    $i++;
-                }
+            foreach ($res as $index) {
+                $pic[$i]['url'] = '/EXbook/Public/upload/' . $index['savepath'] . $index['savename'];
+                $pic[$i]['flag'] = $saveBook;
+                $i++;
             }
             $picRepo->addAll($pic);
             $this->ajaxReturn(array('status' => '1'));
