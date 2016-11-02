@@ -275,7 +275,7 @@ class IndexController extends Controller
         $condition['id'] = I('post.id');
         $books = M('books');
         $res = $books->WHERE($condition)->find();
-        $selectOwner['name'] = $res['owner'];
+        $selectOwner['id'] = $res['owner'];
         $data['id'] = $res['id'];
         $data['owner'] = $user->WHERE($selectOwner)->find()['name'];
         $data['ownerid'] = $res['owner'];
