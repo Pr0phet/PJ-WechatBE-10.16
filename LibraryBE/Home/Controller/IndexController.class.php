@@ -210,7 +210,7 @@ class IndexController extends Controller
         $condition['status'] = 1;
         if ($mode == 1)
         {
-            $condition['owner'] = session('username');
+            $condition['owner'] = session('userid');
             unset($condition['status']);
         }
         if ($search != null)
