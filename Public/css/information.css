@@ -1,3 +1,68 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+html, body{
+	background-color: #eeeeee;
+}
+
+.leaders{
+	position: fixed;
+	width: 100%;
+	bottom: 0px;
+	left: 0px;
+	height: 50px;
+}
+
+.leaders .putComment, .leaders .zu{
+	float: left;
+	width: 50%;
+	text-align: center;
+	line-height: 50px;
+}
+
+.writeComment{
+	overflow: hidden;
+	background-color: #d9e7e7;
+}
+
+.writeComment .box{
+	margin: 9px 80px 0px 20px;
+}
+
+.writeComment input[type="text"]{
+	width: 100%;
+	height: 30px;
+	border-radius: 5px;
+	outline: none;
+	border: 1px solid #d6d7dc;
+}
+
+.writeComment .send{
+	float: right;
+	margin-right: 20px;
+	margin-top: 10px;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	text-align: center;
+	color: white;
+	line-height: 30px;
+	width: 50px;
+	background-color: #98cb86;
+}
+
+.leaders .putComment{
+	background-color: #d9e7e7;
+	color: #005981;
+}
+
+.leaders .zu{
+	background-color: #ff5001;
+	color: white;
+}
+
 .content{
 	margin-top: 50px;
 	margin-bottom: 90px;
@@ -75,13 +140,12 @@
 
 .content .baseInfor .person h4{
 	font-size: 16px;
-	margin: 3px 0px 8px;
+	margin: 0px 0px 8px;
 	font-weight: 500;
 	padding-right: 10px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	padding-top: 4px;
 }
 
 .content .baseInfor .person p{
