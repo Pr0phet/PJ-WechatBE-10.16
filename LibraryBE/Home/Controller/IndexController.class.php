@@ -490,18 +490,10 @@ class IndexController extends Controller
         else
         {
             $data['pic'] = '/EXbook/Public/upload/'.$info['savepath'].$info['savename'];
-            $res = $db -> WHERE($conditon) -> save($data);
-            if(!$res)
-            {
-                $this -> ajaxReturn(array('status' => '0'));
-            }
-            else
-            {
-                $rongCloud = new \rongcloud('x18ywvqf8wznc','CIJoQrifglW3FE');
-                $rongCloud -> user() -> refresh(session('userid'),$data['pic']);
-
-                $this -> ajaxReturn(array('status' => '1'));
-            }
+            $res = $db -> WHERE($conditon) -> save($data)；
+            $rongCloud = new \rongcloud('x18ywvqf8wznc','CIJoQrifglW3FE');
+            $rongCloud -> user() -> refresh(session('userid'),$data['pic']);
+            $this -> ajaxReturn(array('status' => '1'));
         }
     }
 
