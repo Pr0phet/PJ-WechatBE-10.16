@@ -46,7 +46,7 @@
 							}
 						},
 						error: function(e){
-							tools.alterMassage("访问服务器失败");
+							tools.alertMassage("访问服务器失败");
 						},
 					});
 				},
@@ -54,6 +54,27 @@
 					$(".maximute").find("img")
 					.attr("src", e.target.src)
 					.end().css("display", "block");
+				},
+				layout: function(id, book){
+					$.ajax({
+						url: "/EXbook/index.php/Home/Index/rentOut",
+						type: "post",
+						data: {
+							id: id,
+						},
+						dataType: "json",
+						success: function(datas){
+							if(datas.status == 0){
+								tools.alertMassage("出租成功");
+								book.status = 0;
+							}else{
+								tools.alertMassage("出租失败");
+							}
+						},
+						error: function(e){
+							tools.alertMassage("连接服务器失败");
+						},
+					});
 				},
 			},
 		});
@@ -121,7 +142,7 @@
 								}
 							},
 							error: function(e){
-								tools.alertMessage("连接服务器失败");
+								tools.alertMassage("连接服务器失败");
 							}
 						});
 					}

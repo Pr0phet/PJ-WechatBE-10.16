@@ -104,6 +104,11 @@
 	position: relative;
 }
 
+.content .bookStatus p{
+	font-size: 14px;
+	margin-left: -10px;
+}
+
 .content .bookStatus span::before{
 	content: "";
 	display: block;

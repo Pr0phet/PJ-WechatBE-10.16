@@ -73,7 +73,8 @@
 			<div class="book" v-for="book in books">
 				<div class="bookStatus">
 					<span>{{ book.price }}</span>
-					<img src="__PUBLIC__/img/click.png" alt="" />
+					<img src="__PUBLIC__/img/click.png" v-on:click="layout(book.id, book)" alt="" v-if="book.status == 1"/>
+					<p v-else>已出租</p>
 				</div>
 				<div class="information">
 					<div class="pics">
