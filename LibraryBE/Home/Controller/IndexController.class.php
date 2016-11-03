@@ -406,7 +406,7 @@ class IndexController extends Controller
         $res = $db -> WHERE($condition) -> find();
         $data['owner'] = $res['name'];
         $data['owner_pic'] = $res['pic'];
-        $selectB['owner'] = $res['name'];
+        $selectB['owner'] = session("userid");
         $num =  count($books -> WHERE($selectB) -> select());
         $data['number'] = $num;
         $this -> ajaxReturn($data);
