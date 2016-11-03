@@ -475,13 +475,16 @@ class IndexController extends Controller
             'rootPath' => './Public/upload/', //根目录
             'savePath' => session('userid').'/', //分类存储图片（相对于根目录）
             'saveName' => 'userpic', //文件命名规则
+            'autoSub' => false,
             'exts' => array('jpg','jpeg','png'),
             'replace' => true
         );
         $upload = new \Think\Upload($config);
-        $info = $upload -> uploadOne($_FILES);
+        $info = $upload -> uploadOne($_FILES['touxiang']);
         if(!$info)
         {
+            echo $upload -> getError()."/n";
+            var_dump($_FILES);
             $this -> ajaxReturn(array('status' => '-1'));
         }
         else
