@@ -511,8 +511,8 @@ class IndexController extends Controller
     public function changePass()
     {
         $db = M('user');
-        $old_pass = I('post.OldPass');
-        $new_pass = I('post.NewPass');
+        $old_pass = I('post.oldPass');
+        $new_pass = I('post.newPass');
         $condition['id'] = session('userid');
         $user = $db -> WHERE($condition) -> find();
         if(!$user)
