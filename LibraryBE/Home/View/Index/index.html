@@ -47,7 +47,7 @@
 	
 	<div class="viewbox" id="viewbox">
 		<div class="view index" id="index">
-			<div class="search" id="search">
+			<div class="search">
 				<input type="button" id="search" value="搜索"/>
 				<i></i><input type="text" id="searchText" placeholder="搜索" />
 			</div>
@@ -59,19 +59,25 @@
 						<h4>{{book.owner}}</h4>
 						<p class="time">{{book.time}}</p>
 						<p class="pic">
-							<img v-bind:src="url.url" alt=""  v-for="url in book.pic"/>
+							<img v-bind:src="url.url" v-on:click="showPicture" alt=""  v-for="url in book.pic"/>
 						</p>
 						<p class="describe">{{book.desciption}}</p>
 					</div>
 					<p class="more">
-						<a href="">详情</a>
-						<a href="" class="comment">{{book.commentNum}}</a>
+						<a v-bind:href="'information?id=' + book.id">详情</a>
+						<a v-bind:href="'information?id=' + book.id" class="comment">{{book.commentNum}}</a>
 					</p>
 				</div>
 				<p class="nomore">加载中</p>
 			</div>
 		</div>
 	</div>
+
+	<div class="maximute">
+		<div class="slider"></div>
+		<img src="" alt="" />
+	</div>
+
 	<script src="__PUBLIC__/js/index.js"></script>
 </body>
 </html>

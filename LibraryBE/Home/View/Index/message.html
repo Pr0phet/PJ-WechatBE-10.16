@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/leader.css" />
 	<link rel="stylesheet" href="__PUBLIC__/css/message.css" />
 	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/tools.js"></script>
+	<script src="__PUBLIC__/js/RongIMLib-2.2.4.min.js"></script>
 </head>
 <body>
 	<div class="leaders">
@@ -45,7 +48,7 @@
 	
 	<div class="content">
 		<div class="header">
-			<div class="back" id="back">
+			<div class="back" id="back" onclick="history.back()">
 				<img src="__PUBLIC__/img/back.png" alt="back">
 				<span>Back</span>
 			</div>
@@ -55,7 +58,7 @@
 		</div>
 
 		<div class="messages" id="messages">
-			<div class="message" v-for="message in messages">
+			<div class="message" v-for="message in messages" v-on:click="toChatRoom(message, $event)">
 				<div class="touxiang">
 					<img v-bind:src="message.pic" alt="" />
 				</div>

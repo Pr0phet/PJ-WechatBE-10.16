@@ -58,6 +58,7 @@
 				if(datas.error == "empty"){
 					$(".nomore").html("没有更多");
 				}else{
+					console.log(datas);
 					data.books = datas;
 				}
 			},
