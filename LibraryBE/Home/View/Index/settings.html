@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<title>Ex-BOOK</title>
+	<script src="http://localhost:35729/livereload.js?snipver=1"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/settings.css" />
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/ajaxform.js"></script>
+</head>
+<body>
+	
+	<div class="content">
+		<div class="header">
+			<div class="back" id="back" onclick="history.back()">
+				<img src="__PUBLIC__/img/back.png" alt="back">
+				<span>Back</span>
+			</div>
+			<div class="title">
+				<p>我的资料</p>
+			</div>
+		</div>
+
+		<div class="information">
+			<h4>基本信息</h4>
+			<form action="" id="boxs" class="boxs" enctype="multipart/form-data">
+				<label for="touxiang">
+					<div class="box">
+						头像<img src="__PUBLIC__/img/touxiang.jpg" class="touxiang" alt="" />
+					</div>
+				</label>
+				<a href="changePassword"><div class="box">修改密码</div></a>
+				<input type="file" accept="image/*" id="touxiang" name="touxiang" style="display: none;" />
+			</form>
+		</div>
+	</div>
+
+	<script src="__PUBLIC__/js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+body, html{
+	background-color: #f0f0f0;
+}
+
+.content{
+	margin-top: 50px;
+}
+
+.content .header{
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #d9e7e7;
+	font-size: 20px;
+	color: #005981;
+	text-align: center;
+	z-index: 5;
+}
+
+.content .header .back{
+	float: left;
+	margin-left: 10px;
+	margin-right: -155px;
+}
+
+.content .header .back img{
+	position: relative;
+	width: 10px;
+	top: 3px;
+}
+
+.content .information{
+	margin: 80px 0px 0px;
+}
+
+.content .information h4{
+	padding-left: 30px;
+	font-size: 14px;
+	color: #7d7d7d;
+}
+
+.content .boxs{
+	margin-top: 15px;
+	border-top: 1px solid #d6d7dc;
+}
+
+.content .boxs .box{
+	position: relative;
+	height: 60px;
+	line-height: 60px;
+	background-color: white;
+	border-bottom: 1px solid #d6d7dc;
+	padding-left: 20px;
+
+}
+
+.content .boxs .box::after{
+	float: right;
+	content: ">";
+	margin-right: 25px;
+	font-size: 20px;
+	color: #7d7d7d;
+}
+
+.content .boxs .touxiang{
+	float: right;
+	width: 50px;
+	height: 50px;
+	margin-top: 5px;
+	position: absolute;
+	right: 50px;
+}
+
+.content a{
+	color: black;
+	text-decoration: none;
+}

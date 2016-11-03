@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" >
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<title>Ex-BOOK</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/chatroom.css" />
+	<script src="__PUBLIC__/js/vue.min.js"></script>
+	<script src="__PUBLIC__/js/jquery-3.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/tools.js"></script>
+	<script src="__PUBLIC__/js/RongIMLib-2.2.4.min.js"></script>
+</head>
+<body>
+	<div class="leaders">
+		<input type="button" value="发送" class="send" />
+		<div class="box">
+			<input type="text" placeholder="我想说" id="message"/>
+		</div>
+	</div>
+	
+	<div class="content">
+		<div class="header">
+			<div class="back" id="back" onclick="history.back()">
+				<img src="__PUBLIC__/img/back.png" alt="back">
+				<span>Back</span>
+			</div>
+			<div class="title">
+				<p id="name"></p>
+			</div>
+		</div>
+
+		<div class="messages" id="messages">
+			<template v-for="message in messages">
+				<div class="message target" v-if="message.target">
+					<img v-bind:src="message.pic"  alt="" />
+					<p>{{ message.content }}</p>
+				</div>
+				<div class="message self" v-else>
+					<img v-bind:src="message.pic"  alt="" />
+					<p>{{ message.content }}</p>
+				</div>
+			</template>
+		</div>
+	</div>
+	
+	<script src="__PUBLIC__/js/chatroom.js"></script>
+</body>
+</html>
