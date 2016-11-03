@@ -479,7 +479,7 @@ class IndexController extends Controller
             'replace' => true
         );
         $upload = new \Think\Upload($config);
-        $info = $upload -> uploadOne($_FILES['pic']);
+        $info = $upload -> uploadOne($_FILES['touxiang']);
         if(!$info)
         {
             $this -> ajaxReturn(array('status' => '-1'));
