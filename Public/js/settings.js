@@ -1,4 +1,13 @@
 ;(function(window, undefined){
+	var pic = location.search.match(/\bpic=(.*?)(&|$)/);
+
+	if(!pic)
+		location.href = "index";
+
+	$("#oldOwnerPic").attr({
+		src: pic[1],
+	});
+
 	$("#touxiang").change(function(){
 		console.log(this);
 		$("#boxs").ajaxSubmit({
