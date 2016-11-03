@@ -93,8 +93,8 @@
 					</div>
 					<div class="more">
 						<p>
-							<a href="">详情</a>
-							<a href="" class="comment">{{ book.commentNum }}</a>
+							<a v-bind:href="'information?id=' + book.id">详情</a>
+							<a v-bind:href="'information?id=' + book.id" class="comment">{{ book.commentNum }}</a>
 						</p>
 					</div>
 				</div>
