@@ -1,15 +1,18 @@
 ;(function(window, undefined){
 	$("#changePassword").submit(function(){
-		if($("#password").val().length < 8){
+		if($("#oldpassword").val().length < 8){
+			alert("密码至少8位");
+		}else if($("#password").val().length < 8){
 			alert("密码至少8位");
 		}else if($("#password").val() != $("#repeatPassword").val()){
 			alert("两次密码不相同");
 		}else{
 			$.ajax({
-				url: "/EXbook/index.php/Home/Index/forgetPass",
+				url: "/EXbook/index.php/Home/Index/changePass",
 				type: "post",
 				data: {
-					pass: $("#password").val(),
+					oldPass: $("#oldpassword").val(),
+					newPass: $("#password").val(),
 				},
 				dataType: "json",
 				success: function(data){

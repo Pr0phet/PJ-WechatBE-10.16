@@ -13,6 +13,7 @@
 		},
 		dataType: "json",
 		success: function(datas){
+			console.log(datas);
 			data = datas;
 			data.comments.reverse();
 			new Vue({
@@ -53,7 +54,6 @@
 			.animate({
 				bottom: 0,
 			}).find(".send").click(function(){
-				$(".commentText").val("");
 				$.ajax({
 					url: "/EXbook/index.php/Home/Index/addComment",
 					type: "post",
@@ -63,6 +63,7 @@
 					},
 					dataType: "json",
 					success: function(datas){
+						$(".commentText").val("");
 						data.comments = data.comments || [],
 						data.comments.unshift({
 							owner: datas.owner,
