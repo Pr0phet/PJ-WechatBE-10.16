@@ -28,7 +28,7 @@
 		};
 
 		new Vue({
-			el: content,
+			el: "#content",
 			data: data,
 			methods: {
 				del: function(id, event){
@@ -50,7 +50,16 @@
 						},
 					});
 				},
+				showPicture: function(e){
+					$(".maximute").find("img")
+					.attr("src", e.target.src)
+					.end().css("display", "block");
+				},
 			},
+		});
+
+		$(".maximute").click(function(){
+			$(this).css("display", "none");
 		});
 
 		// 个人信息

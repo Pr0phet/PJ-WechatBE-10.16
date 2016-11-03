@@ -11,7 +11,6 @@
 		},
 		methods: {
 			showPicture: function(e){
-				console.log(e.target.src);
 				$(".maximute").find("img")
 				.attr("src", e.target.src)
 				.end().css("display", "block");
@@ -21,7 +20,7 @@
 
 	$(".maximute").click(function(){
 		$(this).css("display", "none");
-	})
+	});
 
 	$.ajax({
 		url: "/EXbook/index.php/Home/Index/showBlocks",
