@@ -30,6 +30,27 @@
 		new Vue({
 			el: content,
 			data: data,
+			methods: {
+				del: function(id, event){
+					$.ajax({
+						url: "/EXbook/index.php/Home/Index/deleteBlock",
+						type: "post",
+						data: {
+							id: id,
+						},
+						dataType: "json",
+						success: function(data){
+							if(data.status == 1){
+								tools.alertMassage("删除成功");
+								location = location;
+							}
+						},
+						error: function(e){
+							tools.alterMassage("访问服务器失败");
+						},
+					});
+				},
+			},
 		});
 
 		// 个人信息
@@ -58,7 +79,6 @@
 				if(datas.error == "empty"){
 					$(".nomore").html("没有更多");
 				}else{
-					console.log(datas);
 					data.books = datas;
 				}
 			},

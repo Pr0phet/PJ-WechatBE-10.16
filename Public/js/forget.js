@@ -9,7 +9,6 @@
 		var codeCheck = false,
 			sending = false;
 		$("#getCode").click(function(){
-			console.log(sending, phoneCheck)
 			if(sending == false && phoneCheck == true){
 				if($("#phone").val().length == 11){
 					codeCheck = false;

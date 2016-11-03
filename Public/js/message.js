@@ -65,7 +65,6 @@
 			type: "post",
 			dataType: "json",
 			success: function(datas){
-				console.log(datas);
 				RongIMClient.connect(datas.token, {
 					onSuccess: function(){},
 				});
