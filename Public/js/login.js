@@ -6,7 +6,7 @@
 		});
 
 		$("#login").ajaxForm({
-			url: "/Exbook/index.php/Home/Index/login",
+			url: "/EXbook/index.php/Home/Index/login",
 			type: "post",
 			dataType: "json",
 			beforeSubmit: function(data){

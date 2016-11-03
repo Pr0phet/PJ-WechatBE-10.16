@@ -280,7 +280,7 @@ class IndexController extends Controller
         $data['owner_pic'] = $user->WHERE($selectOwner)->find()['pic'];
         $data['price'] = $res['price'];
         $data['time'] = $this->showTime($res['ct']);
-        $data['pic'] = $this->getPic($res['picflag']);
+        $data['pic'] = $this->getPic($res['id']);
         $data['description'] = $res['description'];
         $this->ajaxReturn($data);
     }

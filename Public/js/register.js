@@ -81,7 +81,7 @@
 
 		// 提交注册
 		$("#register").ajaxForm({
-			url: "/Exbook/index.php/Home/Index/register",
+			url: "/EXbook/index.php/Home/Index/register",
 			type: "post",
 			dataType: "json",
 			beforeSubmit: function(data){
