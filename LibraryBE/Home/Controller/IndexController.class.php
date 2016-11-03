@@ -639,4 +639,24 @@ class IndexController extends Controller
     {
         $this -> display();
     }
+
+    public function changePassword()
+    {
+        $this -> display();
+    }
+
+    public function chatroom()
+    {
+        $this -> display();
+    }
+
+    public function infomation()
+    {
+        $this -> display();
+    }
+
+    public function settings()
+    {
+        $this -> display();
+    }
 }
