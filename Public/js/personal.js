@@ -161,7 +161,7 @@
 				success: function(datas){
 					if(datas.status == 1){
 						tools.alertMassage("注销成功");
-						location.href = "index";
+						location.href = "subLogin";
 					}else{
 						tools.alertMassage("注销失败");
 					}

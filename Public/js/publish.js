@@ -27,9 +27,11 @@
 			el: "#publish",
 			data: data,
 			methods: {
-				delPic: function(index){
-					data.delPicture[index] = true;
-					$("#picture" + (index + 1)).remove();
+				delPic: function(picture){
+					if(window.confirm("确定要删除图片？")){
+						picture.show = false;
+						$("#picture" + picture.id).remove();	
+					}
 				}
 			}
 		});
@@ -39,18 +41,26 @@
 			if(this.files.length == 0)
 				return;
 			try{
-				data.pictures.push(window.URL.createObjectURL(this.files[0]));
+				data.pictures.push({
+					url: window.URL.createObjectURL(this.files[0]),
+					show: true,
+					id: data.pictures.length,
+				});
 			}catch(e){
 				var reader = new FileReader();
 
 				reader.onload = function(e){
-					data.pictures.push(e.target.result);
+					data.pictures.push({
+						url: e.target.result,
+						show: true,
+						id: data.pictures.length,
+					});
 				}
 				reader.readAsDataURL(this.files[0])
 			}
 			$(this).attr({
-				id: "picture" + data.pictures.length,
-				name: "picture" + data.pictures.length,
+				id: "picture" + (data.pictures.length - 1),
+				name: "picture" + (data.pictures.length - 1),
 			});
 			$("#file").append('<input type="file" accept="image/*" id="picture"/>')
 			.find("#picture").change(arguments.callee);
