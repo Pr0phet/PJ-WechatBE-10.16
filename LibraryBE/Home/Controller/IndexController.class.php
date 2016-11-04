@@ -391,35 +391,13 @@ class IndexController extends Controller
             {
                 $owner = $user -> WHERE('id = '.$res[$i]['ownerid']) -> find();
                 $data[$i] = array(
+                    'bookid' => $res[$i]['flag'],
                     'owner' => $owner['name'],
-                    'pic' => $owner['pic'],
-                    'description' => $res[$i]['content'],
-                    'time' => $this -> showTime($res[$i]['time'])
+                    'time' => $this -> showTime($res[$i]['time']),
+                    'status' => $res[$i]['status']
                 );
                 $db -> WHERE($condition) -> save(array('status' => '0')); //更新status为0
             }
-        }
-        $this -> ajaxReturn($data);
-    }
-
-    public function getLastComment()
-    {
-        $db = M('comments');
-        $id = session('userid');
-
-        $condition['id'] = $id;
-        $condition['ownerid'] = array('NEQ',$id);
-        $res = $db -> WHERE($condition) -> ORDER('id desc') ->find();
-        $data = array();
-        if($res)
-        {
-            $user = M('user');
-            $owner = $user -> WHERE('id ='.$res['id']) -> find();
-            $data = array(
-                'name' => $owner['name'],
-                'description' => $res['content'],
-                'time' => $this -> showTime($res['time'])
-            );
         }
         $this -> ajaxReturn($data);
     }
