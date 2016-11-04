@@ -20,7 +20,7 @@
 	
 	<div class="content">
 		<div class="header">
-			<div class="back" id="back" onclick="history.back()">
+			<div class="back" id="back" onclick="location.href='personal'">
 				<img src="__PUBLIC__/img/back.png" alt="back">
 				<span>Back</span>
 			</div>
@@ -30,7 +30,7 @@
 		</div>
 
 		<div class="messages" id="messages">
-			<template v-for="message in messages">
+			<template v-for="message in messages" style="display: none;">
 				<div class="message target" v-if="message.target">
 					<img v-bind:src="message.pic"  alt="" />
 					<p>{{ message.content }}</p>

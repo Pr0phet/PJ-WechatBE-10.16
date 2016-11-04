@@ -21,7 +21,7 @@
 	
 	<div class="content">
 		<div class="header">
-			<div class="back" id="back" onclick="history.back();">
+			<div class="back" id="back" onclick="location.href='index'">
 				<img src="__PUBLIC__/img/back.png" alt="back">
 				<span>Back</span>
 			</div>
@@ -31,43 +31,55 @@
 		</div>
 
 		<div class="information" id="information">
-			<div class="baseInfor">
-				<div class="touxiang">
-					<img v-bind:src="owner_pic" alt="头像" />
-				</div>
-				<div class="price">
-					<span>{{ price }}</span>
-				</div>
-				<div class="person">
-					<h4>{{ owner }}</h4>
-					<p>{{ time }}</p>
-				</div>
-			</div>
-
-			<div class="descript">
-				<h4>图片描述</h4>
-				<p class="pic">
-					<img v-bind:src="picture.url" v-for="picture in pic" alt="图片" />
-				</p>
-				<p class="description">
-					{{ description }}
-				</p>
-			</div>
-
-			<div class="comments">
-				<h4>留言</h4>
-				<div class="comment" v-for="comment in comments">
+			<template id="baseInforTemplate" style="display: none;">
+				<div class="baseInfor">
 					<div class="touxiang">
-						<img v-bind:src="comment.pic" alt="头像" />
+						<img v-bind:src="owner_pic" alt="头像" />
 					</div>
-					<div class="time">{{ comment.time }}</div>
-					<div class="commentInfor">
-						<h5>{{ comment.owner }}</h5>
-						<p>{{ comment.description }}</p>
+					<div class="price">
+						<span>{{ price }}</span>
+					</div>
+					<div class="person">
+						<h4>{{ owner }}</h4>
+						<p>{{ time }}</p>
 					</div>
 				</div>
-			</div>
+			</template>
+			
+			<template id="descriptTemplate" style="display: none;">
+				<div class="descript">
+					<h4>图片描述</h4>
+					<p class="pic">
+						<img v-bind:src="picture.url" v-on:click="showPicture" v-for="picture in pic" alt="图片" />
+					</p>
+					<p class="description">
+						{{ description }}
+					</p>
+				</div>
+			</template>
+			
+			<template id="commentsTemplate" style="display: none;">
+				<div class="comments">
+					<h4>留言</h4>
+					<div class="comment" v-for="comment in comments">
+						<div class="touxiang">
+							<img v-bind:src="comment.pic" alt="头像" />
+						</div>
+						<div class="time">{{ comment.time }}</div>
+						<div class="commentInfor">
+							<h5>{{ comment.owner }}</h5>
+							<p>{{ comment.description }}</p>
+						</div>
+					</div>
+				</div>
+			</template>
+			
 		</div>
+	</div>
+
+	<div class="maximute">
+		<div class="slider"></div>
+		<img src="" alt="" />
 	</div>
 
 	<script src="__PUBLIC__/js/information.js"></script>

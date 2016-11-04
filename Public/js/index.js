@@ -33,7 +33,8 @@
 			if(datas.error == "empty"){
 				$(".nomore").html("没有更多了");
 			}else{
-				data.books.push.apply(data.books, datas);	
+				data.books.push.apply(data.books, datas);
+				$("#booksTemplate").css("display", "block");
 			}
 		},
 		error: function(e){
@@ -92,5 +93,5 @@
 				$(".nomore").html("没有更多");
 			}
 		});
-	})
+	});
 })(window);

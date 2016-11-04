@@ -13,17 +13,30 @@
 		},
 		dataType: "json",
 		success: function(datas){
-			console.log(datas);
 			data = datas;
 			data.comments.reverse();
 			new Vue({
 				el: "#information",
 				data: data,
+				methods: {
+					showPicture: function(e){
+						$(".maximute").find("img")
+						.attr("src", e.target.src)
+						.end().css("display", "block");
+					},
+				}
+			});
+			$("#information").find("template").css({
+				display: "block",
 			});
 		},
 		error: function(e){
 			tools.alertMessage("访问服务器错误");
 		},
+	});
+
+	$(".maximute").click(function(){
+		$(this).css("display", "none");
 	});
 
 	var isLogin = false;
@@ -49,7 +62,7 @@
 			bottom: -50,
 		}, function(){
 			$(this).addClass("writeComment")
-			.html("<input type='button' value='发送' class='send'>"+ "<div class='box'>"+
+			.append("<input type='button' value='发送' class='send'>"+ "<div class='box'>"+
 				"<input type='text' class='commentText' placeholder='评论' /></div>")
 			.animate({
 				bottom: 0,
@@ -71,10 +84,19 @@
 							description: datas.content,
 							time: datas.time,
 						});
+						$(".leaders").stop().animate({
+							bottom: -50,
+						}, function(){
+							$(this).removeClass("writeComment")
+							.find("input, .box").remove().end()
+							.animate({
+								bottom: 0,
+							});
+						});
 					},
 					error: function(e){
 						tools.alertMessage("连接服务器错误");
-					}
+					},
 				});
 			});
 		});

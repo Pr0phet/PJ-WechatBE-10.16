@@ -12,7 +12,7 @@
 </head>
 <body>
 	<header>
-		<div class="back" id="back">
+		<div class="back" id="back" onclick="location.href='index'">
 			<img src="__PUBLIC__/img/back.png" alt="back">
 			<span>Back</span>
 		</div>
@@ -24,18 +24,18 @@
 	<div class="content">
 		<form id="login">
 			<h1>Ex-BOOK</h1>
-			<i class="phone"></i><input type="text" name="phone" id="phone" placeholder="请输入手机号码" maxlength="11">
+			<i class="phone"></i><input type="text" name="phone" id="phone" autocomplete="off" placeholder="请输入手机号码" maxlength="11">
 			<span id="phoneWarning"></span><br />
-			<i class="password"></i><input type="password" name="pass" id="password" placeholder="请输入密码">
+			<i class="password"></i><input type="password" name="pass" id="password" autocomplete="off" placeholder="请输入密码">
 			<span id="passwordWarning"></span><br />
 			<input type="submit" value="登录" class="submit">
 			<p class="else">
 				<a href="subRegister" class="register">手机快速注册</a>
-				<a href="forget.html" class="forget">忘记密码</a>
+				<a href="forget" class="forget">忘记密码</a>
 			</p>
 		</form>
 	</div>
-
+	
 	<script src="__PUBLIC__/js/login.js"></script>
 </body>
 </html>

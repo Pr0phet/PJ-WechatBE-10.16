@@ -170,7 +170,6 @@ class IndexController extends Controller
         $data['owner'] = session('userid');
         $data['ct'] = time();
 
-        $saveBook = $books->add($data);
         $config = array(
             'maxSize' => '1572864', //最大1.5M
             'rootPath' => './Public/upload/', //根目录
@@ -181,6 +180,7 @@ class IndexController extends Controller
         $upload = new \Think\Upload($config);
         $res = $upload->upload();
         if ($res) {
+            $saveBook = $books->add($data);
             $i = 0;
             foreach ($res as $index) {
                 $pic[$i]['url'] = '/EXbook/Public/upload/' . $index['savepath'] . $index['savename'];
@@ -349,11 +349,13 @@ class IndexController extends Controller
     public function addComment()
     {
         $comment = M('comments');
+        $book = M('books');
         $user = M('user');
 
-        $id = I('post.id');
+        $id = I('post.id'); //书块id
         $data['content'] = I('post.comment');
         $data['flag'] = $id;
+        $data['towhom'] = $book -> WHERE('id = '.$id) -> find()['owner'];
         $data['ownerid'] = session('userid');
         $data['time'] = time();
 
@@ -371,32 +373,62 @@ class IndexController extends Controller
 
     //----------end of operation about block ---------
 
+    //----------function of message------
+
+    public function getPersonalComment()
+    {
+        $db = M('comments');
+        $id = session('userid');
+
+        $condition['towhom'] = $id;
+        $condition['ownerid'] = array('NEQ',$id);
+        $res = $db -> WHERE($condition) -> select();
+        $data = array();
+        if($res)
+        {
+            $user = M('user');
+            for($i = 0; $i < count($res); $i++)
+            {
+                $owner = $user -> WHERE('id = '.$res[$i]['ownerid']) -> find();
+                $data[$i] = array(
+                    'owner' => $owner['name'],
+                    'pic' => $owner['pic'],
+                    'description' => $res[$i]['content'],
+                    'time' => $this -> showTime($res[$i]['time'])
+                );
+                $db -> WHERE($condition) -> save(array('status' => '0')); //更新status为0
+            }
+        }
+        $this -> ajaxReturn($data);
+    }
+
+    public function getLastComment()
+    {
+        $db = M('comments');
+        $id = session('userid');
+
+        $condition['id'] = $id;
+        $condition['ownerid'] = array('NEQ',$id);
+        $res = $db -> WHERE($condition) -> ORDER('id desc') ->find();
+        $data = array();
+        if($res)
+        {
+            $user = M('user');
+            $owner = $user -> WHERE('id ='.$res['id']) -> find();
+            $data = array(
+                'name' => $owner['name'],
+                'description' => $res['content'],
+                'time' => $this -> showTime($res['time'])
+            );
+        }
+        $this -> ajaxReturn($data);
+    }
+
+    //----------end of message--------
+
 
     //----------user----------
 
-//    public function getName()
-//    {
-//        $id = I('post.id');
-//        $user = M('user');
-//
-//        $name = $user->WHERE('id = ' . $id)->find()['name'];
-//        $this->ajaxReturn($name);
-//    }
-
-//    public function checkExsist()
-//    {
-//        $phone = I('post.phone');
-//        $user = M('user');
-//        $res = $user -> WHERE('phone ='. $phone) -> find();
-//        if($res)
-//        {
-//            $this -> ajaxReturn(1);
-//        }
-//        else
-//        {
-//            $this -> ajaxReturn(0);
-//        }
-//    }
 
     public function showUser()
     {
@@ -412,26 +444,6 @@ class IndexController extends Controller
         $this -> ajaxReturn($data);
     }
 
-//    /**
-//     * 获取用户头像
-//     * @POST 用户id
-//     * @return success/error
-//     */
-//    public function showPic()
-//    {
-//        $db = M('user');
-//        $id = session('userid');
-//        $condition['id'] = $id;
-//        $pic = $db -> WHERE($condition) -> find();
-//        if($pic)
-//        {
-//            $this -> ajaxReturn(array('success' => $pic));
-//        }
-//        else
-//        {
-//            $this -> ajaxReturn(array('error' => '06'));
-//        }
-//    }
 
     /**
      * 修改用户名称
@@ -564,10 +576,6 @@ class IndexController extends Controller
         $data = $db -> WHERE($condition) -> select();
         $num = count($data);
         $data['num'] = $num;
-//        if($data)
-//        {
-//            $data['time'] = $this->showTime($data['time']);
-//        }
         return $data;
     }
 

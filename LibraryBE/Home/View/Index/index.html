@@ -51,22 +51,24 @@
 				<i></i><input type="text" id="searchText" placeholder="搜索" />
 			</div>
 			<div class="books" id="books">
-				<div class="book" v-bind:id="'book' + book.id" v-for="book in books">
-					<img v-bind:src="book.owner_pic" alt="头像" class="touxiang"/>
-					<span class="price">{{book.price}}</span>
-					<div class="information">
-						<h4>{{book.owner}}</h4>
-						<p class="time">{{book.time}}</p>
-						<p class="pic">
-							<img v-bind:src="url.url" v-on:click="showPicture" alt=""  v-for="url in book.pic"/>
+				<template id="booksTemplate" style="display: none;">
+					<div class="book" v-bind:id="'book' + book.id" v-for="book in books">
+						<img v-bind:src="book.owner_pic" alt="头像" class="touxiang"/>
+						<span class="price">{{book.price}}</span>
+						<div class="information">
+							<h4>{{book.owner}}</h4>
+							<p class="time">{{book.time}}</p>
+							<p class="pic">
+								<img v-bind:src="url.url" v-on:click="showPicture" alt=""  v-for="url in book.pic"/>
+							</p>
+							<p class="describe">{{book.desciption}}</p>
+						</div>
+						<p class="more">
+							<a v-bind:href="'information?id=' + book.id">详情</a>
+							<a v-bind:href="'information?id=' + book.id" class="comment">{{book.commentNum}}</a>
 						</p>
-						<p class="describe">{{book.desciption}}</p>
 					</div>
-					<p class="more">
-						<a v-bind:href="'information?id=' + book.id">详情</a>
-						<a v-bind:href="'information?id=' + book.id" class="comment">{{book.commentNum}}</a>
-					</p>
-				</div>
+				</template>
 				<p class="nomore">加载中</p>
 			</div>
 		</div>

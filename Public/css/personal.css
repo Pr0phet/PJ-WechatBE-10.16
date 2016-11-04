@@ -89,7 +89,6 @@
 .content .books .bookStatus{
 	float: right;
 	font-size: 20px;
-	width: 40px;
 	text-align: right;
 }
 
@@ -106,7 +105,12 @@
 
 .content .bookStatus p{
 	font-size: 14px;
-	margin-left: -10px;
+	color: #fe6c6c;
+	margin-top: 5px;
+	border: 1px solid #fe6c6c;
+	padding: 2px 3px;
+	border-radius: 5px;
+	cursor: pointer;
 }
 
 .content .bookStatus span::before{
@@ -129,6 +133,7 @@
 	width: 80px;
 	height: 80px;
 	margin-bottom: 5px;
+	margin-right: 8px;
 }
 
 .content .description{

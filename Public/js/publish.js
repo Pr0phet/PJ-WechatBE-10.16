@@ -19,12 +19,19 @@
 	// 任务开始
 	var start = function(){
 		var data = {
-			pictures: []
+			pictures: [],
+			delPicture: [],
 		};
 
 		new Vue({
 			el: "#publish",
 			data: data,
+			methods: {
+				delPic: function(index){
+					data.delPicture[index] = true;
+					$("#picture" + (index + 1)).remove();
+				}
+			}
 		});
 
 		// 图片预览
@@ -32,33 +39,22 @@
 			if(this.files.length == 0)
 				return;
 			try{
-				for(var i = 0; i < this.files.length; i++){
-					data.pictures.push(window.URL.createObjectURL(this.files[i]));
-				}
+				data.pictures.push(window.URL.createObjectURL(this.files[0]));
 			}catch(e){
-				var reader = new FileReader(),
-					files = this.files,
-					i = 0;
+				var reader = new FileReader();
+
 				reader.onload = function(e){
 					data.pictures.push(e.target.result);
 				}
-				reader.onloadend = function(e){
-					if(i < files.length){
-						try{
-							reader.readAsDataURL(files[++i]);
-						}catch(e){
-							console.log(e);
-						}				
-					}
-				}
-				reader.readAsDataURL(files[i]);
+				reader.readAsDataURL(this.files[0])
 			}
-			$("#picture").attr({
+			$(this).attr({
 				id: "picture" + data.pictures.length,
 				name: "picture" + data.pictures.length,
 			});
-			$("#file").append('<input type="file" accept="image/*" multiple="true" id="picture"/>')
+			$("#file").append('<input type="file" accept="image/*" id="picture"/>')
 			.find("#picture").change(arguments.callee);
+			$("#picsTemplate").css("display", "block");
 		});
 
 		// 发布
@@ -66,9 +62,9 @@
 			url: "/EXbook/index.php/Home/Index/createBlock",
 			type: "post",
 			dataType: "json",
-			mimeType: "multipart/form-data",
 			beforeSubmit: function(datas){
-				for(var value of datas){
+				for(var index in datas){
+					var value = datas[index];
 					if(value.name == "description" && value.value == ""){
 						tools.alertMassage("描述不能为空");
 						return false;

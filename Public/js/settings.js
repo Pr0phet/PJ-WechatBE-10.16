@@ -1,29 +1,56 @@
 ;(function(window, undefined){
-	var pic = location.search.match(/\bpic=(.*?)(&|$)/);
-
-	if(!pic)
-		location.href = "index";
-
-	$("#oldOwnerPic").attr({
-		src: pic[1],
+	// 检查登录状态
+	$.ajax({
+		url: "/EXbook/index.php/Home/Index/checkSession",
+		type: "post",
+		dataType: "json",
+		success: function(data){
+			if(data.status == 1){
+				start();
+			}else{
+				tools.alertMassage("用户没有登录");
+				location.href="subLogin";
+			}
+		},
+		error: function(e){
+			tools.alertMassage("连接服务器失败");
+		}
 	});
 
-	$("#touxiang").change(function(){
-		console.log(this);
-		$("#boxs").ajaxSubmit({
-			url: "/EXbook/index.php/Home/Index/changePic",
+	var start = function(){
+		$.ajax({
+			url: "/EXbook/index.php/Home/Index/showUser",
 			type: "post",
 			dataType: "json",
-			mimeType: "multipart/form-data",
 			success: function(data){
-				console.log(data);
-				if(data.status == 1){
-					location = location;
-				}
-			}, 
-			error: function(e){
-				alert("连接服务器失败");
+				$("#oldOwnerPic").attr({
+					src: data.owner_pic,
+				});
 			},
+			error: function(e){
+				tools.alertMassage("连接服务器失败");
+			}
 		});
-	});
+
+		$("#touxiang").change(function(){
+			$("#boxs").ajaxSubmit({
+				url: "/EXbook/index.php/Home/Index/changePic",
+				type: "post",
+				dataType: "json",
+				mimeType: "multipart/form-data",
+				success: function(data){
+					if(data.status == 1){
+						location = location;
+					}
+				}, 
+				error: function(e){
+					tools.alertMassage("连接服务器失败");
+				},
+			});
+		});
+	}
+
+
+
+	
 })(window);

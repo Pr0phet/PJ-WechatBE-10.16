@@ -76,6 +76,9 @@ body, html{
 	margin-top: 5px;
 	position: absolute;
 	right: 50px;
+	border: none;
+	outline: none;
+	background-color: transparent;
 }
 
 .content a{

@@ -51,7 +51,7 @@
 			onReceived: function (message) {
 				data.push({
 					id: message.senderUserId,
-					time: message.sentTime,
+					time: Date(parseFloat(message.sentTime) * 1000).toLocaleString().replace(/:\d{1,2}$/, ""),
 					pic: message.content.extra.pic,
 					name: message.content.extra.name,
 					message: message.content.content,

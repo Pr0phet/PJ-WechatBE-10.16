@@ -47,7 +47,7 @@
 	
 	<div class="content">
 		<div class="header">
-			<div class="back" id="back" onclick="history.back()">
+			<div class="back" id="back" onclick="location.href='index'">
 				<img src="__PUBLIC__/img/back.png" alt="back">
 				<span>Back</span>
 			</div>
@@ -59,11 +59,13 @@
 		<form id="publish" enctype="multipart/form-data">
 			<textarea name="description" id="" class="description" placeholder="文字描述"></textarea>
 			<div class="pics">
-				<div class="pic" v-for="picture in pictures">
-					<img v-bind:src="picture" alt="" />
-				</div>
+				<template id="picsTemplate" style="display: none;" v-for="(picture, index) in pictures">
+					<div class="pic" v-on:click="delPic(index)" v-if="delPicture[index] != true">
+						<img v-bind:src="picture" alt="" />
+					</div>
+				</template>
 				<div class="pic" id="file">
-					<input type="file" name="picture" accept="image/*" multiple="true" id="picture"/>
+					<input type="file" name="picture" accept="image/*" id="picture"/>
 					<label for="picture" id="forPicture">+</label>
 				</div>
 			</div>
@@ -88,7 +90,7 @@
 			<input type="submit" value="确定" class="submit"/>
 		</form>
 	</div>
-
+	
 	<script src="__PUBLIC__/js/publish.js"></script>
 </body>
 </html>
