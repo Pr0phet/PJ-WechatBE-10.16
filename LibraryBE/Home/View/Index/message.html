@@ -70,17 +70,11 @@
 						<p>{{message.message}}</p>
 					</div>
 				</div>
-				<div class="message" v-for="comment in comments" v-on:click="">
-					<div class="touxiang">
-						<img v-bind:src="comment.pic" alt="" />
-					</div>
-					<div class="time">
-						<p>{{comment.time}}</p>
-					</div>
-					<div class="text">
-						<h4>{{comment.name}}</h4>
-						<p>{{comment.comment}}</p>
-					</div>
+				<div class="comment" v-for="comment in comments" v-on:click="toBook(comment.bookid)">
+					<span class="status" v-if="comment.status == '1'">*</span>
+					<span class="name">{{ comment.owner }}</span>
+					评论了你
+					<span class="time">{{ comment.time }}</span>
 				</div>
 			</template>
 		</div>

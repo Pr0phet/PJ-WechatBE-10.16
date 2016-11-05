@@ -71,3 +71,23 @@
 	font-size: 16px;
 	line-height: 24px;
 }
+
+.content .messages .comment{
+	overflow: hidden;
+	line-height: 20px;
+	margin: 0px 10px;
+	padding: 10px 0px;
+	border-bottom: 1px solid #d6d7dc;
+}
+
+.content .comment .name{
+	color: #005882;
+}
+
+.content .comment .time{
+	margin-top: 0px;
+}
+
+.content .comment .status{
+	color: red;
+}

@@ -11,8 +11,11 @@
 			toChatRoom: function(message, e){
 				location.href = "chatroom?id=" + message.id
 				+ "&name=" + message.name + "&pic=" + message.pic;
-			}
-		}
+			},
+			toBook: function(id){
+				location.href = "information?id=" + id;
+			},
+		},
 	});
 
 	// 检测登录状态
@@ -99,9 +102,8 @@
 			dataType: "json",
 			success: function(datas){
 				console.log(datas);
-				// data.comments.push({
-				// 	id: 1, 
-				// })
+				data.comments.push.apply(data.comments, datas);
+				$("#messagesTemplate").css("display", "block");
 			},
 			error: function(e){
 				tools.alertMessage("连接服务器错误");
