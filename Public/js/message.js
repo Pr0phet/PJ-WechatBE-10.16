@@ -1,11 +1,12 @@
 ;(function(window, undefined){
-	var data = [];
+	var data = {
+		messages: [],
+		comments: [],
+	};
 
 	new Vue({
 		el: "#messages",
-		data: {
-			messages: data,
-		},
+		data: data,
 		methods: {
 			toChatRoom: function(message, e){
 				location.href = "chatroom?id=" + message.id
@@ -49,28 +50,30 @@
 		// 消息监听
 		RongIMClient.setOnReceiveMessageListener({
 			onReceived: function (message) {
-				data.push({
+				console.log(data);
+				data.messages.push({
 					id: message.senderUserId,
 					time: (function(time){
 						var diff = (new Date().getTime()) - time;
 						if((diff /= 1000) < 60){
-							return parseInt(diff) + "秒";
+							return parseInt(diff) + "秒前";
 						}else if((diff /= 60) < 60){
-							return parseInt(diff) + "分";
+							return parseInt(diff) + "分前";
 						}else if((diff /= 60) < 24){
-							return parseInt(diff) + "时";
+							return parseInt(diff) + "时前";
 						}else if((diff /= 24) < 30){
-							return parseInt(diff) + "天";
+							return parseInt(diff) + "天前";
 						}else if((diff /= 30) < 12){
-							return parseInt(diff) + "月";
+							return parseInt(diff) + "月前";
 						}else{
-							return parseInt(diff /= 12) + "年";
+							return parseInt(diff /= 12) + "年前";
 						}
 					})(message.sentTime),
 					pic: message.content.extra.pic,
 					name: message.content.extra.name,
 					message: message.content.content,
 				});
+				$("#messagesTemplate").css("display", "block");
 			},
 		});
 
@@ -96,9 +99,12 @@
 			dataType: "json",
 			success: function(datas){
 				console.log(datas);
+				// data.comments.push({
+				// 	id: 1, 
+				// })
 			},
 			error: function(e){
-				// tools.alertMessage("连接服务器错误");
+				tools.alertMessage("连接服务器错误");
 			},
 		})
 	}

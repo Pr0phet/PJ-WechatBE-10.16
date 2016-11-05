@@ -70,8 +70,19 @@
 						<p>{{message.message}}</p>
 					</div>
 				</div>
+				<div class="message" v-for="comment in comments" v-on:click="">
+					<div class="touxiang">
+						<img v-bind:src="comment.pic" alt="" />
+					</div>
+					<div class="time">
+						<p>{{comment.time}}</p>
+					</div>
+					<div class="text">
+						<h4>{{comment.name}}</h4>
+						<p>{{comment.comment}}</p>
+					</div>
+				</div>
 			</template>
-
 		</div>
 	</div>
 
