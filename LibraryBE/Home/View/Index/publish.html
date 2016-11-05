@@ -59,9 +59,9 @@
 		<form id="publish" enctype="multipart/form-data">
 			<textarea name="description" id="" class="description" placeholder="文字描述"></textarea>
 			<div class="pics">
-				<template id="picsTemplate" style="display: none;" v-for="(picture, index) in pictures">
-					<div class="pic" v-on:click="delPic(index)" v-if="delPicture[index] != true">
-						<img v-bind:src="picture" alt="" />
+				<template id="picsTemplate" style="display: none;" v-for="picture in pictures">
+					<div class="pic" v-on:click="delPic(picture)" v-if="picture.show">
+						<img v-bind:src="picture.url" alt="" />
 					</div>
 				</template>
 				<div class="pic" id="file">

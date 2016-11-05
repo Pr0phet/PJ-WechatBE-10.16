@@ -1,6 +1,6 @@
 ;(function(window, undefined){
 	window.tools = {
-		alertMassage: function(message){
+		alertMessage: function(message){
 			alert(message);
 		},
 		warning: function(warning, id){

@@ -8,12 +8,12 @@
 			if(data.status == 1){
 				start();
 			}else{
-				tools.alertMassage("用户没有登录");
+				tools.alertMessage("用户没有登录");
 				location.href="subLogin";
 			}
 		},
 		error: function(e){
-			tools.alertMassage("连接服务器失败");
+			tools.alertMessage("连接服务器失败");
 		}
 	});
 
@@ -32,7 +32,7 @@
 				$("#person").css("display", "block");
 			},
 			error: function(e){
-				tools.alertMassage("连接服务器失败");
+				tools.alertMessage("连接服务器失败");
 				location = location;
 			}
 		})
@@ -56,12 +56,12 @@
 							dataType: "json",
 							success: function(data){
 								if(data.status == 1){
-									tools.alertMassage("删除成功");
+									tools.alertMessage("删除成功");
 									location = location;
 								}
 							},
 							error: function(e){
-								tools.alertMassage("访问服务器失败");
+								tools.alertMessage("访问服务器失败");
 							},
 						});	
 					}
@@ -81,15 +81,15 @@
 						dataType: "json",
 						success: function(datas){
 							if(datas.status == 0){
-								tools.alertMassage("出租成功");
+								tools.alertMessage("出租成功");
 								book.status = 0;
 							}else if(datas.status == 1){
-								tools.alertMassage("取消出租");
+								tools.alertMessage("取消出租");
 								book.status = 1;
 							}
 						},
 						error: function(e){
-							tools.alertMassage("连接服务器失败");
+							tools.alertMessage("连接服务器失败");
 						},
 					});
 				},
@@ -112,7 +112,7 @@
 				}
 			},
 			error: function(data){
-				tools.alertMassage("连接服务器失败");
+				tools.alertMessage("连接服务器失败");
 			},
 		});
 
@@ -145,7 +145,7 @@
 								}
 							},
 							error: function(e){
-								tools.alertMassage("连接服务器失败");
+								tools.alertMessage("连接服务器失败");
 							}
 						});
 					}
@@ -160,14 +160,14 @@
 				dataType: "json",
 				success: function(datas){
 					if(datas.status == 1){
-						tools.alertMassage("注销成功");
-						location.href = "index";
+						tools.alertMessage("注销成功");
+						location.href = "subLogin";
 					}else{
-						tools.alertMassage("注销失败");
+						tools.alertMessage("注销失败");
 					}
 				},
 				error: function(e){
-					tools.alertMassage("连接服务器失败");
+					tools.alertMessage("连接服务器失败");
 				}
 			});
 		});

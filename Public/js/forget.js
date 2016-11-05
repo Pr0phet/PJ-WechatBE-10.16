@@ -32,19 +32,19 @@
 						dataType: "json",
 						success: function(data){
 							if(data.status){
-								tools.alertMassage("发送成功");
+								tools.alertMessage("发送成功");
 								$("#codeWarning").html("");
 								$("#code")[0].focus();
 							}else{
-								tools.alertMassage("发送失败");
+								tools.alertMessage("发送失败");
 							}
 						},
 						error: function(error){
-							tools.alertMassage("连接服务器错误");
+							tools.alertMessage("连接服务器错误");
 						},
 					});
 				}else{
-					tools.alertMassage("请输入正确的手机号码");
+					tools.alertMessage("请输入正确的手机号码");
 					$("#phoneWarning").html("请输入正确的手机号码");
 				}
 			}
@@ -71,7 +71,7 @@
 					},
 					error: function(error){
 						codingCheck = false;
-						tools.alertMassage("连接服务器错误");
+						tools.alertMessage("连接服务器错误");
 					}
 				});
 			}else{
@@ -88,21 +88,21 @@
 				for(var i = 0; i < data.length; i++){
 					var value = data[i];
 					if(value.value == ""){
-						tools.alertMassage("手机号和密码不能为空");
+						tools.alertMessage("手机号和密码不能为空");
 						return false;
 					}else if(value.name == "phone" && value.value.length != 11){
-						tools.alertMassage("手机号只能为11位");
+						tools.alertMessage("手机号只能为11位");
 						return false;
 					}else if(value.name == "pass" && value.value.length < 8){
-						tools.alertMassage("密码至少8位");
+						tools.alertMessage("密码至少8位");
 						return false;
 					}else if(value.name == "repass" && value.value != $("#password").val()){
-						tools.alertMassage("两次密码不相同");
+						tools.alertMessage("两次密码不相同");
 						return false;
 					}
 				}
 				if(codeCheck == false){
-					tools.alertMassage("验证码错误");
+					tools.alertMessage("验证码错误");
 					return false;
 				}
 			},
@@ -110,11 +110,11 @@
 				if(data.status){
 					location.href = "subLogin";
 				}else{
-					tools.alertMassage("更改错误， 请检查帐号和密码是否正确");
+					tools.alertMessage("更改错误， 请检查帐号和密码是否正确");
 				}
 			},
 			error: function(error){
-				tools.alertMassage("连接服务器错误");
+				tools.alertMessage("连接服务器错误");
 			},
 		});
 
@@ -141,7 +141,7 @@
 						}
 					},
 					error: function(error){
-						tools.alertMassage("连接服务器错误")
+						tools.alertMessage("连接服务器错误")
 					}
 				});
 			}else{

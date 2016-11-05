@@ -51,12 +51,27 @@
 			onReceived: function (message) {
 				data.push({
 					id: message.senderUserId,
-					time: Date(parseFloat(message.sentTime) * 1000).toLocaleString().replace(/:\d{1,2}$/, ""),
+					time: (function(time){
+						var diff = (new Date().getTime()) - time;
+						if((diff /= 1000) < 60){
+							return parseInt(diff) + "秒";
+						}else if((diff /= 60) < 60){
+							return parseInt(diff) + "分";
+						}else if((diff /= 60) < 24){
+							return parseInt(diff) + "时";
+						}else if((diff /= 24) < 30){
+							return parseInt(diff) + "天";
+						}else if((diff /= 30) < 12){
+							return parseInt(diff) + "月";
+						}else{
+							return parseInt(diff /= 12) + "年";
+						}
+					})(message.sentTime),
 					pic: message.content.extra.pic,
 					name: message.content.extra.name,
 					message: message.content.content,
 				});
-			}
+			},
 		});
 
 		// 请求token
@@ -70,8 +85,21 @@
 				});
 			},
 			error: function(e){
-				tools.alterMessage("访问服务器失败");
+				tools.alertMessage("访问服务器失败");
 			}
 		});
+
+		// 查询评论
+		$.ajax({
+			url: "/EXbook/index.php/Home/Index/getPersonalComment",
+			type: "post",
+			dataType: "json",
+			success: function(datas){
+				console.log(datas);
+			},
+			error: function(e){
+				// tools.alertMessage("连接服务器错误");
+			},
+		})
 	}
 })(window);

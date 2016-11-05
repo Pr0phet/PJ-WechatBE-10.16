@@ -8,13 +8,13 @@
 			for(var i = 0; i < data.length; i++){
 				var value = data[i];
 				if(value.value == ""){
-					tools.alertMassage("手机号和密码不能为空");
+					tools.alertMessage("手机号和密码不能为空");
 					return false;
 				}else if(value.name == "phone" && value.value.length != 11){
-					tools.alertMassage("手机号只能为11位");
+					tools.alertMessage("手机号只能为11位");
 					return false;
 				}else if(value.name == "pass" && value.value.length < 8){
-					tools.alertMassage("密码至少8位");
+					tools.alertMessage("密码至少8位");
 					return false;
 				}
 			}
@@ -23,11 +23,11 @@
 			if(data.status == 1){
 				location.href = "index";
 			}else{
-				tools.alertMassage("登录错误， 请检查帐号和密码是否正确");
+				tools.alertMessage("登录错误， 请检查帐号和密码是否正确");
 			}
 		},
 		error: function(error){
-			tools.alertMassage("连接服务器错误");
+			tools.alertMessage("连接服务器错误");
 		},
 	});
 
