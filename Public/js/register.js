@@ -30,11 +30,11 @@
 								$("#codeWarning").html("");
 								$("#code")[0].focus();
 							}else{
-								tools.alertMassage("发送失败");
+								tools.alertMessage("发送失败");
 							}
 						},
 						error: function(e){
-							tools.alertMassage("连接服务器错误");
+							tools.alertMessage("连接服务器错误");
 						}
 					})
 				}else{
@@ -64,7 +64,7 @@
 					},
 					error: function(error){
 						codingCheck = false;
-						tools.alertMassage("连接服务器错误");
+						tools.alertMessage("连接服务器错误");
 					}
 				});
 			}else{
@@ -107,14 +107,14 @@
 			},
 			success: function(data){
 				if(data.status == 1){
-					tools.alertMassage("注册成功");
+					tools.alertMessage("注册成功");
 					location.href = "index";
 				}else{
-					tools.alertMassage("注册失败， 请检查帐号和密码是否正确");
+					tools.alertMessage("注册失败， 请检查帐号和密码是否正确");
 				}
 			},
 			error: function(error){
-				tools.alertMassage("连接服务器错误");
+				tools.alertMessage("连接服务器错误");
 			},
 		});
 
@@ -143,7 +143,7 @@
 					},
 					error: function(error){
 						phoneCheck = false;
-						tools.alertMassage("连接服务器错误");
+						tools.alertMessage("连接服务器错误");
 					}
 				});
 			}else if($("#phone").val() == ""){
@@ -180,7 +180,7 @@
 					},
 					error: function(error){
 						usernameCheck = false;
-						tools.alertMassage("连接服务器错误");
+						tools.alertMessage("连接服务器错误");
 					}
 				});
 			}

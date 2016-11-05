@@ -57,7 +57,7 @@
 		</div>
 
 		<div class="messages" id="messages">
-			<template>
+			<template id="messagesTemplate" style="display: none;">
 				<div class="message" v-for="message in messages" v-on:click="toChatRoom(message, $event)">
 					<div class="touxiang">
 						<img v-bind:src="message.pic" alt="" />
@@ -71,6 +71,7 @@
 					</div>
 				</div>
 			</template>
+
 		</div>
 	</div>
 

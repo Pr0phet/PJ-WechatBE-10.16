@@ -8,12 +8,12 @@
 			if(data.status == 1){
 				start();
 			}else{
-				tools.alertMassage("用户没有登录");
+				tools.alertMessage("用户没有登录");
 				location.href="subLogin";
 			}
 		},
 		error: function(e){
-			tools.alertMassage("连接服务器失败");
+			tools.alertMessage("连接服务器失败");
 		}
 	});
 

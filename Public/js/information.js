@@ -55,7 +55,7 @@
 
 	$(".putComment").click(function(){
 		if(isLogin == false){
-			tools.alertMassage("没有登录");
+			tools.alertMessage("没有登录");
 			location.href = "subLogin";
 		}
 		$(".leaders").stop().animate({
@@ -104,7 +104,7 @@
 
 	$(".zu").click(function(){
 		if(isLogin == false){
-			tools.alertMassage("没有登录");
+			tools.alertMessage("没有登录");
 			location.href = "subLogin";
 		}
 		location.href = "chatroom?id=" + data.ownerid

@@ -12,7 +12,7 @@
 			}
 		},
 		error: function(e){
-			tools.alterMassage("连接服务器错误");
+			tools.alertMessage("连接服务器错误");
 		}
 	});
 
@@ -49,7 +49,7 @@
 			onChanged: function(status){
 				switch(status){
 					case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
-						tools.alterMassage('其他设备登录');
+						tools.alertMessage('其他设备登录');
 						break;
 				}
 			}
@@ -108,7 +108,7 @@
 				});
 			},
 			error: function(e){
-				tools.alterMassage("访问服务器失败");
+				tools.alertMessage("访问服务器失败");
 			}
 		});
 	}
