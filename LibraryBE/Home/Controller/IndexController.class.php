@@ -178,6 +178,7 @@ class IndexController extends Controller
             'maxSize' => '20971519', //最大20M
             'rootPath' => './Public/upload/', //根目录
             'savePath' => session('userid') . '/', //分类存储图片（相对于根目录）
+            'autoSub' => false,
             'exts' => array('jpg', 'jpeg', 'png'),
             'replace' => true
         );
@@ -478,14 +479,12 @@ class IndexController extends Controller
         $info = $upload -> uploadOne($_FILES['touxiang']);
         if(!$info)
         {
-            echo $upload -> getError()."/n";
-            var_dump($_FILES);
             $this -> ajaxReturn(array('status' => '-1'));
         }
         else
         {
             $data['pic'] = '/EXbook/Public/upload/'.$info['savepath'].$info['savename'];
-            $res = $db -> WHERE($conditon) -> save($data);
+            $db -> WHERE($conditon) -> save($data);
             $rongCloud = new \rongcloud('x18ywvqf8wznc','CIJoQrifglW3FE');
             $rongCloud -> user() -> refresh(session('userid'),$data['pic']);
             $this -> ajaxReturn(array('status' => '1'));
