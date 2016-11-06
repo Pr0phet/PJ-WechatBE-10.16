@@ -4,7 +4,7 @@
 			alert(message);
 		},
 		warning: function(warning, id){
-			window.tools.alertMassage(warning);
+			window.tools.alertMessage(warning);
 			if(id){
 				var elem = document.getElementById(id);
 				elem.value = warning;
