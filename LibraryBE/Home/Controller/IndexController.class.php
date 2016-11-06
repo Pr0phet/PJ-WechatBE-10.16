@@ -145,6 +145,10 @@ class IndexController extends Controller
         }
         else
         {
+            session(array('name' => 'userid'));
+            session(array('name' => 'username'));
+            session('userid', $res);
+            session('username', $data['name']);
             $this->ajaxReturn(array('status' => '1'));
         }
     }
@@ -171,7 +175,7 @@ class IndexController extends Controller
         $data['ct'] = time();
 
         $config = array(
-            'maxSize' => '1572864', //最大1.5M
+            'maxSize' => '20971519', //最大20M
             'rootPath' => './Public/upload/', //根目录
             'savePath' => session('userid') . '/', //分类存储图片（相对于根目录）
             'exts' => array('jpg', 'jpeg', 'png'),
@@ -223,7 +227,8 @@ class IndexController extends Controller
         $blocks = $books -> WHERE($condition) -> ORDER('id desc') ->limit(5) -> select();
         if ($update != null)
         {
-            $blocks = $books -> WHERE('id < '.$update) -> ORDER('id desc') -> limit(5) -> select();
+            $condition['id'] = array('LT',$update);
+            $blocks = $books -> WHERE($condition) -> ORDER('id desc') -> limit(5) -> select();
         }
         if ($blocks)
         {
@@ -461,7 +466,7 @@ class IndexController extends Controller
         $db = M('user');
         $conditon['id'] = session('userid');
         $config = array(
-            'maxSize' => '1572864', //最大1.5M
+            'maxSize' => '5242880', //最大5M
             'rootPath' => './Public/upload/', //根目录
             'savePath' => session('userid').'/', //分类存储图片（相对于根目录）
             'saveName' => 'userpic', //文件命名规则
