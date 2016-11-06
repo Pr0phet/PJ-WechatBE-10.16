@@ -227,7 +227,8 @@ class IndexController extends Controller
         $blocks = $books -> WHERE($condition) -> ORDER('id desc') ->limit(5) -> select();
         if ($update != null)
         {
-            $blocks = $books -> WHERE('id < '.$update) -> ORDER('id desc') -> limit(5) -> select();
+            $condition['id'] = array('LT',$update);
+            $blocks = $books -> WHERE($condition) -> ORDER('id desc') -> limit(5) -> select();
         }
         if ($blocks)
         {
