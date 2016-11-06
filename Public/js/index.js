@@ -20,6 +20,10 @@
 
 	$(".maximute").click(function(){
 		$(this).css("display", "none");
+	}).find("img").on("load", function(){
+		$(this).css({
+			marginTop:  - $(this).height() * 0.5,
+		});
 	});
 
 	$.ajax({
@@ -91,7 +95,10 @@
 				if(datas.error != "empty")
 					data.books.push.apply(data.books, datas);
 				$(".nomore").html("没有更多");
-			}
+			},
+			error: function(data){
+				tools.alertMessage("连接服务器失败");
+			},
 		});
 	});
 })(window);

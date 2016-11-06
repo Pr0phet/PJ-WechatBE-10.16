@@ -37,6 +37,10 @@
 
 	$(".maximute").click(function(){
 		$(this).css("display", "none");
+	}).find("img").on("load", function(){
+		$(this).css({
+			marginTop:  - $(this).height() * 0.5,
+		});
 	});
 
 	var isLogin = false;
@@ -55,7 +59,7 @@
 
 	$(".putComment").click(function(){
 		if(isLogin == false){
-			tools.alertMessage("没有登录");
+			tools.alertMessage("用户没有登录");
 			location.href = "subLogin";
 		}
 		$(".leaders").stop().animate({
@@ -104,10 +108,11 @@
 
 	$(".zu").click(function(){
 		if(isLogin == false){
-			tools.alertMessage("没有登录");
+			tools.alertMessage("用户没有登录");
 			location.href = "subLogin";
+		}else{
+			location.href = "chatroom?id=" + data.ownerid
+				+ "&name=" + data.owner + "&pic=" + data.owner_pic;	
 		}
-		location.href = "chatroom?id=" + data.ownerid
-			+ "&name=" + data.owner + "&pic=" + data.owner_pic;
 	});
 })(window);

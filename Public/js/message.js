@@ -1,23 +1,4 @@
 ;(function(window, undefined){
-	var data = {
-		messages: [],
-		comments: [],
-	};
-
-	new Vue({
-		el: "#messages",
-		data: data,
-		methods: {
-			toChatRoom: function(message, e){
-				location.href = "chatroom?id=" + message.id
-				+ "&name=" + message.name + "&pic=" + message.pic;
-			},
-			toBook: function(id){
-				location.href = "information?id=" + id;
-			},
-		},
-	});
-
 	// 检测登录状态
 	$.ajax({
 		url: "/EXbook/index.php/Home/Index/checkSession",
@@ -25,6 +6,7 @@
 		dataType: "json",
 		success: function(datas){
 			if(datas.status == 0){
+				tools.alertMessage("用户没有登录");
 				location.href = "subLogin";
 			}else{
 				start();
@@ -36,6 +18,25 @@
 	});
 
 	var start = function(){
+		var data = {
+			messages: [],
+			comments: [],
+		};
+
+		new Vue({
+			el: "#messages",
+			data: data,
+			methods: {
+				toChatRoom: function(message, e){
+					location.href = "chatroom?id=" + message.id
+					+ "&name=" + message.name + "&pic=" + message.pic;
+				},
+				toBook: function(id){
+					location.href = "information?id=" + id;
+				},
+			},
+		});
+
 		// 初始化IM
 		RongIMClient.init("kj7swf8o7whu2");
 
@@ -53,7 +54,6 @@
 		// 消息监听
 		RongIMClient.setOnReceiveMessageListener({
 			onReceived: function (message) {
-				console.log(data);
 				data.messages.push({
 					id: message.senderUserId,
 					time: (function(time){

@@ -118,6 +118,10 @@
 
 		$(".maximute").click(function(){
 			$(this).css("display", "none");
+		}).find("img").on("load", function(){
+			$(this).css({
+				marginTop:  - $(this).height() * 0.5,
+			});
 		});
 
 		// 滑动添加

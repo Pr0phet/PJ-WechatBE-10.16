@@ -6,6 +6,7 @@
 		dataType: "json",
 		success: function(datas){
 			if(datas.status == 0){
+				tools.alertMessage("用户没有登录");
 				location.href = "index";
 			}else{
 				start();
