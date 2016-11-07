@@ -644,4 +644,9 @@ class IndexController extends Controller
     {
         $this -> display();
     }
+
+    public function changeUserName()
+    {
+        $this -> display();
+    }
 }
