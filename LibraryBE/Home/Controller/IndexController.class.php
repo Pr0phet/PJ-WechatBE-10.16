@@ -388,7 +388,7 @@ class IndexController extends Controller
 
         $condition['towhom'] = $id;
         $condition['ownerid'] = array('NEQ',$id);
-        $res = $db -> WHERE($condition) -> select();
+        $res = $db -> WHERE($condition) -> ORDER('id desc') -> select();
         $data = array();
         if($res)
         {
@@ -586,7 +586,7 @@ class IndexController extends Controller
         }
         else
         {
-            return date('Y-M-D');
+            return date('Y-m-d');
         }
     }
 
