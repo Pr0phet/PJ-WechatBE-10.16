@@ -39,6 +39,7 @@
 
 .content .person{
 	margin: 65px 20px 20px;
+	overflow: hidden;
 }
 
 .content .touxiang{
@@ -57,7 +58,7 @@
 }
 
 .content .information h4{
-	font-size: 20px;
+	font-size: 18px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;

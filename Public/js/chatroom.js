@@ -36,7 +36,7 @@
 			messages: [],
 		}
 
-		$("#name").html(chatroom.target.name);
+		$("#name").html(decodeURI(chatroom.target.name));
 		new Vue({
 			el: "#messages",
 			data: chatroom,
